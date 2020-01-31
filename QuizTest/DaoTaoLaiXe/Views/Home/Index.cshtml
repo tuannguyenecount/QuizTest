@@ -1,0 +1,81 @@
+﻿@model List<DaoTaoLaiXe.Models.CauHoi>
+@{
+    
+}
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://znews-static.zadn.vn/interactive/quizz/css/quizz_008.css">
+    <style>
+        .the-article-body table.picture {
+            color: #333;
+            font-size: 0.9em;
+            line-height: 1.5;
+            width:100%;
+            clear:both;
+            margin:50px 0px;
+
+        }
+        .the-article-body table img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+}
+
+<div class="row">
+    <h1 class="text-center">TRẮC NGHIỆM ĐÀO TẠO LÁI XE @Model.Count</h1>
+    <div class="col-md-12 the-article-body">
+        @foreach (var cauhoi in Model)
+        {
+        <table class="picture" align="center" >
+            <tbody>
+
+                @*<tr>
+                    <td class="pic">
+                        <div class="zad-inimage-wrapper" style="overflow: hidden;">
+                            <img src="https://znews-photo.zadn.vn/w660/Uploaded/mdf_nsozxd/2020_01_29/1.jpg" alt="Can benh truyen nhiem nao tung khien 200 trieu nguoi chet? hinh anh 1 1.jpg">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pCaption caption">
+                        <h3>Câu 1: Căn bệnh nào từng cướp đi sinh mạng hàng trăm triệu người trong thế kỷ XIV?</h3>
+                        <ul>
+                            <li> Sốt xuất huyết</li>
+                            <li>Lao phổi</li>
+                            <li class="correct"><strong>Dịch hạch</strong></li>
+                            <li>Bệnh than</li>
+                        </ul>
+                        <p>Theo sách “Lịch sử văn minh thế giới”, dịch hạch là một trong những căn bệnh truyền nhiễm nguy hiểm nhất trong lịch sử nhân loại. Đỉnh điểm trong khoảng thời gian (1346-1351), căn bệnh này bùng phát ở một số nước châu Á và nhiều nước châu Âu, khiến hàng chục triệu người bỏ mạng. Thời điểm đó, y học "bó tay" với căn bệnh này, người mắc bệnh xem như cầm chắc cái chết.</p>
+                    </td>
+                </tr>*@
+
+                 @if (!string.IsNullOrEmpty(cauhoi.Hinh))
+                 {
+                    <tr>
+                        <td class="pic">
+                            <div class="zad-inimage-wrapper" style="overflow: hidden;">
+                                <img src="~/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
+                            </div>
+                        </td>
+                    </tr>
+                 }
+
+                    <tr>
+                        <td class="pCaption caption">
+                            <h3>Câu @cauhoi.MaCauHoi: @cauhoi.NoiDung?</h3>
+                            <ul>
+                                @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                                {
+                                    <li class="@(dapan.DapAnDung ? "correct" : "")"> @dapan.NoiDung</li>
+                                }
+                            </ul>
+                            @* <p>Theo sách “Lịch sử văn minh thế giới”, dịch hạch là một trong những căn bệnh truyền nhiễm nguy hiểm nhất trong lịch sử nhân loại. Đỉnh điểm trong khoảng thời gian (1346-1351), căn bệnh này bùng phát ở một số nước châu Á và nhiều nước châu Âu, khiến hàng chục triệu người bỏ mạng. Thời điểm đó, y học "bó tay" với căn bệnh này, người mắc bệnh xem như cầm chắc cái chết.</p>*@
+                        </td>
+                    </tr>
+                
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
