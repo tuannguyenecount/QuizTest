@@ -1,81 +1,93 @@
 ﻿@model List<DaoTaoLaiXe.Models.CauHoi>
 @{
-    
+
 }
 
 @section styles{
-    <link rel="stylesheet" type="text/css" href="https://znews-static.zadn.vn/interactive/quizz/css/quizz_008.css">
-    <style>
-        .the-article-body table.picture {
-            color: #333;
-            font-size: 0.9em;
-            line-height: 1.5;
-            width:100%;
-            clear:both;
-            margin:50px 0px;
+    <link href="~/Content/quizz_008.css" rel="stylesheet" type="text/css" />
 
-        }
-        .the-article-body table img {
-            width: 100%;
-            height: auto;
-        }
-    </style>
+}
+
+@section Scripts{
+    <script>
+        $(function(){
+            $(document).on("click", ".listAnswer li", function () {
+                if ($(this).find("input[type=checkbox]").length > 0) {
+                    if ($(this).find("input").is(":checked") == false) {
+                        $(this).find("input").prop('checked', true);
+                        $(this).attr("style", "background:#696969");
+                    }
+                    else {
+                        $(this).find("input").prop('checked', false);
+                        $(this).removeAttr("style");
+                    }
+                }
+                else if ($(this).find("input[type=radio]").length > 0) {
+                    if ($(this).find("input").is(":checked") == false) {
+                        $(this).closest("form").find("li").removeAttr("style");
+                        $(this).find("input").prop('checked', true);;
+                        $(this).attr("style", "background:#696969");
+                    }
+                    else {
+                        $(this).find("input").prop('checked', false);
+                        $(this).removeAttr("style");
+                    }
+                }
+            });
+        });
+    </script>    
 }
 
 <div class="row">
-    <h1 class="text-center">TRẮC NGHIỆM ĐÀO TẠO LÁI XE @Model.Count</h1>
-    <div class="col-md-12 the-article-body">
+    <div class="col-md-8 col-md-offset-2 the-article-body" >
+        <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE @Model.Count</h1>
+
         @foreach (var cauhoi in Model)
         {
-        <table class="picture" align="center" >
-            <tbody>
-
-                @*<tr>
-                    <td class="pic">
-                        <div class="zad-inimage-wrapper" style="overflow: hidden;">
-                            <img src="https://znews-photo.zadn.vn/w660/Uploaded/mdf_nsozxd/2020_01_29/1.jpg" alt="Can benh truyen nhiem nao tung khien 200 trieu nguoi chet? hinh anh 1 1.jpg">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="pCaption caption">
-                        <h3>Câu 1: Căn bệnh nào từng cướp đi sinh mạng hàng trăm triệu người trong thế kỷ XIV?</h3>
-                        <ul>
-                            <li> Sốt xuất huyết</li>
-                            <li>Lao phổi</li>
-                            <li class="correct"><strong>Dịch hạch</strong></li>
-                            <li>Bệnh than</li>
-                        </ul>
-                        <p>Theo sách “Lịch sử văn minh thế giới”, dịch hạch là một trong những căn bệnh truyền nhiễm nguy hiểm nhất trong lịch sử nhân loại. Đỉnh điểm trong khoảng thời gian (1346-1351), căn bệnh này bùng phát ở một số nước châu Á và nhiều nước châu Âu, khiến hàng chục triệu người bỏ mạng. Thời điểm đó, y học "bó tay" với căn bệnh này, người mắc bệnh xem như cầm chắc cái chết.</p>
-                    </td>
-                </tr>*@
-
-                 @if (!string.IsNullOrEmpty(cauhoi.Hinh))
-                 {
-                    <tr>
-                        <td class="pic">
-                            <div class="zad-inimage-wrapper" style="overflow: hidden;">
-                                <img src="~/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
-                            </div>
-                        </td>
-                    </tr>
-                 }
-
+            if (cauhoi.DapAns == null || cauhoi.DapAns.Count == 0)
+            {
+                continue;
+            }
+            <table class="picture" align="center">
+                <tbody>
                     <tr>
                         <td class="pCaption caption">
-                            <h3>Câu @cauhoi.MaCauHoi: @cauhoi.NoiDung?</h3>
-                            <ul>
-                                @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                            <form method="post" action="@Url.Action("Answer",new { questionId = cauhoi.MaCauHoi })">
+                                <h3><b>Câu @cauhoi.MaCauHoi:</b> @cauhoi.NoiDung?</h3>
+                                @if (!string.IsNullOrEmpty(cauhoi.Hinh))
                                 {
-                                    <li class="@(dapan.DapAnDung ? "correct" : "")"> @dapan.NoiDung</li>
+                                    <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">
+                                        <img src="~/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
+                                    </div>
                                 }
-                            </ul>
-                            @* <p>Theo sách “Lịch sử văn minh thế giới”, dịch hạch là một trong những căn bệnh truyền nhiễm nguy hiểm nhất trong lịch sử nhân loại. Đỉnh điểm trong khoảng thời gian (1346-1351), căn bệnh này bùng phát ở một số nước châu Á và nhiều nước châu Âu, khiến hàng chục triệu người bỏ mạng. Thời điểm đó, y học "bó tay" với căn bệnh này, người mắc bệnh xem như cầm chắc cái chết.</p>*@
+                                @if (cauhoi.DapAns != null && cauhoi.DapAns.Count(x => x.DapAnDung) <= 1)
+                                {
+                                    <ul class="listAnswer">
+                                        @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                                        {
+                                            <li> <input type="radio" name="selectAnswer" class="selectAnswer" value="@dapan.SoThuTu" /> @dapan.NoiDung</li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <ul class="listAnswer">
+                                        @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                                        {
+                                            <li> <input type="checkbox" name="selectAnswer" class="selectAnswer" value="@dapan.SoThuTu" /> @dapan.NoiDung</li>
+                                        }
+                                    </ul>
+                                }
+                            </form>
                         </td>
                     </tr>
-                
-            </tbody>
-        </table>
+
+                </tbody>
+            </table>
         }
+    </div>
+    <div id="summary" >
+        <h2><a href="#" class="btn btn-default">BẠN ĐÃ TRẢ LỜI <br /> <b><span id="countAnswer">5</span>/30 câu</b></a></h2>
+        <h2><a href="#" class="btn btn-primary">XEM KẾT QUẢ</a></h2>
     </div>
 </div>
