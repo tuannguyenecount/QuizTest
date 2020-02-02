@@ -23,9 +23,9 @@
         </EntityType>
         <EntityType Name="DapAn">
           <Key>
-            <PropertyRef Name="MaCauHoi" />
-            <PropertyRef Name="SoThuTu" />
+            <PropertyRef Name="MaDapAn" />
           </Key>
+          <Property Name="MaDapAn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaCauHoi" Type="int" Nullable="false" />
           <Property Name="SoThuTu" Type="tinyint" Nullable="false" />
           <Property Name="NoiDung" Type="nvarchar(max)" />
@@ -44,7 +44,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DapAn_CauHoi">
-          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1" />
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DapAn" Type="Self.DapAn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CauHoi">
@@ -106,9 +108,9 @@
         </EntityType>
         <EntityType Name="DapAn">
           <Key>
-            <PropertyRef Name="MaCauHoi" />
-            <PropertyRef Name="SoThuTu" />
+            <PropertyRef Name="MaDapAn" />
           </Key>
+          <Property Name="MaDapAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
           <Property Name="SoThuTu" Type="Byte" Nullable="false" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -128,7 +130,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DapAn_CauHoi">
-          <End Type="QuizDBModel.CauHoi" Role="CauHoi" Multiplicity="1" />
+          <End Type="QuizDBModel.CauHoi" Role="CauHoi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="QuizDBModel.DapAn" Role="DapAn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CauHoi">
@@ -170,6 +174,7 @@
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
                 <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
+                <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

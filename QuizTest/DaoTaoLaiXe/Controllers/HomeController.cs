@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DaoTaoLaiXe.Models;
@@ -23,8 +24,57 @@ namespace DaoTaoLaiXe.Controllers
             cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoi >= 201 && x.MaCauHoi <= 255).OrderBy(x => x.MaCauHoi).Take(1).ToList()); // lấy 1 câu phần 4,5
             cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoi >= 256 && x.MaCauHoi <= 355).OrderBy(x => x.MaCauHoi).Take(9).ToList()); // lấy 9 câu phần 6
             cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoi >= 356 && x.MaCauHoi <= 450).OrderBy(x => x.MaCauHoi).Take(9).ToList()); // lấy 9 câu phần 7
+            cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
-            return View(cauhois.OrderBy(x=>x.MaCauHoi).ToList());
+            cauhois = cauhois.OrderBy(x => x.MaCauHoi).ToList();
+            Session["CauHois"] = cauhois;
+
+            ViewBag.SelectAnswer = new byte[] { };
+            ViewBag.danhSachCauHoiTraLoiDung = new List<CauHoi>();
+            ViewBag.cauHoiDapAnDung = new Dictionary<int, List<byte>>();
+            ViewBag.CountAnswer = 0;
+            return View(Session["CauHois"]);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ViewResult(FormCollection frm)
+        {
+            List<int> selectAnswer = new List<int>();
+            Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
+            (Session["CauHois"] as List<CauHoi>).ForEach(x =>
+            {
+                selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoi].Split(',').Select(y => int.Parse(y)).ToList());
+                cauHoiDapAnDung.Add(x.MaCauHoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
+            });
+
+            List<CauHoi> danhSachCauHoiTraLoiDung = new List<CauHoi>();
+            foreach(int answerId in selectAnswer)
+            {
+                DapAn dapAn = await db.DapAns.FindAsync(answerId);
+                if(db.DapAns.Count(x=>x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
+                {
+                    List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
+                    if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Any())
+                    {
+                        if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
+                            danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+                    }
+                }
+                else  // Nếu câu trả lời cho câu hỏi dạng radio
+                {
+                    if (dapAn.DapAnDung == true)
+                    {
+                        if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
+                            danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+                    }
+                }
+               
+            }
+            ViewBag.SelectAnswer = selectAnswer;
+            ViewBag.danhSachCauHoiTraLoiDung = danhSachCauHoiTraLoiDung;
+            ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
+            ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoi).Distinct().Count();
+            return View("Index", Session["CauHois"]);
         }
 
         public ActionResult About()

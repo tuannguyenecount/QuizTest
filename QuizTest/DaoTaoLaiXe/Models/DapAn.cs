@@ -14,6 +14,7 @@ namespace DaoTaoLaiXe.Models
     
     public partial class DapAn
     {
+        public int MaDapAn { get; set; }
         public int MaCauHoi { get; set; }
         public byte SoThuTu { get; set; }
         public string NoiDung { get; set; }
