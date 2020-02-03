@@ -29,11 +29,16 @@ namespace DaoTaoLaiXe.Controllers
             cauhois = cauhois.OrderBy(x => x.MaCauHoi).ToList();
             Session["CauHois"] = cauhois;
 
-            ViewBag.SelectAnswer = new byte[] { };
+            ViewBag.SelectAnswer = new List<int>();
             ViewBag.danhSachCauHoiTraLoiDung = new List<CauHoi>();
-            ViewBag.cauHoiDapAnDung = new Dictionary<int, List<byte>>();
+            ViewBag.cauHoiDapAnDung = new Dictionary<int, List<int>>();
             ViewBag.CountAnswer = 0;
             return View(Session["CauHois"]);
+        }
+
+        public ActionResult ViewResult()
+        {
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -54,7 +59,7 @@ namespace DaoTaoLaiXe.Controllers
                 if(db.DapAns.Count(x=>x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
                 {
                     List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
-                    if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Any())
+                    if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Count() == danhSachDapAnDung.Count)
                     {
                         if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
                             danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
@@ -74,7 +79,7 @@ namespace DaoTaoLaiXe.Controllers
             ViewBag.danhSachCauHoiTraLoiDung = danhSachCauHoiTraLoiDung;
             ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
             ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoi).Distinct().Count();
-            return View("Index", Session["CauHois"]);
+            return View(Session["CauHois"]);
         }
 
         public ActionResult About()
