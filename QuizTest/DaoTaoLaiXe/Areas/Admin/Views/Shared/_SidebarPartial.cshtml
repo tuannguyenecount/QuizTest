@@ -1,0 +1,42 @@
+﻿@model List<DaoTaoLaiXe.Models.ChuyenMucCauHoi>
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <a href="javascript:void(0)"><img width="45" height="45" src="~/Content/images/user.png" class="img-circle" /></a>
+            </div>
+            <div class="pull-left info">
+                <p>Administrator</p>
+                <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+            </div>
+        </div>
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">TRANG QUẢN TRỊ</li>
+
+            @foreach (var item in Model)
+            {
+            <li data-toggle="tooltip" title="@item.TenChuyenMuc">
+                <a href="@Url.Action("Index", "CauHoi",new { MaChuyenMuc = item.MaChuyenMuc })">
+                    <i class="fa fa-list"></i> <span>@(item.TenChuyenMuc.Length > 20 ? item.TenChuyenMuc.Substring(0,20) + "..." : item.TenChuyenMuc)</span>
+                </a>
+            </li>
+            }
+            <li>
+                <a href="/" target="_blank">
+                    <i class="fa fa-globe"></i> <span>Xem Website</span>
+                </a>
+            </li>
+
+            <li class="header">QUẢN LÝ CÁ NHÂN</li>
+            <li>
+                <a href="@Url.Action("ChangePassword","Account")">
+                    <i class="fa fa-key"></i> <span>Đổi mật khẩu</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
+            </li>
+        </ul>
+    </section>

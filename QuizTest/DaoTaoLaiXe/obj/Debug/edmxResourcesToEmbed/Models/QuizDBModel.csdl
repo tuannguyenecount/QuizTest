@@ -20,6 +20,7 @@
       <End Role="CauHoi" EntitySet="CauHois" />
       <End Role="DapAn" EntitySet="DapAns" />
     </AssociationSet>
+    <EntitySet Name="QuanTriViens" EntityType="QuizDBModel.QuanTriVien" />
   </EntityContainer>
   <EntityType Name="CauHoi">
     <Key>
@@ -69,4 +70,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="QuanTriVien">
+    <Key>
+      <PropertyRef Name="TaiKhoan" />
+    </Key>
+    <Property Name="TaiKhoan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

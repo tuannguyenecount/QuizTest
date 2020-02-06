@@ -31,6 +31,13 @@
           <Property Name="NoiDung" Type="nvarchar(max)" />
           <Property Name="DapAnDung" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="QuanTriVien">
+          <Key>
+            <PropertyRef Name="TaiKhoan" />
+          </Key>
+          <Property Name="TaiKhoan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <Association Name="FK_CauHoi_ChuyenMucCauHoi">
           <End Role="ChuyenMucCauHoi" Type="Self.ChuyenMucCauHoi" Multiplicity="0..1" />
           <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="*" />
@@ -61,6 +68,7 @@
           <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChuyenMucCauHoi" EntityType="Self.ChuyenMucCauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DapAn" EntityType="Self.DapAn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuanTriVien" EntityType="Self.QuanTriVien" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="Self.FK_CauHoi_ChuyenMucCauHoi">
             <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHoi" />
             <End Role="CauHoi" EntitySet="CauHoi" />
@@ -94,6 +102,7 @@
             <End Role="CauHoi" EntitySet="CauHois" />
             <End Role="DapAn" EntitySet="DapAns" />
           </AssociationSet>
+          <EntitySet Name="QuanTriViens" EntityType="QuizDBModel.QuanTriVien" />
         </EntityContainer>
         <EntityType Name="CauHoi">
           <Key>
@@ -143,6 +152,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="QuanTriVien">
+          <Key>
+            <PropertyRef Name="TaiKhoan" />
+          </Key>
+          <Property Name="TaiKhoan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -175,6 +191,14 @@
                 <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
                 <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
                 <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuanTriViens">
+            <EntityTypeMapping TypeName="QuizDBModel.QuanTriVien">
+              <MappingFragment StoreEntitySet="QuanTriVien">
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
