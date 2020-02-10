@@ -11,7 +11,24 @@ namespace DaoTaoLaiXe.Controllers
     {
         QuizDBEntities db = new QuizDBEntities();
 
-        public ActionResult Index()
+        public ViewResult Index()
+        {
+            return View();
+        }
+
+        public ViewResult Review()
+        {
+            Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
+            List<CauHoi> cauHois = db.CauHois.OrderBy(x => x.MaCauHoi).ToList();
+            cauHois.ForEach(x =>
+            {
+                cauHoiDapAnDung.Add(x.MaCauHoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
+            });
+            ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
+            return View(cauHois);
+        }
+
+        public ActionResult Practice()
         {
             List<CauHoi> cauhois = new List<CauHoi>();
             Random random = new Random();
@@ -38,7 +55,7 @@ namespace DaoTaoLaiXe.Controllers
 
         public ActionResult ViewResult()
         {
-            return RedirectToAction("Index");
+            return RedirectToAction("Practice");
         }
 
         [HttpPost]
@@ -82,18 +99,6 @@ namespace DaoTaoLaiXe.Controllers
             return View(Session["CauHois"]);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }
