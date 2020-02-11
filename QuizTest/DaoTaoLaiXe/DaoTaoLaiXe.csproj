@@ -144,6 +144,7 @@
     <Compile Include="Models\CauHoi.cs">
       <DependentUpon>QuizDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DapAnMetadata.cs" />
     <Compile Include="Models\CauHoiMetadata.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChuyenMucCauHoi.cs">
@@ -1693,7 +1694,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Practice.cshtml" />
-    <Content Include="Views\Home\ViewResult.cshtml" />
+    <Content Include="Views\Home\ViewResultbackup.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Review.cshtml" />
     <Content Include="Scripts\popper-utils.js.map" />
@@ -1701,6 +1702,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper.min.js.map" />
     <Content Include="Scripts\README.md" />
+    <Content Include="Views\Home\ViewResult.cshtml" />
+    <Content Include="Views\Home\ViewWrongAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

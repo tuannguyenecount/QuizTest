@@ -62,18 +62,16 @@ namespace DaoTaoLaiXe.Controllers
         public async Task<ActionResult> ViewResult(FormCollection frm)
         {
             List<int> selectAnswer = new List<int>();
-            Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
             (Session["CauHois"] as List<CauHoi>).ForEach(x =>
             {
                 selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoi].Split(',').Select(y => int.Parse(y)).ToList());
-                cauHoiDapAnDung.Add(x.MaCauHoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
             });
 
             List<CauHoi> danhSachCauHoiTraLoiDung = new List<CauHoi>();
-            foreach(int answerId in selectAnswer)
+            foreach (int answerId in selectAnswer)
             {
                 DapAn dapAn = await db.DapAns.FindAsync(answerId);
-                if(db.DapAns.Count(x=>x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
+                if (db.DapAns.Count(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
                 {
                     List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
                     if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Count() == danhSachDapAnDung.Count)
@@ -90,7 +88,48 @@ namespace DaoTaoLaiXe.Controllers
                             danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
                     }
                 }
-               
+
+            }
+            ViewBag.TongCauHoi = (Session["CauHois"] as List<CauHoi>).Count;
+            ViewBag.TongCauDung = danhSachCauHoiTraLoiDung.Count;
+            ViewBag.TongCauSai = ViewBag.TongCauHoi - ViewBag.TongCauDung;
+            Session["frm"] = frm;
+            return View();
+        }
+
+        public async Task<ActionResult> ViewWrongAnswer()
+        {
+            FormCollection frm = Session["frm"] as FormCollection;
+            List<int> selectAnswer = new List<int>();
+            Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
+            (Session["CauHois"] as List<CauHoi>).ForEach(x =>
+            {
+                selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoi].Split(',').Select(y => int.Parse(y)).ToList());
+                cauHoiDapAnDung.Add(x.MaCauHoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
+            });
+
+            List<CauHoi> danhSachCauHoiTraLoiDung = new List<CauHoi>();
+            foreach (int answerId in selectAnswer)
+            {
+                DapAn dapAn = await db.DapAns.FindAsync(answerId);
+                if (db.DapAns.Count(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
+                {
+                    List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
+                    if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Count() == danhSachDapAnDung.Count)
+                    {
+                        if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
+                            danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+                    }
+                }
+                else  // Nếu câu trả lời cho câu hỏi dạng radio
+                {
+                    if (dapAn.DapAnDung == true)
+                    {
+                        if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
+                            danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+                    }
+                }
+
             }
             ViewBag.SelectAnswer = selectAnswer;
             ViewBag.danhSachCauHoiTraLoiDung = danhSachCauHoiTraLoiDung;
@@ -99,6 +138,47 @@ namespace DaoTaoLaiXe.Controllers
             return View(Session["CauHois"]);
         }
 
-        
+        //[HttpPost]
+        //public async Task<ActionResult> ViewResult(FormCollection frm)
+        //{
+        //    List<int> selectAnswer = new List<int>();
+        //    Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
+        //    (Session["CauHois"] as List<CauHoi>).ForEach(x =>
+        //    {
+        //        selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoi].Split(',').Select(y => int.Parse(y)).ToList());
+        //        cauHoiDapAnDung.Add(x.MaCauHoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
+        //    });
+
+        //    List<CauHoi> danhSachCauHoiTraLoiDung = new List<CauHoi>();
+        //    foreach(int answerId in selectAnswer)
+        //    {
+        //        DapAn dapAn = await db.DapAns.FindAsync(answerId);
+        //        if(db.DapAns.Count(x=>x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
+        //        {
+        //            List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
+        //            if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Count() == danhSachDapAnDung.Count)
+        //            {
+        //                if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
+        //                    danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+        //            }
+        //        }
+        //        else  // Nếu câu trả lời cho câu hỏi dạng radio
+        //        {
+        //            if (dapAn.DapAnDung == true)
+        //            {
+        //                if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
+        //                    danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+        //            }
+        //        }
+
+        //    }
+        //    ViewBag.SelectAnswer = selectAnswer;
+        //    ViewBag.danhSachCauHoiTraLoiDung = danhSachCauHoiTraLoiDung;
+        //    ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
+        //    ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoi).Distinct().Count();
+        //    return View(Session["CauHois"]);
+        //}
+
+
     }
 }

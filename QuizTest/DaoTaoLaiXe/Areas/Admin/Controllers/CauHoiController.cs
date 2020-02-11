@@ -128,12 +128,14 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                     return RedirectToAction("Index", new { MaChuyenMuc = cauHoi.MaChuyenMuc });
                 }
                 ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
+                cauHoi.DapAns = db.CauHois.Find(cauHoi.MaCauHoi).DapAns.ToList();
                 return View(cauHoi);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
                 ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
+                cauHoi.DapAns = db.CauHois.Find(cauHoi.MaCauHoi).DapAns.ToList();
                 return View(cauHoi);
             }
         }
@@ -153,6 +155,48 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index", new { MaChuyenMuc = maChuyenMuc });
+        }
+
+        [HttpPost]
+        public ActionResult AddAnswer([Bind(Exclude = "SoThuTu")]DapAn dapAn)
+        {
+            CauHoi cauHoi = db.CauHois.Find(dapAn.MaCauHoi);
+            if(cauHoi.DapAns != null && cauHoi.DapAns.Count >= 4)
+            {
+                ModelState.AddModelError("", "Câu hỏi này đã có đủ 4 đáp án. Không thể thêm đáp án khác được!");
+            }
+            else 
+                dapAn.SoThuTu = (byte)(cauHoi.DapAns.Count + 1);
+            if(ModelState.IsValid)
+            {
+                db.DapAns.Add(dapAn);
+                db.SaveChanges();
+                return RedirectToAction("Edit", new { id = dapAn.MaCauHoi });
+
+            }
+            ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
+            return View("Edit", cauHoi);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAnswer(int Id)
+        {
+            DapAn dapAn = db.DapAns.Find(Id);
+            try
+            {
+                if (dapAn != null)
+                {
+                    db.DapAns.Remove(dapAn);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Edit", new { id = dapAn.MaCauHoi });
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", dapAn.CauHoi.MaChuyenMuc);
+                return View("Edit", dapAn.CauHoi);
+            }
         }
     }
 }

@@ -127,10 +127,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/02/2020 19:51:00</publishTime>
     </File>
     <File Include="bin/DaoTaoLaiXe.dll">
-      <publishTime>02/09/2020 00:37:32</publishTime>
+      <publishTime>02/11/2020 09:06:27</publishTime>
     </File>
     <File Include="bin/DaoTaoLaiXe.pdb">
-      <publishTime>02/09/2020 00:37:32</publishTime>
+      <publishTime>02/11/2020 09:06:27</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>01/02/2020 19:51:01</publishTime>
@@ -3669,14 +3669,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/images/95285-OKAK92-116.jpg">
       <publishTime>02/02/2020 13:07:45</publishTime>
     </File>
+    <File Include="Content/images/background.jpg">
+      <publishTime>02/11/2020 09:00:15</publishTime>
+    </File>
     <File Include="Content/popupImage.css">
       <publishTime>02/06/2020 23:34:10</publishTime>
     </File>
     <File Include="Content/quizz_008.css">
-      <publishTime>02/06/2020 21:53:50</publishTime>
+      <publishTime>02/11/2020 09:00:15</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>02/02/2020 13:58:02</publishTime>
+      <publishTime>02/11/2020 09:00:15</publishTime>
     </File>
     <File Include="Content/sweetalert.css">
       <publishTime>02/02/2020 22:38:28</publishTime>
