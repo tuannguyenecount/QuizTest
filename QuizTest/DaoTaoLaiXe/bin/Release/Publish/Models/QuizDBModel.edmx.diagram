@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="QuizDBModel.DapAn" Width="1.5" PointX="5.25" PointY="0.875" />
         <AssociationConnector Association="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" />
         <AssociationConnector Association="QuizDBModel.FK_DapAn_CauHoi" />
+        <EntityTypeShape EntityType="QuizDBModel.QuanTriVien" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,93 @@
+﻿@model List<CauHoi>
+@{
+    ChuyenMucCauHoi chuyenMucCauHoi = ViewBag.ChuyenMucCauHoi;
+    ViewBag.Title =  chuyenMucCauHoi.TenChuyenMuc;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+}
+
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Bảng điều khiển</a></li>
+        <li class="active">Danh sách câu hỏi</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <p>
+                        @Html.ActionLink("Thêm Câu Hỏi", "Create", new { MaChuyenMuc = Request.QueryString["MaChuyenMuc"].ToString() }, new { @class = "btn btn-success" })
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tblData">
+                            <thead>
+                                <tr>
+                                    <th class="text-center col-sm-1">
+                                        Mã Số
+                                    </th>
+                                    <th class="col-sm-4">
+                                        Nội Dung Câu Hỏi
+                                    </th>
+                                    <th class="col-sm-4">Đáp Án</th>
+                                    <th class="col-sm-3 text-center">Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center">
+                                            @item.MaCauHoi
+                                        </td>
+                                        <td>
+                                            <label>@item.NoiDung</label>
+                                        </td>
+                                        <td>
+                                            @foreach (var dapan in item.DapAns.OrderBy(x => x.SoThuTu))
+                                            {
+                                                <p> <input type="checkbox" readonly value="@dapan.MaDapAn" @(dapan.DapAnDung == true ? "checked=''" : "") /> <b @(dapan.DapAnDung == true ? "class=text-success" : "")>@dapan.SoThuTu. @dapan.NoiDung</b> </p>
+                                            }
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("Details",new { id = item.MaCauHoi })" class="btn btn-primary"><i class="fa fa-info"></i> Xem</a>
+                                            <a href="@Url.Action("Edit",new { id = item.MaCauHoi })" class="btn btn-primary"><i class="fa fa-edit"></i> Sửa</a>
+                                            <form class="hidden" action="@Url.Action("Delete",new { id = item.MaCauHoi })" id="frmDelete@(item.MaCauHoi)" method="post"></form>
+                                            <a class="btn btn-default" onclick="return confirm('Xác nhận xóa câu hỏi này?');" href="javascript:document.getElementById('frmDelete@(item.MaCauHoi)').submit();">Xoá</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>                        
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+
+
+@section scripts{
+     <!-- DataTables -->
+    <script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('#tblData').DataTable({
+                ordering: false
+            });
+        });
+    </script>
+}
