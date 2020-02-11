@@ -1,0 +1,32 @@
+/* CSS Document */
+
+#header nav a, div.single article footer section.share a, #footer a, .pagination a, nav.mobile ul li a{ color: #fff !important; }
+#footer h4.blog-description{ color: #000 !important; }
+div.timeline article:hover span.arrow{ background: #fff !important; }
+div#settings{
+	position: fixed;
+	left: 100%;
+	top: 20%;
+	color: #333;
+	z-index: 5000;
+}
+div#settings a.icon{ display: block; width: 15px; padding: 5px; background: #fff; border: 1px solid #ddd; height: 20px; margin-right: -1px; border-right: 0; position: relative; z-index: 2; float: left; margin-left: -25px; }
+div#settings.active a.icon{
+	
+}
+div#settings div.hidden{
+	float: left;
+	background: #fff;
+	padding: 5px;
+	border: 1px solid #ddd;
+	position: relative;
+	z-index: 1;
+	
+}
+div#settings.active{
+	left: auto;
+	right: 0;
+}
+div#settings div#picker{ }
+
+

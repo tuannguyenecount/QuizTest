@@ -17,10 +17,15 @@
 
 .success {
     background: #4CAF50 !important;
+
+}
+
+.success {
+    color: #fff !important;
 }
 
 .error {
-    background: #d9534f !important; 
+    background: #d9534f !important;
 }
 
 .the-article-summary {
@@ -33,7 +38,7 @@
 
 .the-article-body {
     margin-top: 15px;
-    background: #fff;
+    background: rgba(0, 0, 0, 0.05);
 }
 
 table.picture {
@@ -41,7 +46,7 @@ table.picture {
     /*background: #FFEB00;*/
     overflow: hidden;
     font-size: 12px !important;
-    margin-top:40px;
+    margin-top: 40px;
 }
 
     table.picture .caption {
@@ -49,24 +54,24 @@ table.picture {
         color: #000
     }
 
-    .the-article-body table.picture {
-        color: #333;
-        font-size: 0.9em;
-        line-height: 1.5;
-        width: 100%;
-        clear: both;
-    }
+.the-article-body table.picture {
+    color: #333;
+    font-size: 0.9em;
+    line-height: 1.5;
+    width: 100%;
+    clear: both;
+}
 
-    .the-article-body table img {
-        width: 100%;
-        height: auto;
-        max-width:600px;
-        margin: 10px auto;
-    }
+.the-article-body table img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    margin: 10px auto;
+}
 
-    table.picture .zad-inimage-wrapper{
-        margin-bottom:-20px;
-    }
+table.picture .zad-inimage-wrapper {
+    margin-bottom: -20px;
+}
 
 table.picture .selectAnswer {
     position: absolute;
@@ -76,51 +81,73 @@ table.picture .selectAnswer {
     top: 12px;
 }
 
-    table.picture .caption h3 {
-        font-size: 1.4em !important;
-        margin-top: 0px;
-        float: none !important;
-        font-weight: normal
+table.picture .caption h3 {
+    font-size: 1.4em !important;
+    margin-top: 0px;
+    float: none !important;
+    font-weight: normal
+}
+
+table.picture ul {
+    margin: 20px 0;
+    list-style: none;
+    padding: 0
+}
+
+    table.picture ul li {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 15px 10px 15px 90px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        position: relative;
+        font-weight: bold !important;
+        color: #000 !important;
+        font-size: 1.2em !important;
+        border-radius: 30px
     }
 
-    table.picture ul {
-        margin: 20px 0;
-        list-style: none;
-        padding: 0
-    }
 
-        table.picture ul li {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 15px 10px 15px 90px;
-            margin-bottom: 5px;
-            cursor: pointer;
-            position: relative;
-            font-weight: bold !important;
+        table.picture ul li span,
+        table.picture ul li strong {
             color: #000 !important;
-            font-size: 1.2em !important;
-            border-radius: 30px
+            font-weight: bold !important;
         }
 
-
-            table.picture ul li span,
-            table.picture ul li strong {
-                color: #000 !important;
-                font-weight: bold !important;
-            }
-
-/*table.picture span.contentAnswer{
+        /*table.picture span.contentAnswer{
     cursor:pointer;
     display:block;
 }*/
 
-table.picture ul li p.explaination {
-    display: block !important;
-    color: #fff;
-    font-weight: normal
-}
+        table.picture ul li p.explaination {
+            display: block !important;
+            color: #fff;
+            font-weight: normal
+        }
 
-            table.picture ul li:before {
+        table.picture ul li:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            text-align: center;
+            line-height: 30px
+        }
+
+        table.picture ul li.selected {
+            color: #fff;
+        }
+
+            table.picture ul li.selected span, table.picture ul li.selected strong {
+                color: #fff !important;
+            }
+
+            table.picture ul li.selected:before {
                 content: "";
                 display: block;
                 position: absolute;
@@ -129,73 +156,73 @@ table.picture ul li p.explaination {
                 width: 30px;
                 height: 30px;
                 border-radius: 100%;
-                background: rgba(0, 0, 0, 0.1);
+                background: #ccc;
                 text-align: center;
                 line-height: 30px
             }
 
-            table.picture ul li:first-child:before {
-                content: "A"
-            }
-
-            table.picture ul li:nth-child(2):before {
-                content: "B"
-            }
-
-            table.picture ul li:nth-child(3):before {
-                content: "C"
-            }
-
-            table.picture ul li:nth-child(4):before {
-                content: "D"
-            }
-
-            table.picture ul li:nth-child(5):before {
-                content: "E"
-            }
-
-            table.picture ul li:nth-child(6):before {
-                content: "F"
-            }
-
-        table.picture ul + p {
-            display: none !important;
-            margin: 15px 0 !important
+        table.picture ul li:first-child:before {
+            content: "1"
         }
 
-            table.picture ul + p:before {
-                content: "Giải thích: ";
-                font-weight: bold
-            }
-
-    table.picture:not(.answered) ul li:hover {
-        background: rgba(255, 255, 255, 0.6)
-    }
-
-    table.picture.answered ul li {
-        opacity: 0.4
-    }
-
-        table.picture.answered ul li.selected {
-            opacity: 1;
-            border-radius: 5px
+        table.picture ul li:nth-child(2):before {
+            content: "2"
         }
 
-            table.picture.answered ul li.selected:not(.correct) {
-                background: #f16464;
-                color: #FFF
-            }
-
-        table.picture.answered ul li.correct {
-            opacity: 1;
-            background: #55d000;
-            color: #FFF;
-            border-radius: 5px
+        table.picture ul li:nth-child(3):before {
+            content: "3"
         }
 
-    table.picture.answered ul + p {
-        display: block !important
+        table.picture ul li:nth-child(4):before {
+            content: "4"
+        }
+
+        table.picture ul li:nth-child(5):before {
+            content: "5"
+        }
+
+        table.picture ul li:nth-child(6):before {
+            content: "6"
+        }
+
+    table.picture ul + p {
+        display: none !important;
+        margin: 15px 0 !important
     }
+
+        table.picture ul + p:before {
+            content: "Giải thích: ";
+            font-weight: bold
+        }
+
+table.picture:not(.answered) ul li:hover {
+    background: rgba(255, 255, 255, 0.6)
+}
+
+table.picture.answered ul li {
+    opacity: 0.4
+}
+
+    table.picture.answered ul li.selected {
+        opacity: 1;
+        border-radius: 5px
+    }
+
+        table.picture.answered ul li.selected:not(.correct) {
+            background: #f16464;
+            color: #FFF
+        }
+
+    table.picture.answered ul li.correct {
+        opacity: 1;
+        background: #55d000;
+        color: #FFF;
+        border-radius: 5px
+    }
+
+table.picture.answered ul + p {
+    display: block !important
+}
 
 #result {
     position: relative;
@@ -247,9 +274,9 @@ table.picture ul li p.explaination {
     border: 0
 }
 
-#summary{
-    margin:20px auto;
-    text-align:center;
+#summary {
+    margin: 20px auto;
+    text-align: center;
 }
 
 @media screen and (min-width: 992px) {
