@@ -82,13 +82,17 @@
     <div class="col-md-8 col-md-offset-2 the-article-body">
         <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE </h1>
         <form action="@Url.Action("ViewResult")" method="post" id="frmViewResult">
+            @{ 
+                int sothutu = 1;
+            }
             @foreach (var cauhoi in Model)
             {
+                sothutu++;
                 <table class="picture question" align="center">
                     <tbody>
                         <tr>
                             <td class="pCaption caption">
-                                <h3><b>Câu @cauhoi.MaCauHoi:</b> @cauhoi.NoiDung?</h3>
+                                <h3><b>Câu @(sothutu):</b> @cauhoi.NoiDung?</h3>
                                 @if (!string.IsNullOrEmpty(cauhoi.Hinh))
                                 {
                                     <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">

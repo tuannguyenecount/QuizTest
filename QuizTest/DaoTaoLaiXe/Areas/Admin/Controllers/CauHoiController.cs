@@ -96,10 +96,19 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
             try
             {
                 List<DapAn> dapAns = new List<DapAn>();
-                dapAns.Add(dapan1);
-                dapAns.Add(dapan2);
-                dapAns.Add(dapan3);
-                if (cauHoi.DapAns.Count > 3)
+                if (dapan1.MaDapAn != 0)
+                {
+                    dapAns.Add(dapan1);
+                }
+                if (dapan2.MaDapAn != 0)
+                {
+                    dapAns.Add(dapan2);
+                }
+                if (dapan3.MaDapAn != 0)
+                {
+                    dapAns.Add(dapan3);
+                }
+                if (dapan4.MaDapAn != 0)
                 {
                     dapAns.Add(dapan4);
                 }
