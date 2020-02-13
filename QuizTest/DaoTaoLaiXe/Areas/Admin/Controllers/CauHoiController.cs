@@ -44,14 +44,23 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
             try
             {
                 cauHoi.DapAns = new List<DapAn>();
-                cauHoi.DapAns.Add(dapan1);
-                cauHoi.DapAns.Add(dapan2);
-                cauHoi.DapAns.Add(dapan3);
-                if(!string.IsNullOrEmpty(dapan4.NoiDung))
+                if (!string.IsNullOrEmpty(dapan1.NoiDung))
+                {
+                    cauHoi.DapAns.Add(dapan1);
+                }
+                if (!string.IsNullOrEmpty(dapan2.NoiDung))
+                {
+                    cauHoi.DapAns.Add(dapan2);
+                }
+                if (!string.IsNullOrEmpty(dapan3.NoiDung))
+                {
+                    cauHoi.DapAns.Add(dapan3);
+                }
+                if (!string.IsNullOrEmpty(dapan4.NoiDung))
                 {
                     cauHoi.DapAns.Add(dapan4);
                 }
-                if(cauHoi.DapAns.Any(x=>x.DapAnDung == true) == false)
+                if(cauHoi.DapAns.Count > 0 && cauHoi.DapAns.Any(x=>x.DapAnDung == true) == false)
                 {
                     ModelState.AddModelError("", "Bạn cần chỉ định ít nhất 1 đáp án là đáp án đúng!");
                 }

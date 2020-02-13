@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QuizDBModelStoreContainer" CdmEntityContainer="QuizDBEntities">
-    <EntitySetMapping Name="DapAns">
-      <EntityTypeMapping TypeName="QuizDBModel.DapAn">
-        <MappingFragment StoreEntitySet="DapAn">
-          <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
-          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-          <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="QuanTriViens">
       <EntityTypeMapping TypeName="QuizDBModel.QuanTriVien">
         <MappingFragment StoreEntitySet="QuanTriVien">
@@ -20,9 +9,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ChuyenMucCauHois">
+      <EntityTypeMapping TypeName="QuizDBModel.ChuyenMucCauHoi">
+        <MappingFragment StoreEntitySet="ChuyenMucCauHoi">
+          <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
+          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CauHois">
       <EntityTypeMapping TypeName="QuizDBModel.CauHoi">
         <MappingFragment StoreEntitySet="CauHoi">
+          <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
           <ScalarProperty Name="Hinh" ColumnName="Hinh" />
           <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
@@ -30,11 +28,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ChuyenMucCauHois">
-      <EntityTypeMapping TypeName="QuizDBModel.ChuyenMucCauHoi">
-        <MappingFragment StoreEntitySet="ChuyenMucCauHoi">
-          <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
-          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
+    <EntitySetMapping Name="DapAns">
+      <EntityTypeMapping TypeName="QuizDBModel.DapAn">
+        <MappingFragment StoreEntitySet="DapAn">
+          <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
+          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
+          <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

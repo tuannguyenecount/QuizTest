@@ -8,6 +8,7 @@
     <Property Name="NoiDung" Type="nvarchar(max)" />
     <Property Name="MaChuyenMuc" Type="varchar" MaxLength="20" />
     <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
+    <Property Name="MaCauHoiMoi" Type="int" />
   </EntityType>
   <EntityType Name="ChuyenMucCauHoi">
     <Key>
@@ -46,9 +47,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_DapAn_CauHoi">
-    <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1" />
     <End Role="DapAn" Type="Self.DapAn" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CauHoi">
