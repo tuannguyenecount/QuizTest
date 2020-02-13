@@ -12,7 +12,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         QuizDBEntities db = new QuizDBEntities();
 
         // GET: Admin/CauHoi
-        public ActionResult Index(int MaChuyenMuc)
+        public ActionResult Index(string MaChuyenMuc)
         {
             ChuyenMucCauHoi chuyenMuc = db.ChuyenMucCauHois.Find(MaChuyenMuc);
             ViewBag.ChuyenMucCauHoi = chuyenMuc; 
@@ -31,7 +31,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         }
 
         // GET: Admin/CauHoi/Create
-        public ActionResult Create(int? MaChuyenMuc)
+        public ActionResult Create(string MaChuyenMuc)
         {
             ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", MaChuyenMuc);
             return View(new CauHoi());
@@ -134,7 +134,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                 {
                     db.Entry(cauHoi).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("Index", new { MaChuyenMuc = cauHoi.MaChuyenMuc });
+                    return RedirectToAction("Edit", new { Id = cauHoi.MaCauHoi });
                 }
                 ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
                 cauHoi.DapAns = db.CauHois.Find(cauHoi.MaCauHoi).DapAns.ToList();
@@ -154,12 +154,12 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             CauHoi cauHoi = db.CauHois.Find(id);
-            int maChuyenMuc = 1;
+            string maChuyenMuc = "1.1";
 
             if (cauHoi != null)
             {
                 db.CauHois.Remove(cauHoi);
-                maChuyenMuc = cauHoi.MaChuyenMuc ?? 1;
+                maChuyenMuc = cauHoi.MaChuyenMuc ?? "1.1";
                 db.SaveChanges();
             }
 

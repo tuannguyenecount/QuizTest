@@ -1,17 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QuizDBModelStoreContainer" CdmEntityContainer="QuizDBEntities">
+    <EntitySetMapping Name="QuanTriViens">
+      <EntityTypeMapping TypeName="QuizDBModel.QuanTriVien">
+        <MappingFragment StoreEntitySet="QuanTriVien">
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ChuyenMucCauHois">
       <EntityTypeMapping TypeName="QuizDBModel.ChuyenMucCauHoi">
         <MappingFragment StoreEntitySet="ChuyenMucCauHoi">
-          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
           <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
+          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CauHois">
       <EntityTypeMapping TypeName="QuizDBModel.CauHoi">
         <MappingFragment StoreEntitySet="CauHoi">
+          <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
           <ScalarProperty Name="Hinh" ColumnName="Hinh" />
           <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
           <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
@@ -27,14 +36,6 @@
           <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
           <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
           <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="QuanTriViens">
-      <EntityTypeMapping TypeName="QuizDBModel.QuanTriVien">
-        <MappingFragment StoreEntitySet="QuanTriVien">
-          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-          <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
