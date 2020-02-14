@@ -178,8 +178,8 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
 
             if (cauHoi != null)
             {
-                db.CauHois.Remove(cauHoi);
                 maChuyenMuc = cauHoi.MaChuyenMuc ?? 1.1;
+                db.CauHois.Remove(cauHoi);
                 db.SaveChanges();
             }
 
