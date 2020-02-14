@@ -22,9 +22,9 @@ namespace DaoTaoLaiXe.Models
     
         public int MaCauHoi { get; set; }
         public string NoiDung { get; set; }
-        public string MaChuyenMuc { get; set; }
+        public Nullable<double> MaChuyenMuc { get; set; }
         public string Hinh { get; set; }
-        public Nullable<int> MaCauHoiMoi { get; set; }
+        public int MaCauHoiMoi { get; set; }
     
         public virtual ChuyenMucCauHoi ChuyenMucCauHoi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

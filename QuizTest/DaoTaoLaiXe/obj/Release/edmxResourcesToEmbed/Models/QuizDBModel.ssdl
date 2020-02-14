@@ -6,15 +6,15 @@
     </Key>
     <Property Name="MaCauHoi" Type="int" Nullable="false" />
     <Property Name="NoiDung" Type="nvarchar(max)" />
-    <Property Name="MaChuyenMuc" Type="varchar" MaxLength="20" />
+    <Property Name="MaChuyenMuc" Type="float" />
     <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
-    <Property Name="MaCauHoiMoi" Type="int" />
+    <Property Name="MaCauHoiMoi" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ChuyenMucCauHoi">
     <Key>
       <PropertyRef Name="MaChuyenMuc" />
     </Key>
-    <Property Name="MaChuyenMuc" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MaChuyenMuc" Type="float" Nullable="false" />
     <Property Name="TenChuyenMuc" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="DapAn">

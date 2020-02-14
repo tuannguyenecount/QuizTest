@@ -22,7 +22,7 @@ namespace DaoTaoLaiXe.Models
         public string NoiDung { get; set; }
 
         [Display(Name = "Chuyên mục")]
-        public string MaChuyenMuc { get; set; }
+        public Nullable<double> MaChuyenMuc { get; set; }
 
         [Display(Name = "Hình")]
         public string Hinh { get; set; }

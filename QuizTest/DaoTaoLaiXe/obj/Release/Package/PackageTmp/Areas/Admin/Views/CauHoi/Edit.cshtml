@@ -19,6 +19,12 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body">
+                    @if(Request.QueryString["message"] != null)
+                    {
+                        <h5 class="text-success">
+                            @Request.QueryString["message"]
+                        </h5>
+                    }
                     @using (Html.BeginForm("Edit", "CauHoi", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.HiddenFor(m => m.Hinh)
@@ -29,7 +35,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.MaCauHoi, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-6">
-                                    <input readonly type="text" value="@Model.MaCauHoi" />
+                                    @Html.EditorFor(model => model.MaCauHoiMoi, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MaCauHoiMoi, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -197,7 +204,7 @@
                     @using (Html.BeginForm("AddAnswer", "CauHoi",FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         DapAn dapAn = new DapAn() {
-                            MaCauHoi = Model.MaCauHoi
+                            MaCauHoi = Model.MaCauHoiMoi
                         };
                         @Html.HiddenFor(m => dapAn.MaCauHoi)
                         <div class="form-horizontal">
