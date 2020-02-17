@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>bin\Release\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\Release\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Admin/Views/CauHoi/Create.cshtml">
@@ -127,10 +127,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/DaoTaoLaiXe.dll">
-      <publishTime>02/17/2020 11:12:20</publishTime>
+      <publishTime>02/17/2020 13:14:50</publishTime>
     </File>
     <File Include="bin/DaoTaoLaiXe.pdb">
-      <publishTime>02/17/2020 11:12:20</publishTime>
+      <publishTime>02/17/2020 13:14:50</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>06/07/2018 11:03:48</publishTime>
@@ -4705,7 +4705,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2020 08:53:01</publishTime>
     </File>
     <File Include="Views/Home/Practice.cshtml">
-      <publishTime>02/17/2020 09:11:26</publishTime>
+      <publishTime>02/17/2020 11:14:47</publishTime>
     </File>
     <File Include="Views/Home/Review.cshtml">
       <publishTime>02/10/2020 11:47:29</publishTime>

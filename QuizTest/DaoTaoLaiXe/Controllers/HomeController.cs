@@ -28,22 +28,76 @@ namespace DaoTaoLaiXe.Controllers
             return View(cauHois);
         }
 
+        void Swap(CauHoi a, CauHoi b)
+        {
+            CauHoi temp = a;
+            a = b;
+            b = temp;
+        }
+
+        void ShuffleArray(ref List<CauHoi> lst)
+        {
+            Random r = new Random();
+            int minPosition;
+            int maxPosition = lst.Count - 1;
+            int swapPosition;
+
+            int i = 0;
+            while (i < lst.Count - 1)
+            {
+                minPosition = i + 1;
+                swapPosition = r.Next(1, Int32.MaxValue) % (maxPosition - minPosition + 1) + minPosition;
+
+                CauHoi temp = lst[i];
+                lst[i] = lst[swapPosition];
+                lst[swapPosition] = temp;
+
+                i++;
+            }
+        }
+
+
+
         public ActionResult Practice()
         {
             List<CauHoi> cauhois = new List<CauHoi>();
             Random random = new Random();
 
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 21).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 20)).Take(1).ToList()); // lấy 1 câu phần 1
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 22 && x.MaCauHoiMoi <= 131).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 109)).Take(7).ToList()); // lấy 7 câu phần 1
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 132 && x.MaCauHoiMoi <= 145).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 13)).Take(1).ToList()); // lấy 1 câu phần 1
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 146 && x.MaCauHoiMoi <= 175).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 29)).Take(1).ToList()); // lấy 1 câu phần 2
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 176 && x.MaCauHoiMoi <= 200).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 24)).Take(1).ToList()); // lấy 1 câu phần 3
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 201 && x.MaCauHoiMoi <= 255).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 54)).Take(1).ToList()); // lấy 1 câu phần 4,5
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 256 && x.MaCauHoiMoi <= 355).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 99)).Take(9).ToList()); // lấy 9 câu phần 6
-            cauhois.AddRange(db.CauHois.Where(x => x.MaCauHoiMoi >= 356 && x.MaCauHoiMoi <= 450).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 94)).Take(9).ToList()); // lấy 9 câu phần 7
-            cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
+            List<CauHoi> lstToAdd = new List<CauHoi>();
 
-            cauhois = cauhois.OrderBy(x => x.MaCauHoiMoi).ToList();
+            lstToAdd =  db.CauHois.Where(x => x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 21).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 19)).Take(1).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 1 câu phần 1
+
+            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 22 && x.MaCauHoiMoi <= 131).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 102)).Take(7).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 7 câu phần 1
+
+            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 132 && x.MaCauHoiMoi <= 145).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 12)).Take(1).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 1 câu phần 1
+
+            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 146 && x.MaCauHoiMoi <= 175).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 28)).Take(1).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 1 câu phần 2
+
+            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 176 && x.MaCauHoiMoi <= 200).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 23)).Take(1).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 1 câu phần 3
+
+            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 201 && x.MaCauHoiMoi <= 255).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 53)).Take(1).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 1 câu phần 4,5
+
+            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 256 && x.MaCauHoiMoi <= 355).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 90)).Take(9).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 9 câu phần 6
+
+            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 356 && x.MaCauHoiMoi <= 450).OrderBy(x => x.MaCauHoiMoi).Skip(random.Next(0, 85)).Take(9).ToList();
+            ShuffleArray(ref lstToAdd);
+            cauhois.AddRange(lstToAdd); // lấy 9 câu phần 7
+
+            cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
             Session["CauHois"] = cauhois;
 
             ViewBag.SelectAnswer = new List<int>();
