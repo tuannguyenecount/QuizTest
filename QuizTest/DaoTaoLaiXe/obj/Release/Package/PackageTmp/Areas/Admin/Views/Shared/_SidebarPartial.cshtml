@@ -19,7 +19,7 @@
             {
             <li data-toggle="tooltip" title="@item.TenChuyenMuc">
                 <a href="@Url.Action("Index", "CauHoi",new { MaChuyenMuc = item.MaChuyenMuc })">
-                    <i class="fa fa-list"></i> <span>@(item.TenChuyenMuc.Length > 20 ? item.TenChuyenMuc.Substring(0,20) + "..." : item.TenChuyenMuc)</span>
+                    <i class="fa fa-list"></i> <span>@item.MaChuyenMuc/ @(item.TenChuyenMuc.Length > 20 ? item.TenChuyenMuc.Substring(0,20) + "..." : item.TenChuyenMuc)</span>
                 </a>
             </li>
             }

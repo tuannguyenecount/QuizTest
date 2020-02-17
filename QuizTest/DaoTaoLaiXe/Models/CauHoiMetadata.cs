@@ -18,10 +18,11 @@ namespace DaoTaoLaiXe.Models
         public int MaCauHoi { get; set; }
 
         [Display(Name = "Nội dung")]
+        [Required(ErrorMessage = "Bạn chưa nhập {0}")]
         public string NoiDung { get; set; }
 
         [Display(Name = "Chuyên mục")]
-        public Nullable<int> MaChuyenMuc { get; set; }
+        public Nullable<double> MaChuyenMuc { get; set; }
 
         [Display(Name = "Hình")]
         public string Hinh { get; set; }

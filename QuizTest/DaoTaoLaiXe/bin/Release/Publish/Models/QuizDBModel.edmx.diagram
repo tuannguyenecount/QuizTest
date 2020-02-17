@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="75d2999a01fa43349a0e53158119a347" Name="Diagram1">
-        <EntityTypeShape EntityType="QuizDBModel.ChuyenMucCauHoi" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuizDBModel.CauHoi" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="QuizDBModel.DapAn" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="QuizDBModel.QuanTriVien" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="QuizDBModel.DapAn" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="QuizDBModel.CauHoi" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="QuizDBModel.ChuyenMucCauHoi" Width="1.5" PointX="0.75" PointY="7.375" />
         <AssociationConnector Association="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" />
         <AssociationConnector Association="QuizDBModel.FK_DapAn_CauHoi" />
-        <EntityTypeShape EntityType="QuizDBModel.QuanTriVien" Width="1.5" PointX="0.75" PointY="4.75" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

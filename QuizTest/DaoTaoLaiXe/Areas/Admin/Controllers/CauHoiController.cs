@@ -12,7 +12,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         QuizDBEntities db = new QuizDBEntities();
 
         // GET: Admin/CauHoi
-        public ActionResult Index(int MaChuyenMuc)
+        public ActionResult Index(double MaChuyenMuc)
         {
             ChuyenMucCauHoi chuyenMuc = db.ChuyenMucCauHois.Find(MaChuyenMuc);
             ViewBag.ChuyenMucCauHoi = chuyenMuc; 
@@ -31,9 +31,9 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         }
 
         // GET: Admin/CauHoi/Create
-        public ActionResult Create(int? MaChuyenMuc)
+        public ActionResult Create(double MaChuyenMuc)
         {
-            ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", MaChuyenMuc);
+            ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois, "MaChuyenMuc", "TenChuyenMuc", MaChuyenMuc);
             return View(new CauHoi());
         }
 
@@ -43,36 +43,54 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         {
             try
             {
+                cauHoi.MaCauHoiMoi = cauHoi.MaCauHoi;
                 cauHoi.DapAns = new List<DapAn>();
-                cauHoi.DapAns.Add(dapan1);
-                cauHoi.DapAns.Add(dapan2);
-                cauHoi.DapAns.Add(dapan3);
-                if(!string.IsNullOrEmpty(dapan4.NoiDung))
+                if (db.CauHois.Any(x => x.MaCauHoiMoi == cauHoi.MaCauHoi))
                 {
-                    cauHoi.DapAns.Add(dapan4);
+                    ModelState.AddModelError("MaCauHoi", "Mã câu hỏi này đã tồn tại. Bạn hãy kiểm tra lại.");
                 }
-                if(cauHoi.DapAns.Any(x=>x.DapAnDung == true) == false)
+                else
                 {
-                    ModelState.AddModelError("", "Bạn cần chỉ định ít nhất 1 đáp án là đáp án đúng!");
-                }
-                if(file != null && file.ContentLength > 0)
-                {
-                    string fileName = DateTime.Now.Ticks.ToString() + System.IO.Path.GetExtension(file.FileName);
-                    cauHoi.Hinh = fileName;
-                    file.SaveAs(Server.MapPath("~/Content/images/" + fileName));
+                    if (!string.IsNullOrEmpty(dapan1.NoiDung))
+                    {
+                        cauHoi.DapAns.Add(dapan1);
+                    }
+                    if (!string.IsNullOrEmpty(dapan2.NoiDung))
+                    {
+                        cauHoi.DapAns.Add(dapan2);
+                    }
+                    if (!string.IsNullOrEmpty(dapan3.NoiDung))
+                    {
+                        cauHoi.DapAns.Add(dapan3);
+                    }
+                    if (!string.IsNullOrEmpty(dapan4.NoiDung))
+                    {
+                        cauHoi.DapAns.Add(dapan4);
+                    }
+                    if (cauHoi.DapAns.Count > 0 && cauHoi.DapAns.Any(x => x.DapAnDung == true) == false)
+                    {
+                        ModelState.AddModelError("", "Bạn cần chỉ định ít nhất 1 đáp án là đáp án đúng!");
+                    }
                 }
                 if (ModelState.IsValid)
                 {
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string fileName = DateTime.Now.Ticks.ToString() + System.IO.Path.GetExtension(file.FileName);
+                        cauHoi.Hinh = fileName;
+                        file.SaveAs(Server.MapPath("~/Content/images/" + fileName));
+                    }
                     db.CauHois.Add(cauHoi);
                     db.SaveChanges();
                     return RedirectToAction("Index",new { MaChuyenMuc = cauHoi.MaChuyenMuc });
                 }
+                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois, "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
                 return View(cauHoi);
             }
             catch(Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
+                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois, "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
                 return View(cauHoi);
             }
         }
@@ -85,7 +103,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
+            ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois, "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
             return View(cauHoi);
         }
 
@@ -95,11 +113,26 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         {
             try
             {
+                
+                if (db.CauHois.Any(x => x.MaCauHoiMoi == cauHoi.MaCauHoiMoi && x.MaCauHoi != cauHoi.MaCauHoi))
+                {
+                    ModelState.AddModelError("MaCauHoiMoi", "Mã câu hỏi này đã tồn tại. Bạn hãy kiểm tra lại.");
+                }
+                
                 List<DapAn> dapAns = new List<DapAn>();
-                dapAns.Add(dapan1);
-                dapAns.Add(dapan2);
-                dapAns.Add(dapan3);
-                if (cauHoi.DapAns.Count > 3)
+                if (dapan1.MaDapAn != 0)
+                {
+                    dapAns.Add(dapan1);
+                }
+                if (dapan2.MaDapAn != 0)
+                {
+                    dapAns.Add(dapan2);
+                }
+                if (dapan3.MaDapAn != 0)
+                {
+                    dapAns.Add(dapan3);
+                }
+                if (dapan4.MaDapAn != 0)
                 {
                     dapAns.Add(dapan4);
                 }
@@ -107,34 +140,30 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("", "Bạn cần chỉ định ít nhất 1 đáp án là đáp án đúng!");
                 }
-                else
+                if (ModelState.IsValid)
                 {
-                    foreach(DapAn dapAnItem in dapAns)
+                    foreach (DapAn dapAnItem in dapAns)
                     {
                         db.Entry(dapAnItem).State = System.Data.Entity.EntityState.Modified;
                     }
-                }
-                if (file != null && file.ContentLength > 0)
-                {
-                    string fileName = DateTime.Now.Ticks.ToString() + System.IO.Path.GetExtension(file.FileName);
-                    cauHoi.Hinh = fileName;
-                    file.SaveAs(Server.MapPath("~/Content/images/" + fileName));
-                }
-               // cauHoi.DapAns = dapAns;
-                if (ModelState.IsValid)
-                {
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string fileName = DateTime.Now.Ticks.ToString() + System.IO.Path.GetExtension(file.FileName);
+                        cauHoi.Hinh = fileName;
+                        file.SaveAs(Server.MapPath("~/Content/images/" + fileName));
+                    }
                     db.Entry(cauHoi).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("Index", new { MaChuyenMuc = cauHoi.MaChuyenMuc });
+                    return RedirectToAction("Edit", new { Id = cauHoi.MaCauHoi, message = "Sửa thành công" });
                 }
-                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
+                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois, "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
                 cauHoi.DapAns = db.CauHois.Find(cauHoi.MaCauHoi).DapAns.ToList();
                 return View(cauHoi);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois.OrderBy(x => x.MaChuyenMuc).ToList(), "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
+                ViewBag.MaChuyenMuc = new SelectList(db.ChuyenMucCauHois, "MaChuyenMuc", "TenChuyenMuc", cauHoi.MaChuyenMuc);
                 cauHoi.DapAns = db.CauHois.Find(cauHoi.MaCauHoi).DapAns.ToList();
                 return View(cauHoi);
             }
@@ -145,12 +174,12 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             CauHoi cauHoi = db.CauHois.Find(id);
-            int maChuyenMuc = 1;
+            double maChuyenMuc = 1.1;
 
             if (cauHoi != null)
             {
+                maChuyenMuc = cauHoi.MaChuyenMuc ?? 1.1;
                 db.CauHois.Remove(cauHoi);
-                maChuyenMuc = cauHoi.MaChuyenMuc ?? 1;
                 db.SaveChanges();
             }
 

@@ -5,7 +5,7 @@
     List<CauHoi> danhSachCauHoiTraLoiDung = ViewBag.danhSachCauHoiTraLoiDung;
     List<int> selectAnswer = ViewBag.SelectAnswer;
     int countAnswer = ViewBag.CountAnswer;
-    ViewBag.Title = "TRẮC NGHIỆM ĐÀO TẠO LÁI XE";
+    ViewBag.Title = "TRẮC NGHIỆM ĐÀO TẠO LÁI XE ";
 }
 
 @section styles{
@@ -82,20 +82,24 @@
     <div class="col-md-8 col-md-offset-2 the-article-body">
         <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE </h1>
         <form action="@Url.Action("ViewResult")" method="post" id="frmViewResult">
+            @{ 
+                int sothutu = 0;
+            }
             @foreach (var cauhoi in Model)
             {
+                sothutu++;
                 <table class="picture question" align="center">
                     <tbody>
                         <tr>
                             <td class="pCaption caption">
-                                <h3><b>Câu @cauhoi.MaCauHoi:</b> @cauhoi.NoiDung?</h3>
+                                <h3><b>Câu @(sothutu):</b> @cauhoi.NoiDung?</h3>
                                 @if (!string.IsNullOrEmpty(cauhoi.Hinh))
                                 {
                                     <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">
                                         <img src="~/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
                                     </div>
                                 }
-                                @if (cauhoi.DapAns.Count(x => x.DapAnDung) <= 1)
+                                @*@if (cauhoi.DapAns.Count(x => x.DapAnDung) <= 1)
                                 {
                                     <ul class="listAnswer">
                                         @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
@@ -105,14 +109,14 @@
                                     </ul>
                                 }
                                 else
-                                {
+                                {*@
                                     <ul class="listAnswer">
                                         @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
                                         {
                                             <li> <input type="checkbox" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
                                         }
                                     </ul>
-                                }
+                                @*}*@
                             </td>
                         </tr>
 

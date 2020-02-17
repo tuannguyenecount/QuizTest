@@ -25,9 +25,9 @@ namespace DaoTaoLaiXe.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ChuyenMucCauHoi> ChuyenMucCauHois { get; set; }
-        public virtual DbSet<CauHoi> CauHois { get; set; }
-        public virtual DbSet<DapAn> DapAns { get; set; }
         public virtual DbSet<QuanTriVien> QuanTriViens { get; set; }
+        public virtual DbSet<DapAn> DapAns { get; set; }
+        public virtual DbSet<CauHoi> CauHois { get; set; }
+        public virtual DbSet<ChuyenMucCauHoi> ChuyenMucCauHois { get; set; }
     }
 }

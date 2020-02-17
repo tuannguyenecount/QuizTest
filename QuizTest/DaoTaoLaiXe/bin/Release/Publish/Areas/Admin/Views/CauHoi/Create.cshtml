@@ -52,7 +52,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.MaChuyenMuc, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-6">
-                                @Html.DropDownList("MaChuyenMuc", null, new { @class = "form-control" })
+                                @Html.DropDownList("MaChuyenMuc", (SelectList)ViewBag.MaChuyenMuc, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.MaChuyenMuc, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                        <tr>
                                            <td class="text-center col-sm-1"><span>1</span></td>
                                            <td>
-                                               @Html.TextBoxFor(m => dapAn1.NoiDung, new { @class = "form-control", required = "" })
+                                               @Html.TextBoxFor(m => dapAn1.NoiDung, new { @class = "form-control" })
                                            </td>
                                            <td class="text-center col-sm-1">
                                                @Html.CheckBoxFor(m => dapAn1.DapAnDung)
@@ -89,7 +89,7 @@
                                        <tr>
                                            <td class="text-center col-sm-1"><span>2</span></td>
                                            <td>
-                                               @Html.TextBoxFor(m => dapAn2.NoiDung, new { @class = "form-control", required = "" })
+                                               @Html.TextBoxFor(m => dapAn2.NoiDung, new { @class = "form-control" })
                                            </td>
                                            <td class="text-center col-sm-1">
                                                @Html.CheckBoxFor(m => dapAn2.DapAnDung)
@@ -102,7 +102,7 @@
                                        <tr>
                                            <td class="text-center col-sm-1"><span>3</span></td>
                                            <td>
-                                               @Html.TextBoxFor(m => dapAn3.NoiDung, new { @class = "form-control", required = "" })
+                                               @Html.TextBoxFor(m => dapAn3.NoiDung, new { @class = "form-control" })
                                            </td>
                                            <td class="text-center col-sm-1">
                                                @Html.CheckBoxFor(m => dapAn3.DapAnDung)

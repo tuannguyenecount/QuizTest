@@ -1,0 +1,70 @@
+﻿@using DaoTaoLaiXe.Models;
+@model List<CauHoi>
+
+@{
+    ViewBag.Title = "Xem lại câu sai";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Dictionary<int, List<int>> cauHoiDapAnDung = ViewBag.cauHoiDapAnDung;
+    List<CauHoi> danhSachCauHoiTraLoiDung = ViewBag.danhSachCauHoiTraLoiDung;
+    List<int> selectAnswer = ViewBag.SelectAnswer;
+    int countAnswer = ViewBag.CountAnswer;
+}
+
+
+@section styles{
+    <link href="~/Content/quizz_008.css" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts{
+
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 the-article-body">
+        
+        @*<h1 class="text-center well text-info">Chúc mừng bạn đã đậu với số câu trả lời đúng là @(danhSachCauHoiTraLoiDung.Count)/@(Model.Count) câu.</h1>*@
+       @{ 
+           int sothutu = 0;
+       }
+        @foreach (var cauhoi in Model.Where(x => danhSachCauHoiTraLoiDung.Any(y=>y.MaCauHoi == x.MaCauHoi) == false))
+        {
+            sothutu++;
+            <table class="picture question" align="center">
+                <tbody>
+                    <tr>
+                        <td class="pCaption caption">
+                            <h3><b>Câu @(sothutu):</b> @cauhoi.NoiDung?</h3>
+                            @if (!string.IsNullOrEmpty(cauhoi.Hinh))
+                            {
+                                <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">
+                                    <img src="~/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
+                                </div>
+                            }
+                            @*@if (cauhoi.DapAns.Count(x => x.DapAnDung) <= 1)
+                            {
+                                <ul class="listAnswer">
+                                    @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                                    {
+                                        <li class="@(selectAnswer.Contains(dapan.MaDapAn) ? (dapan.DapAnDung == true ? "success":"selected") : (dapan.DapAnDung == true ? "success":"")  )"> <input type="radio" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {*@
+                                <ul class="listAnswer">
+                                    @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                                    {
+                                        <li class="@(selectAnswer.Contains(dapan.MaDapAn) ? (dapan.DapAnDung == true ? "success":"selected") : (dapan.DapAnDung == true ? "success":"")  )"> <input type="checkbox" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
+                                    }
+                                </ul>
+                            @*}*@
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        }
+    </div>
+
+</div>
+

@@ -20,7 +20,7 @@ namespace DaoTaoLaiXe.Models
             this.CauHois = new HashSet<CauHoi>();
         }
     
-        public int MaChuyenMuc { get; set; }
+        public double MaChuyenMuc { get; set; }
         public string TenChuyenMuc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
