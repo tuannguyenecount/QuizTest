@@ -24,7 +24,7 @@
         
         @*<h1 class="text-center well text-info">Chúc mừng bạn đã đậu với số câu trả lời đúng là @(danhSachCauHoiTraLoiDung.Count)/@(Model.Count) câu.</h1>*@
        @{ 
-           int sothutu = 1;
+           int sothutu = 0;
        }
         @foreach (var cauhoi in Model.Where(x => danhSachCauHoiTraLoiDung.Any(y=>y.MaCauHoi == x.MaCauHoi) == false))
         {

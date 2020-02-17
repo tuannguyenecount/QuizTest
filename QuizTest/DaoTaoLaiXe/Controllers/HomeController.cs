@@ -64,7 +64,7 @@ namespace DaoTaoLaiXe.Controllers
             List<int> selectAnswer = new List<int>();
             (Session["CauHois"] as List<CauHoi>).ForEach(x =>
             {
-                selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y)).ToList());
+                selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y.Trim())).ToList());
             });
 
             List<CauHoi> danhSachCauHoiTraLoiDung = new List<CauHoi>();
@@ -104,7 +104,7 @@ namespace DaoTaoLaiXe.Controllers
             Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
             (Session["CauHois"] as List<CauHoi>).ForEach(x =>
             {
-                selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y)).ToList());
+                selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y.Trim())).ToList());
                 cauHoiDapAnDung.Add(x.MaCauHoiMoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
             });
 

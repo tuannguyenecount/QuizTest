@@ -32,11 +32,11 @@
                 @if ((int)ViewBag.TongCauSai > 0)
                 {
                 <tr>
-                    <td></td>
-                    <td>
-                        <a href="@Url.Action("ViewWrongAnswer")" class="btn btn-primary">Xem Lại Câu Sai</a>
+                    <td class="text-center" colspan="3">
+                        <a href="@Url.Action("Index")" class="btn btn-default"><i class="glyphicon glyphicon-backward"></i> Về Trang Chủ</a>
+                        <a href="@Url.Action("ViewWrongAnswer")" class="btn btn-danger"><i class="glyphicon glyphicon-search"></i>Xem Lại Câu Sai</a>
+                        <a href="@Url.Action("Practice")" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i>Thi Lại</a>
                     </td>
-                    <td></td>
                 </tr>
                 }
             </tbody>
