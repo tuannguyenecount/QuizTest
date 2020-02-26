@@ -16,6 +16,7 @@ namespace DaoTaoLaiXe.Controllers
             return View();
         }
 
+        [Route("450-cau-hoi-on-tap-sat-hach-lai-xe")]
         public ViewResult Review()
         {
             Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
@@ -35,27 +36,6 @@ namespace DaoTaoLaiXe.Controllers
             b = temp;
         }
 
-        //void ShuffleArray(ref List<CauHoi> lst)
-        //{
-        //    Random r = new Random();
-        //    int minPosition;
-        //    int maxPosition = lst.Count - 1;
-        //    int swapPosition;
-
-        //    int i = 0;
-        //    while (i < lst.Count - 1)
-        //    {
-        //        minPosition = i + 1;
-        //        swapPosition = r.Next(1, Int32.MaxValue) % (maxPosition - minPosition + 1) + minPosition;
-
-        //        CauHoi temp = lst[i];
-        //        lst[i] = lst[swapPosition];
-        //        lst[swapPosition] = temp;
-
-        //        i++;
-        //    }
-        //}
-
         void ShuffleArray(ref List<CauHoi> lst)
         {
             Random r = new Random();
@@ -68,7 +48,7 @@ namespace DaoTaoLaiXe.Controllers
             }
         }
 
-
+        [Route("de-thi-sat-hach-lai-xe")]
         public ActionResult Practice()
         {
             List<CauHoi> cauhois = new List<CauHoi>();
@@ -127,11 +107,13 @@ namespace DaoTaoLaiXe.Controllers
             return View(Session["CauHois"]);
         }
 
+        [Route("ket-qua-thi-sat-hach-lai-xe")]
         public ActionResult ViewResult()
         {
             return RedirectToAction("Practice");
         }
 
+        [Route("ket-qua-thi-sat-hach-lai-xe")]
         [HttpPost]
         public async Task<ActionResult> ViewResult(FormCollection frm)
         {
@@ -171,6 +153,7 @@ namespace DaoTaoLaiXe.Controllers
             return View();
         }
 
+        [Route("xem-cau-tra-loi-sai")]
         public async Task<ActionResult> ViewWrongAnswer()
         {
             FormCollection frm = Session["frm"] as FormCollection;
@@ -211,48 +194,6 @@ namespace DaoTaoLaiXe.Controllers
             ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoi).Distinct().Count();
             return View(Session["CauHois"]);
         }
-
-        //[HttpPost]
-        //public async Task<ActionResult> ViewResult(FormCollection frm)
-        //{
-        //    List<int> selectAnswer = new List<int>();
-        //    Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
-        //    (Session["CauHois"] as List<CauHoi>).ForEach(x =>
-        //    {
-        //        selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y)).ToList());
-        //        cauHoiDapAnDung.Add(x.MaCauHoiMoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
-        //    });
-
-        //    List<CauHoi> danhSachCauHoiTraLoiDung = new List<CauHoi>();
-        //    foreach(int answerId in selectAnswer)
-        //    {
-        //        DapAn dapAn = await db.DapAns.FindAsync(answerId);
-        //        if(db.DapAns.Count(x=>x.MaCauHoiMoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
-        //        {
-        //            List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoiMoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
-        //            if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Count() == danhSachDapAnDung.Count)
-        //            {
-        //                if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoiMoi == dapAn.MaCauHoi) == false)
-        //                    danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
-        //            }
-        //        }
-        //        else  // Nếu câu trả lời cho câu hỏi dạng radio
-        //        {
-        //            if (dapAn.DapAnDung == true)
-        //            {
-        //                if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoiMoi == dapAn.MaCauHoi) == false)
-        //                    danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
-        //            }
-        //        }
-
-        //    }
-        //    ViewBag.SelectAnswer = selectAnswer;
-        //    ViewBag.danhSachCauHoiTraLoiDung = danhSachCauHoiTraLoiDung;
-        //    ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
-        //    ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoiMoi).Distinct().Count();
-        //    return View(Session["CauHois"]);
-        //}
-
 
     }
 }

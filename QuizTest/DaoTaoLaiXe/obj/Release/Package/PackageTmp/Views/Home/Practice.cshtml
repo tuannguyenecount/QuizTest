@@ -29,7 +29,7 @@
             $("#countAnswer").html(countAnswer);
         }
         function viewResult() {
-            if (countAnswer < 1) {
+            if (countAnswer < @(Model.Count)) {
                 swal("Lỗi", "Bạn chưa hoàn thành trả lời tất cả câu hỏi!", "error");
                 return false;
             }
@@ -70,7 +70,7 @@
                         showLoaderOnConfirm: false
                     }, function (result) {
                         if (result == true) {
-                            window.location.href = "/Home/Practice";
+                            window.location.href = "@Url.Action("Practice")";
                         }
                         else {
                             window.location.href = "/";
