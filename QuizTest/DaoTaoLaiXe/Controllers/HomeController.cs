@@ -56,42 +56,42 @@ namespace DaoTaoLaiXe.Controllers
 
             List<CauHoi> lstToAdd = new List<CauHoi>();
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 21).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 21).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 19)).Take(1).ToList();
             cauhois.AddRange(lstToAdd); // lấy 1 câu phần 1
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 22 && x.MaCauHoiMoi <= 131).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 22 && x.MaCauHoiMoi <= 131).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 102)).Take(7).ToList();
             cauhois.AddRange(lstToAdd); // lấy 7 câu phần 1
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 132 && x.MaCauHoiMoi <= 145).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 132 && x.MaCauHoiMoi <= 145).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 12)).Take(1).ToList();
             cauhois.AddRange(lstToAdd); // lấy 1 câu phần 1
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 146 && x.MaCauHoiMoi <= 175).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 146 && x.MaCauHoiMoi <= 175).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 28)).Take(1).ToList();          
             cauhois.AddRange(lstToAdd); // lấy 1 câu phần 2
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 176 && x.MaCauHoiMoi <= 200).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 176 && x.MaCauHoiMoi <= 200).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 23)).Take(1).ToList();
             cauhois.AddRange(lstToAdd); // lấy 1 câu phần 3
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 201 && x.MaCauHoiMoi <= 255).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 201 && x.MaCauHoiMoi <= 255).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 53)).Take(1).ToList(); 
             cauhois.AddRange(lstToAdd); // lấy 1 câu phần 4,5
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 256 && x.MaCauHoiMoi <= 355).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 256 && x.MaCauHoiMoi <= 355).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 90)).Take(9).ToList();
             cauhois.AddRange(lstToAdd); // lấy 9 câu phần 6
 
-            lstToAdd = db.CauHois.Where(x => x.MaCauHoiMoi >= 356 && x.MaCauHoiMoi <= 450).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 356 && x.MaCauHoiMoi <= 450).ToList();
             ShuffleArray(ref lstToAdd);
             lstToAdd = lstToAdd.Skip(random.Next(0, 85)).Take(9).ToList();          
             cauhois.AddRange(lstToAdd); // lấy 9 câu phần 7

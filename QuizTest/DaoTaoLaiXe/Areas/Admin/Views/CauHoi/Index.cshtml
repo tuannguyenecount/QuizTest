@@ -39,6 +39,7 @@
                                         Nội Dung Câu Hỏi
                                     </th>
                                     <th class="col-sm-4">Đáp Án</th>
+                                    <th>Trạng thái</th>
                                     <th class="col-sm-3 text-center">Thao Tác</th>
                                 </tr>
                             </thead>
@@ -56,6 +57,16 @@
                                             @foreach (var dapan in item.DapAns.OrderBy(x => x.SoThuTu))
                                             {
                                                 <p> <input type="checkbox" readonly value="@dapan.MaDapAn" @(dapan.DapAnDung == true ? "checked=''" : "") /> <b @(dapan.DapAnDung == true ? "class=text-success" : "")>@dapan.SoThuTu. @dapan.NoiDung</b> </p>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.SuDung)
+                                            {
+                                                <label class="label label-success" >Sử dụng</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="label label-danger" >Không sử dụng</label>
                                             }
                                         </td>
                                         <td class="text-center">

@@ -43,6 +43,7 @@
     <Property Name="MaCauHoiMoi" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ChuyenMucCauHoi" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="CauHoi" ToRole="ChuyenMucCauHoi" />
     <NavigationProperty Name="DapAns" Relationship="QuizDBModel.FK_DapAn_CauHoi" FromRole="CauHoi" ToRole="DapAn" />
+    <Property Name="SuDung" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="ChuyenMucCauHoi">
     <Key>
