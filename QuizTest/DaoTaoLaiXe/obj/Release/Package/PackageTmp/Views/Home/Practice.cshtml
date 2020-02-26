@@ -17,6 +17,8 @@
     <script src="~/Scripts/sweetalert.min.js"></script>
     <script>
         var countAnswer = 0;
+        var minutePractice = 20;
+        var timeUp = false;
         function SetCountAnswer() {
             countAnswer = 0;
             $.each($(".listAnswer"), function (key, ctrl) {
@@ -32,10 +34,66 @@
                 return false;
             }
             else {
-                $("#frmViewResult").submit();
+                if (timeUp == true) {
+                    swal("Lỗi", "Bạn đã quá giờ thi!", "error");
+                }
+                else 
+                    $("#frmViewResult").submit();
             }
         }
+       
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            var tickTimer = setInterval(function() {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (minutes <= 0 && seconds <= 0) {
+                    timeUp = true;
+                    clearInterval(tickTimer);
+
+                    swal({
+                        title: 'Lỗi',
+                        text: "Bạn đã quá thời gian quy định",
+                        type: "error",
+                        showCancelButton: true,
+                        showConfirmButton: true,
+                        confirmButtonColor: "#e64942",
+                        confirmButtonText: "Thi Lại",
+                        cancelButtonText: 'Về Trang Chủ',
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: false
+                    }, function (result) {
+                        if (result == true) {
+                            window.location.href = "@Url.Action("Practice")";
+                        }
+                        else {
+                            window.location.href = "/";
+                        }
+                    });
+
+                    
+                }
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
         $(function () {
+            var minutes = 60 * minutePractice,
+            display = document.querySelector('#time');
+            startTimer(minutes, display);
+
+            window.onbeforeunload = function(e) {
+              return 'Dialog text here.';
+            };
+
             $(document).on("click", ".listAnswer li input", function (e) {
                 e.stopPropagation();
                 $(".listAnswer li input").change().bind();
@@ -76,8 +134,25 @@
 
         });
     </script>
-}
 
+}
+<div id="time" style="
+                        text-align: center;
+                        height:50px;
+                        background: #f2f2f2;
+                        color:#000;
+                        font-size:26px;
+                        position: fixed;
+                        /* left: 50px; */
+                        width: 100px;
+                        z-index:99;
+                        left:0;
+                        padding-top: 8px;
+                        bottom: 0px;
+                        width: 100%;
+                        opacity: 0.8;
+                        text-align: center;
+                        ">20:00</div>
 <div class="row">
     <div class="col-md-8 col-md-offset-2 the-article-body">
         <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE </h1>
