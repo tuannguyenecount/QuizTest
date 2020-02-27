@@ -15,6 +15,13 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        $(document).ready(function() {
+            $('body').bind("cut copy paste", function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
