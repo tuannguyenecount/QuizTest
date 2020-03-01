@@ -48,6 +48,20 @@ namespace DaoTaoLaiXe.Controllers
             }
         }
 
+        string GetListIdQuestion(List<CauHoi> cauHois)
+        {
+            string result = "";
+            foreach(CauHoi cauHoi in cauHois)
+            {
+                result += cauHoi.MaCauHoiMoi + ",";
+            }
+            if(result != "")
+            {
+                result = result.Substring(0, result.Length - 1);
+            }
+            return result;
+        }
+
         [Route("de-thi-sat-hach-lai-xe")]
         public ActionResult Practice()
         {
@@ -98,13 +112,14 @@ namespace DaoTaoLaiXe.Controllers
 
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
             
-            Session["CauHois"] = cauhois;
+            //Session["CauHois"] = cauhois;
 
             ViewBag.SelectAnswer = new List<int>();
             ViewBag.danhSachCauHoiTraLoiDung = new List<CauHoi>();
             ViewBag.cauHoiDapAnDung = new Dictionary<int, List<int>>();
             ViewBag.CountAnswer = 0;
-            return View(Session["CauHois"]);
+            ViewBag.CauHois = GetListIdQuestion(cauhois);
+            return View(cauhois);
         }
 
         [Route("ket-qua-thi-sat-hach-lai-xe")]
@@ -118,36 +133,73 @@ namespace DaoTaoLaiXe.Controllers
         public async Task<ActionResult> ViewResult(FormCollection frm)
         {
             List<int> selectAnswer = new List<int>();
-            (Session["CauHois"] as List<CauHoi>).ForEach(x =>
+            List<CauHoi> cauHois = new List<CauHoi>();
+            foreach(string sMaCauHoi in frm["CauHois"].Split(','))
             {
-                selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y.Trim())).ToList());
-            });
+                int maCauHoi = int.Parse(sMaCauHoi);
+                CauHoi ch = await db.CauHois.FindAsync(maCauHoi);
+                cauHois.Add(ch);
+            }
+            try
+            {
+
+                cauHois.ForEach(x =>
+                {
+                    if(frm["selectAnswer_" + x.MaCauHoiMoi] == null)
+                    {
+                        throw new Exception("selectAnswer_" + x.MaCauHoiMoi + " null");
+                    }
+                    selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y.Trim())).ToList());
+                });
+            }
+            catch
+            {
+                throw new Exception("Lỗi số 1");
+            }
 
             List<CauHoi> danhSachCauHoiTraLoiDung = new List<CauHoi>();
             foreach (int answerId in selectAnswer)
             {
-                DapAn dapAn = await db.DapAns.FindAsync(answerId);
-                if (db.DapAns.Count(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
+                DapAn dapAn = db.DapAns.Find(answerId);
+                if(dapAn == null)
                 {
-                    List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
-                    if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Count() == danhSachDapAnDung.Count)
+                    throw new Exception("Đáp án " + answerId + " null");
+                }
+                try
+                {
+                    if (db.DapAns.Count(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true) > 1) // Nếu câu trả lời cho câu hỏi dạng checkbox
                     {
-                        if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoiMoi == dapAn.MaCauHoi) == false)
-                            danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+                        List<int> danhSachDapAnDung = db.DapAns.Where(x => x.MaCauHoi == dapAn.MaCauHoi && x.DapAnDung == true).Select(x => x.MaDapAn).ToList();
+                        if (selectAnswer.ToList().Intersect(danhSachDapAnDung).Count() == danhSachDapAnDung.Count)
+                        {
+                            if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoiMoi == dapAn.MaCauHoi) == false)
+                                danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+                        }
+                    }
+                    else  // Nếu câu trả lời cho câu hỏi dạng radio
+                    {
+                        if (dapAn.DapAnDung == true)
+                        {
+                            if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoiMoi == dapAn.MaCauHoi) == false)
+                                danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
+                        }
                     }
                 }
-                else  // Nếu câu trả lời cho câu hỏi dạng radio
+                catch
                 {
-                    if (dapAn.DapAnDung == true)
-                    {
-                        if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoiMoi == dapAn.MaCauHoi) == false)
-                            danhSachCauHoiTraLoiDung.Add(dapAn.CauHoi);
-                    }
+                    throw new Exception("Lỗi số 2");
                 }
 
             }
-            ViewBag.TongCauHoi = (Session["CauHois"] as List<CauHoi>).Count;
-            ViewBag.TongCauDung = danhSachCauHoiTraLoiDung.Count;
+            try
+            {
+                ViewBag.TongCauHoi = cauHois.Count;
+                ViewBag.TongCauDung = danhSachCauHoiTraLoiDung.Count;
+            }
+            catch
+            {
+                throw new Exception("Lỗi số 3");
+            }
             ViewBag.TongCauSai = ViewBag.TongCauHoi - ViewBag.TongCauDung;
             Session["frm"] = frm;
             return View();
@@ -157,9 +209,16 @@ namespace DaoTaoLaiXe.Controllers
         public async Task<ActionResult> ViewWrongAnswer()
         {
             FormCollection frm = Session["frm"] as FormCollection;
+            List<CauHoi> cauHois = new List<CauHoi>();
+            foreach (string sMaCauHoi in frm["CauHois"].Split(','))
+            {
+                int maCauHoi = int.Parse(sMaCauHoi);
+                CauHoi ch = await db.CauHois.FindAsync(maCauHoi);
+                cauHois.Add(ch);
+            }
             List<int> selectAnswer = new List<int>();
             Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
-            (Session["CauHois"] as List<CauHoi>).ForEach(x =>
+            cauHois.ForEach(x =>
             {
                 selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoiMoi].Split(',').Select(y => int.Parse(y.Trim())).ToList());
                 cauHoiDapAnDung.Add(x.MaCauHoiMoi, x.DapAns.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
@@ -192,7 +251,7 @@ namespace DaoTaoLaiXe.Controllers
             ViewBag.danhSachCauHoiTraLoiDung = danhSachCauHoiTraLoiDung;
             ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
             ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoi).Distinct().Count();
-            return View(Session["CauHois"]);
+            return View(cauHois);
         }
 
     }

@@ -157,6 +157,7 @@
     <div class="col-md-8 col-md-offset-2 the-article-body">
         <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE </h1>
         <form action="@Url.Action("ViewResult")" method="post" id="frmViewResult">
+            <input type="hidden" name="CauHois" value="@ViewBag.CauHois" />
             @{ 
                 int sothutu = 0;
             }
