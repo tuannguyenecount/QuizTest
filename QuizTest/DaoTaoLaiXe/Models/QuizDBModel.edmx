@@ -14,6 +14,7 @@
           <Property Name="MaChuyenMuc" Type="float" />
           <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
           <Property Name="MaCauHoiMoi" Type="int" Nullable="false" />
+          <Property Name="SuDung" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ChuyenMucCauHoi">
           <Key>
@@ -39,6 +40,20 @@
           <Property Name="TaiKhoan" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MatKhau" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__DapAn__MaCauHoi__3F466844">
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DapAn" Type="Self.DapAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CauHoi">
+              <PropertyRef Name="MaCauHoi" />
+            </Principal>
+            <Dependent Role="DapAn">
+              <PropertyRef Name="MaCauHoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CauHoi_ChuyenMucCauHoi">
           <End Role="ChuyenMucCauHoi" Type="Self.ChuyenMucCauHoi" Multiplicity="0..1" />
           <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="*" />
@@ -51,30 +66,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DapAn_CauHoi">
-          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1" />
-          <End Role="DapAn" Type="Self.DapAn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CauHoi">
-              <PropertyRef Name="MaCauHoi" />
-            </Principal>
-            <Dependent Role="DapAn">
-              <PropertyRef Name="MaCauHoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="QuizDBModelStoreContainer">
           <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChuyenMucCauHoi" EntityType="Self.ChuyenMucCauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DapAn" EntityType="Self.DapAn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuanTriVien" EntityType="Self.QuanTriVien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="Self.FK__DapAn__MaCauHoi__3F466844">
+            <End Role="CauHoi" EntitySet="CauHoi" />
+            <End Role="DapAn" EntitySet="DapAn" />
+          </AssociationSet>
           <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="Self.FK_CauHoi_ChuyenMucCauHoi">
             <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHoi" />
             <End Role="CauHoi" EntitySet="CauHoi" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DapAn_CauHoi" Association="Self.FK_DapAn_CauHoi">
-            <End Role="CauHoi" EntitySet="CauHoi" />
-            <End Role="DapAn" EntitySet="DapAn" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -124,6 +127,7 @@
           <Property Name="MaCauHoiMoi" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChuyenMucCauHoi" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="CauHoi" ToRole="ChuyenMucCauHoi" />
           <NavigationProperty Name="DapAns" Relationship="QuizDBModel.FK_DapAn_CauHoi" FromRole="CauHoi" ToRole="DapAn" />
+          <Property Name="SuDung" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ChuyenMucCauHoi">
           <Key>
@@ -185,6 +189,7 @@
           <EntitySetMapping Name="CauHois">
             <EntityTypeMapping TypeName="QuizDBModel.CauHoi">
               <MappingFragment StoreEntitySet="CauHoi">
+                <ScalarProperty Name="SuDung" ColumnName="SuDung" />
                 <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
                 <ScalarProperty Name="Hinh" ColumnName="Hinh" />
                 <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />

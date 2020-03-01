@@ -25,6 +25,7 @@ namespace DaoTaoLaiXe.Models
         public Nullable<double> MaChuyenMuc { get; set; }
         public string Hinh { get; set; }
         public int MaCauHoiMoi { get; set; }
+        public bool SuDung { get; set; }
     
         public virtual ChuyenMucCauHoi ChuyenMucCauHoi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -29,88 +29,95 @@
                     {
                         @Html.HiddenFor(m => m.Hinh)
                         @Html.HiddenFor(m => m.MaCauHoi)
-                        <div class="form-horizontal">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.MaCauHoi, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-6">
-                                    @Html.EditorFor(model => model.MaCauHoiMoi, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.MaCauHoiMoi, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaCauHoi, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.MaCauHoiMoi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MaCauHoiMoi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-6">
-                                    @Html.EditorFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Đổi Hình (không bắt buộc)</label>
-                                <div class="col-md-6">
-                                    <input type="file" name="file" accept="image/x-png,image/gif,image/jpeg" />
-                                    @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Đổi Hình (không bắt buộc)</label>
+                        <div class="col-md-6">
+                            <input type="file" name="file" accept="image/x-png,image/gif,image/jpeg" />
+                            @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.MaChuyenMuc, htmlAttributes: new { @class = "control-label col-md-3" })
-                                <div class="col-md-6">
-                                    @Html.DropDownList("MaChuyenMuc", null, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.MaChuyenMuc, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaChuyenMuc, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.DropDownList("MaChuyenMuc", null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaChuyenMuc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                    @if (Model.DapAns != null && Model.DapAns.Count < 4)
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Sử dụng</label>
+                        <div class="col-md-6 checkbox">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.CheckBoxFor(model => model.SuDung)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @if (Model.DapAns != null && Model.DapAns.Count < 4)
+                        {
+                            <p class="col-md-12">
+                                <button type="button" data-toggle="modal" class="btn btn-success" data-target="#modalThemDapAn">Thêm đáp án</button>
+                            </p>
+                        }
+                        <div class="col-md-12">
+
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td class="text-center">Đáp án số</td>
+                                        <td>Nội dung</td>
+                                        <td class="text-center">Đáp án đúng</td>
+                                        <td class="text-center col-sm-1">Xóa</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.DapAns.Count > 0)
                                     {
-                                        <p class="col-md-12">
-                                            <button type="button" data-toggle="modal" class="btn btn-success" data-target="#modalThemDapAn">Thêm đáp án</button>
-                                        </p>
+                                        DapAn dapAn1 = Model.DapAns.ToList().First();
+                                        @Html.HiddenFor(m => dapAn1.MaDapAn)
+                                        @Html.HiddenFor(m => dapAn1.MaCauHoi)
+                                        @Html.HiddenFor(m => dapAn1.SoThuTu)
+                                        <tr>
+                                            <td class="text-center col-sm-1"><span>1</span></td>
+                                            <td>
+                                                @Html.TextBoxFor(m => dapAn1.NoiDung, new { @class = "form-control", required = "" })
+                                            </td>
+                                            <td class="text-center col-sm-1">
+                                                @Html.CheckBoxFor(m => dapAn1.DapAnDung)
+                                            </td>
+                                            <td class="text-center">
+                                                <form action="@Url.Action("DeleteAnswer",new { id = dapAn1.MaDapAn })" method="post">
+                                                    <button type="submit" onclick="return confirm('Xác nhận xóa đáp án này?')" class="btn btn-default">Xóa</button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     }
-                                <div class="col-md-12">
-                                   
-                                    
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <td class="text-center">Đáp án số</td>
-                                                <td>Nội dung</td>
-                                                <td class="text-center">Đáp án đúng</td>
-                                                <td class="text-center col-sm-1">Xóa</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model.DapAns.Count > 0)
-                                            {
-                                                DapAn dapAn1 = Model.DapAns.ToList().First();
-                                                @Html.HiddenFor(m => dapAn1.MaDapAn)
-                                                @Html.HiddenFor(m => dapAn1.MaCauHoi)
-                                                @Html.HiddenFor(m => dapAn1.SoThuTu)
-                                                <tr>
-                                                    <td class="text-center col-sm-1"><span>1</span></td>
-                                                    <td>
-                                                        @Html.TextBoxFor(m => dapAn1.NoiDung, new { @class = "form-control", required = "" })
-                                                    </td>
-                                                    <td class="text-center col-sm-1">
-                                                        @Html.CheckBoxFor(m => dapAn1.DapAnDung)
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <form action="@Url.Action("DeleteAnswer",new { id = dapAn1.MaDapAn })" method="post">
-                                                            <button type="submit" onclick="return confirm('Xác nhận xóa đáp án này?')" class="btn btn-default">Xóa</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            }
-                                            @if (Model.DapAns.Count > 1)
-                                            {
-                                                DapAn dapAn2 = Model.DapAns.ToList().ElementAt(1);
-                                                @Html.HiddenFor(m => dapAn2.MaDapAn)
-                                                @Html.HiddenFor(m => dapAn2.MaCauHoi)
-                                                @Html.HiddenFor(m => dapAn2.SoThuTu)
+                                    @if (Model.DapAns.Count > 1)
+                                    {
+                                        DapAn dapAn2 = Model.DapAns.ToList().ElementAt(1);
+                                        @Html.HiddenFor(m => dapAn2.MaDapAn)
+                                        @Html.HiddenFor(m => dapAn2.MaCauHoi)
+                                        @Html.HiddenFor(m => dapAn2.SoThuTu)
                                         <tr>
                                             <td class="text-center col-sm-1"><span>2</span></td>
                                             <td>
@@ -125,13 +132,13 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                            }
-                                            @if (Model.DapAns.Count > 2)
-                                            {
-                                                DapAn dapAn3 = Model.DapAns.ToList().ElementAt(2);
-                                                @Html.HiddenFor(m => dapAn3.MaDapAn)
-                                                @Html.HiddenFor(m => dapAn3.MaCauHoi)
-                                                @Html.HiddenFor(m => dapAn3.SoThuTu)
+                                    }
+                                    @if (Model.DapAns.Count > 2)
+                                    {
+                                        DapAn dapAn3 = Model.DapAns.ToList().ElementAt(2);
+                                        @Html.HiddenFor(m => dapAn3.MaDapAn)
+                                        @Html.HiddenFor(m => dapAn3.MaCauHoi)
+                                        @Html.HiddenFor(m => dapAn3.SoThuTu)
                                         <tr>
                                             <td class="text-center col-sm-1"><span>3</span></td>
                                             <td>
@@ -146,40 +153,40 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                            }
-                                            @if (Model.DapAns.Count > 3)
-                                            {
-                                                DapAn dapAn4 = Model.DapAns.ToList().ElementAt(3);
-                                                @Html.HiddenFor(m => dapAn4.MaDapAn)
-                                                @Html.HiddenFor(m => dapAn4.MaCauHoi)
-                                                @Html.HiddenFor(m => dapAn4.SoThuTu)
-                                                <tr>
-                                                    <td class="text-center col-sm-1"><span>4</span></td>
-                                                    <td>
-                                                        @Html.TextBoxFor(m => dapAn4.NoiDung, new { @class = "form-control", required = "" })
-                                                    </td>
-                                                    <td class="text-center col-sm-1">
-                                                        @Html.CheckBoxFor(m => dapAn4.DapAnDung)
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <form action="@Url.Action("DeleteAnswer",new { id = dapAn4.MaDapAn })" method="post">
-                                                            <button type="submit" class="btn btn-default" onclick="return confirm('Xác nhận xóa đáp án này?')">Xóa</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-3 col-md-6">
-                                    <input type="submit" value="Cập Nhật" class="btn btn-success" />
-                                    @Html.ActionLink("Trở về", "Index", new { MaChuyenMuc = Model.MaChuyenMuc }, new { @class = "btn btn-default" })
-                                </div>
-                            </div>
+                                    }
+                                    @if (Model.DapAns.Count > 3)
+                                    {
+                                        DapAn dapAn4 = Model.DapAns.ToList().ElementAt(3);
+                                        @Html.HiddenFor(m => dapAn4.MaDapAn)
+                                        @Html.HiddenFor(m => dapAn4.MaCauHoi)
+                                        @Html.HiddenFor(m => dapAn4.SoThuTu)
+                                        <tr>
+                                            <td class="text-center col-sm-1"><span>4</span></td>
+                                            <td>
+                                                @Html.TextBoxFor(m => dapAn4.NoiDung, new { @class = "form-control", required = "" })
+                                            </td>
+                                            <td class="text-center col-sm-1">
+                                                @Html.CheckBoxFor(m => dapAn4.DapAnDung)
+                                            </td>
+                                            <td class="text-center">
+                                                <form action="@Url.Action("DeleteAnswer",new { id = dapAn4.MaDapAn })" method="post">
+                                                    <button type="submit" class="btn btn-default" onclick="return confirm('Xác nhận xóa đáp án này?')">Xóa</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-6">
+                            <input type="submit" value="Cập Nhật" class="btn btn-success" />
+                            @Html.ActionLink("Trở về", "Index", new { MaChuyenMuc = Model.MaChuyenMuc }, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                </div>
                     }
                 </div>
                 <!-- /.box-body -->

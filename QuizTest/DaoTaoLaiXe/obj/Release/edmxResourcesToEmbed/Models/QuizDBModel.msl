@@ -23,6 +23,7 @@
     <EntitySetMapping Name="CauHois">
       <EntityTypeMapping TypeName="QuizDBModel.CauHoi">
         <MappingFragment StoreEntitySet="CauHoi">
+          <ScalarProperty Name="SuDung" ColumnName="SuDung" />
           <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
           <ScalarProperty Name="Hinh" ColumnName="Hinh" />
           <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
