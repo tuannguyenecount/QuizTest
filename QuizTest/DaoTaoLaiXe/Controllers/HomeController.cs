@@ -29,6 +29,20 @@ namespace DaoTaoLaiXe.Controllers
             return View(cauHois);
         }
 
+
+        [Route("60-cau-hoi-diem-liet")]
+        public ViewResult FierceQuestion()
+        {
+            Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
+            List<CauHoiLiet> cauHoiLiets = db.CauHoiLiets.OrderBy(x => x.MaCauHoi).ToList();
+            cauHoiLiets.ForEach(x =>
+            {
+                cauHoiDapAnDung.Add(x.MaCauHoi, x.DapAnCauHoiLiets.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
+            });
+            ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
+            return View(cauHoiLiets);
+        }
+
         void Swap(CauHoi a, CauHoi b)
         {
             CauHoi temp = a;
@@ -252,6 +266,18 @@ namespace DaoTaoLaiXe.Controllers
             ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
             ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoi).Distinct().Count();
             return View(cauHois);
+        }
+
+        [Route("gioi-thieu")]
+        public ViewResult About()
+        {
+            return View(db.ThongTinChungs.First());
+        }
+
+        [Route("lien-he")]
+        public ViewResult Contact()
+        {
+            return View(db.ThongTinChungs.First());
         }
 
     }

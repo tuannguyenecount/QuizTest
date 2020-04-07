@@ -1,0 +1,16 @@
+﻿@using DaoTaoLaiXe.Models;
+@model ThongTinChung
+@{
+    ViewBag.Title = "Giới Thiệu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="background:#fff;padding-bottom:20px">
+    <div class="col-md-12">
+        <h1>@ViewBag.Title</h1>
+        <article>
+            @Html.Raw(Model.GioiThieu)
+        </article>
+    </div>
+</div>
+

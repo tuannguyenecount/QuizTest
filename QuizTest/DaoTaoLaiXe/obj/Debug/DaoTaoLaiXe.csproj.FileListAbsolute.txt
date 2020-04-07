@@ -236,3 +236,4 @@ D:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.csprojAssemblyReferen
 D:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.csproj.CopyComplete
 D:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.dll
 D:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.pdb
+H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.csproj.CoreCompileInputs.cache

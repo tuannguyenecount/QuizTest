@@ -131,8 +131,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CauHoiLietController.cs" />
     <Compile Include="Areas\Admin\Controllers\CauHoiController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongTinChungController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\SharedController.cs" />
@@ -144,6 +146,14 @@
     <Compile Include="Models\CauHoi.cs">
       <DependentUpon>QuizDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CauHoiLiet.cs">
+      <DependentUpon>QuizDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CauHoiLietMetadata.cs" />
+    <Compile Include="Models\DapAnCauHoiLiet.cs">
+      <DependentUpon>QuizDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DapAnCauHoiLietMetadata.cs" />
     <Compile Include="Models\DapAnMetadata.cs" />
     <Compile Include="Models\CauHoiMetadata.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
@@ -171,6 +181,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QuizDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThongTinChung.cs">
+      <DependentUpon>QuizDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1460,6 +1473,11 @@
     <Content Include="Areas\Admin\Views\CauHoi\Details.cshtml" />
     <Content Include="Areas\Admin\Views\CauHoi\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\CauHoiLiet\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CauHoiLiet\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CauHoiLiet\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CauHoiLiet\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongTinChung\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1703,6 +1721,9 @@
     <Content Include="Scripts\README.md" />
     <Content Include="Views\Home\ViewResult.cshtml" />
     <Content Include="Views\Home\ViewWrongAnswer.cshtml" />
+    <Content Include="Views\Home\FierceQuestion.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
