@@ -9,6 +9,18 @@
     @RenderSection("styles", false)
 </head>
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">luyenthi.hoclaixekhongkho.com</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Trang Chủ</a></li>
+                <li><a href="@Url.Action("About","Home")">Giới Thiệu</a></li>
+                <li><a href="@Url.Action("Contact","Home")">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
     </div>
@@ -16,8 +28,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script>
-        $(document).ready(function() {
-            $('body').bind("cut copy paste", function(e) {
+        $(document).ready(function () {
+            $('body').bind("cut copy paste", function (e) {
                 e.preventDefault();
             });
         });

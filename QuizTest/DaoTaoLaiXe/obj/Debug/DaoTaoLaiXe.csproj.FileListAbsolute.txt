@@ -73,7 +73,6 @@ H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\System.Web.WebPages.Razor.xml
 H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\Newtonsoft.Json.xml
 H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\Antlr3.Runtime.pdb
 H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.csprojAssemblyReference.cache
 H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.csproj.CopyComplete
 H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.dll
 H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Debug\DaoTaoLaiXe.pdb

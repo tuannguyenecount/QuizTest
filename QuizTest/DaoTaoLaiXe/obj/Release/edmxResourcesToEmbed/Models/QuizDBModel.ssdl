@@ -11,6 +11,14 @@
     <Property Name="MaCauHoiMoi" Type="int" Nullable="false" />
     <Property Name="SuDung" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="CauHoiLiet">
+    <Key>
+      <PropertyRef Name="MaCauHoi" />
+    </Key>
+    <Property Name="MaCauHoi" Type="int" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
+  </EntityType>
   <EntityType Name="ChuyenMucCauHoi">
     <Key>
       <PropertyRef Name="MaChuyenMuc" />
@@ -28,12 +36,30 @@
     <Property Name="NoiDung" Type="nvarchar(max)" />
     <Property Name="DapAnDung" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="DapAnCauHoiLiet">
+    <Key>
+      <PropertyRef Name="MaDapAn" />
+    </Key>
+    <Property Name="MaDapAn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaCauHoi" Type="int" Nullable="false" />
+    <Property Name="SoThuTu" Type="tinyint" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="DapAnDung" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="QuanTriVien">
     <Key>
       <PropertyRef Name="TaiKhoan" />
     </Key>
     <Property Name="TaiKhoan" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="MatKhau" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ThongTinChung">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GioiThieu" Type="nvarchar(max)" />
+    <Property Name="LienHe" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="FK__DapAn__MaCauHoi__3F466844">
     <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1">
@@ -45,6 +71,20 @@
         <PropertyRef Name="MaCauHoi" />
       </Principal>
       <Dependent Role="DapAn">
+        <PropertyRef Name="MaCauHoi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DapAnCauH__MaCau__4E88ABD4">
+    <End Role="CauHoiLiet" Type="Self.CauHoiLiet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DapAnCauHoiLiet" Type="Self.DapAnCauHoiLiet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CauHoiLiet">
+        <PropertyRef Name="MaCauHoi" />
+      </Principal>
+      <Dependent Role="DapAnCauHoiLiet">
         <PropertyRef Name="MaCauHoi" />
       </Dependent>
     </ReferentialConstraint>
@@ -63,12 +103,19 @@
   </Association>
   <EntityContainer Name="QuizDBModelStoreContainer">
     <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CauHoiLiet" EntityType="Self.CauHoiLiet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChuyenMucCauHoi" EntityType="Self.ChuyenMucCauHoi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DapAn" EntityType="Self.DapAn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DapAnCauHoiLiet" EntityType="Self.DapAnCauHoiLiet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="QuanTriVien" EntityType="Self.QuanTriVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ThongTinChung" EntityType="Self.ThongTinChung" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="Self.FK__DapAn__MaCauHoi__3F466844">
       <End Role="CauHoi" EntitySet="CauHoi" />
       <End Role="DapAn" EntitySet="DapAn" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DapAnCauH__MaCau__4E88ABD4" Association="Self.FK__DapAnCauH__MaCau__4E88ABD4">
+      <End Role="CauHoiLiet" EntitySet="CauHoiLiet" />
+      <End Role="DapAnCauHoiLiet" EntitySet="DapAnCauHoiLiet" />
     </AssociationSet>
     <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="Self.FK_CauHoi_ChuyenMucCauHoi">
       <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHoi" />

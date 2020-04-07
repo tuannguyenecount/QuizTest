@@ -17,12 +17,25 @@
 
             @foreach (var item in Model)
             {
-            <li data-toggle="tooltip" title="@item.TenChuyenMuc">
-                <a href="@Url.Action("Index", "CauHoi",new { MaChuyenMuc = item.MaChuyenMuc })">
-                    <i class="fa fa-list"></i> <span>@item.MaChuyenMuc/ @(item.TenChuyenMuc.Length > 20 ? item.TenChuyenMuc.Substring(0,20) + "..." : item.TenChuyenMuc)</span>
+                <li data-toggle="tooltip" title="@item.TenChuyenMuc">
+                    <a href="@Url.Action("Index", "CauHoi",new { MaChuyenMuc = item.MaChuyenMuc })">
+                        <i class="fa fa-list"></i> <span>@item.MaChuyenMuc/ @(item.TenChuyenMuc.Length > 20 ? item.TenChuyenMuc.Substring(0,20) + "..." : item.TenChuyenMuc)</span>
+                    </a>
+                </li>
+            }
+
+            <li>
+                <a href="@Url.Action("Index","CauHoiLiet")">
+                    <i class="fa fa-list"></i> <span>Câu Hỏi Liệt</span>
                 </a>
             </li>
-            }
+
+            <li>
+                <a href="@Url.Action("Edit","ThongTinChung")">
+                    <i class="fa fa-info"></i> <span>Thông Tin Chung</span>
+                </a>
+            </li>
+
             <li>
                 <a href="/" target="_blank">
                     <i class="fa fa-globe"></i> <span>Xem Website</span>
