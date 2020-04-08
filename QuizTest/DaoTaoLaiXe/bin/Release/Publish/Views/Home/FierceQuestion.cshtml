@@ -2,6 +2,7 @@
 @model List<CauHoiLiet>
 @{
     Dictionary<int, List<int>> cauHoiDapAnDung = ViewBag.cauHoiDapAnDung;
+    Dictionary<int, List<DapAnCauHoiLiet>> dapAnCauHoiLietDictionarys = ViewBag.DapAnCauHoiLietDictionarys;
     ViewBag.Title = "60 CÂU HỎI ĐIỂM LIỆT";
 }
 
@@ -28,7 +29,7 @@
                             }
 
                             <ul class="listAnswer">
-                                @foreach (var dapan in cauhoi.DapAnCauHoiLiets.OrderBy(x => x.SoThuTu))
+                                @foreach (var dapan in dapAnCauHoiLietDictionarys[cauhoi.MaCauHoi])
                                 {
                                     <li class="@(dapan.DapAnDung == true ? "success" : "")"> <span class="contentAnswer">@dapan.NoiDung</span></li>
                                 }

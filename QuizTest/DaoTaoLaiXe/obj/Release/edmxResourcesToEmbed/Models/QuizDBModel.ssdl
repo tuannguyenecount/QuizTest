@@ -13,8 +13,9 @@
   </EntityType>
   <EntityType Name="CauHoiLiet">
     <Key>
-      <PropertyRef Name="MaCauHoi" />
+      <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaCauHoi" Type="int" Nullable="false" />
     <Property Name="NoiDung" Type="nvarchar(max)" />
     <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
@@ -75,20 +76,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DapAnCauH__MaCau__4E88ABD4">
-    <End Role="CauHoiLiet" Type="Self.CauHoiLiet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="DapAnCauHoiLiet" Type="Self.DapAnCauHoiLiet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CauHoiLiet">
-        <PropertyRef Name="MaCauHoi" />
-      </Principal>
-      <Dependent Role="DapAnCauHoiLiet">
-        <PropertyRef Name="MaCauHoi" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CauHoi_ChuyenMucCauHoi">
     <End Role="ChuyenMucCauHoi" Type="Self.ChuyenMucCauHoi" Multiplicity="0..1" />
     <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="*" />
@@ -101,6 +88,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_DapAnCauHoiLiet_CauHoiLiet' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_DapAnCauHoiLiet_CauHoiLiet" />-->
   <EntityContainer Name="QuizDBModelStoreContainer">
     <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CauHoiLiet" EntityType="Self.CauHoiLiet" Schema="dbo" store:Type="Tables" />
@@ -112,10 +102,6 @@
     <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="Self.FK__DapAn__MaCauHoi__3F466844">
       <End Role="CauHoi" EntitySet="CauHoi" />
       <End Role="DapAn" EntitySet="DapAn" />
-    </AssociationSet>
-    <AssociationSet Name="FK__DapAnCauH__MaCau__4E88ABD4" Association="Self.FK__DapAnCauH__MaCau__4E88ABD4">
-      <End Role="CauHoiLiet" EntitySet="CauHoiLiet" />
-      <End Role="DapAnCauHoiLiet" EntitySet="DapAnCauHoiLiet" />
     </AssociationSet>
     <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="Self.FK_CauHoi_ChuyenMucCauHoi">
       <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHoi" />

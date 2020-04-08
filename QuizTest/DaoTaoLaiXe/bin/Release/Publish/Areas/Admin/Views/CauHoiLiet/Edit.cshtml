@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Sửa Câu Hỏi Liệt";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<DapAnCauHoiLiet> dapAnCauHoiLiets = ViewBag.DapAnCauHoiLiets;
 }
 
 <section class="content-header">
@@ -56,7 +57,7 @@
                             </div>
 
                             <div class="form-group">
-                                @if (Model.DapAnCauHoiLiets != null && Model.DapAnCauHoiLiets.Count < 4)
+                                @if (dapAnCauHoiLiets != null && dapAnCauHoiLiets.Count < 4)
                                 {
                                     <p class="col-md-12">
                                         <button type="button" data-toggle="modal" class="btn btn-success" data-target="#modalThemDapAn">Thêm đáp án</button>
@@ -73,9 +74,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (Model.DapAnCauHoiLiets.Count > 0)
+                                            @if (dapAnCauHoiLiets.Count > 0)
                                             {
-                                                DapAnCauHoiLiet dapAn1 = Model.DapAnCauHoiLiets.ToList().First();
+                                                DapAnCauHoiLiet dapAn1 = dapAnCauHoiLiets.ToList().First();
                                                 @Html.HiddenFor(m => dapAn1.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn1.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn1.SoThuTu)
@@ -94,9 +95,9 @@
                                                     </td>
                                                 </tr>
                                             }
-                                            @if (Model.DapAnCauHoiLiets.Count > 1)
+                                            @if (dapAnCauHoiLiets.Count > 1)
                                             {
-                                                DapAnCauHoiLiet dapAn2 = Model.DapAnCauHoiLiets.ToList().ElementAt(1);
+                                                DapAnCauHoiLiet dapAn2 =  dapAnCauHoiLiets.ToList().ElementAt(1);
                                                 @Html.HiddenFor(m => dapAn2.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn2.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn2.SoThuTu)
@@ -115,9 +116,9 @@
                                                     </td>
                                                 </tr>
                                             }
-                                            @if (Model.DapAnCauHoiLiets.Count > 2)
+                                            @if (dapAnCauHoiLiets.Count > 2)
                                             {
-                                                DapAnCauHoiLiet dapAn3 = Model.DapAnCauHoiLiets.ToList().ElementAt(2);
+                                                DapAnCauHoiLiet dapAn3 = dapAnCauHoiLiets.ToList().ElementAt(2);
                                                 @Html.HiddenFor(m => dapAn3.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn3.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn3.SoThuTu)
@@ -136,9 +137,9 @@
                                                     </td>
                                                 </tr>
                                             }
-                                            @if (Model.DapAnCauHoiLiets.Count > 3)
+                                            @if (dapAnCauHoiLiets.Count > 3)
                                             {
-                                                DapAnCauHoiLiet dapAn4 = Model.DapAnCauHoiLiets.ToList().ElementAt(3);
+                                                DapAnCauHoiLiet dapAn4 = dapAnCauHoiLiets.ToList().ElementAt(3);
                                                 @Html.HiddenFor(m => dapAn4.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn4.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn4.SoThuTu)
