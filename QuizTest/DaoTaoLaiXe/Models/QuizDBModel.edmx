@@ -18,8 +18,9 @@
         </EntityType>
         <EntityType Name="CauHoiLiet">
           <Key>
-            <PropertyRef Name="MaCauHoi" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaCauHoi" Type="int" Nullable="false" />
           <Property Name="NoiDung" Type="nvarchar(max)" />
           <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
@@ -80,20 +81,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DapAnCauH__MaCau__4E88ABD4">
-          <End Role="CauHoiLiet" Type="Self.CauHoiLiet" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="DapAnCauHoiLiet" Type="Self.DapAnCauHoiLiet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CauHoiLiet">
-              <PropertyRef Name="MaCauHoi" />
-            </Principal>
-            <Dependent Role="DapAnCauHoiLiet">
-              <PropertyRef Name="MaCauHoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CauHoi_ChuyenMucCauHoi">
           <End Role="ChuyenMucCauHoi" Type="Self.ChuyenMucCauHoi" Multiplicity="0..1" />
           <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="*" />
@@ -106,6 +93,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_DapAnCauHoiLiet_CauHoiLiet' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_DapAnCauHoiLiet_CauHoiLiet" />-->
         <EntityContainer Name="QuizDBModelStoreContainer">
           <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CauHoiLiet" EntityType="Self.CauHoiLiet" Schema="dbo" store:Type="Tables" />
@@ -117,10 +107,6 @@
           <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="Self.FK__DapAn__MaCauHoi__3F466844">
             <End Role="CauHoi" EntitySet="CauHoi" />
             <End Role="DapAn" EntitySet="DapAn" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DapAnCauH__MaCau__4E88ABD4" Association="Self.FK__DapAnCauH__MaCau__4E88ABD4">
-            <End Role="CauHoiLiet" EntitySet="CauHoiLiet" />
-            <End Role="DapAnCauHoiLiet" EntitySet="DapAnCauHoiLiet" />
           </AssociationSet>
           <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="Self.FK_CauHoi_ChuyenMucCauHoi">
             <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHoi" />
@@ -144,13 +130,9 @@
             <End Role="CauHoi" EntitySet="CauHois" />
             <End Role="DapAn" EntitySet="DapAns" />
           </AssociationSet>
-          <EntitySet Name="DapAnCauHoiLiets" EntityType="QuizDBModel.DapAnCauHoiLiet" />
-          <EntitySet Name="CauHoiLiets" EntityType="QuizDBModel.CauHoiLiet" />
-          <AssociationSet Name="FK__DapAnCauH__MaCau__4E88ABD4" Association="QuizDBModel.FK__DapAnCauH__MaCau__4E88ABD4">
-            <End Role="CauHoiLiet" EntitySet="CauHoiLiets" />
-            <End Role="DapAnCauHoiLiet" EntitySet="DapAnCauHoiLiets" />
-          </AssociationSet>
           <EntitySet Name="ThongTinChungs" EntityType="QuizDBModel.ThongTinChung" />
+          <EntitySet Name="CauHoiLiets" EntityType="QuizDBModel.CauHoiLiet" />
+          <EntitySet Name="DapAnCauHoiLiets" EntityType="QuizDBModel.DapAnCauHoiLiet" />
           </EntityContainer>
         <EntityType Name="QuanTriVien">
           <Key>
@@ -215,6 +197,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ThongTinChung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CauHoiLiet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="DapAnCauHoiLiet">
           <Key>
             <PropertyRef Name="MaDapAn" />
@@ -224,38 +223,6 @@
           <Property Name="SoThuTu" Type="Byte" Nullable="false" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DapAnDung" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="CauHoiLiet" Relationship="QuizDBModel.FK__DapAnCauH__MaCau__4E88ABD4" FromRole="DapAnCauHoiLiet" ToRole="CauHoiLiet" />
-        </EntityType>
-        <EntityType Name="CauHoiLiet">
-          <Key>
-            <PropertyRef Name="MaCauHoi" />
-          </Key>
-          <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Hinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DapAnCauHoiLiets" Relationship="QuizDBModel.FK__DapAnCauH__MaCau__4E88ABD4" FromRole="CauHoiLiet" ToRole="DapAnCauHoiLiet" />
-        </EntityType>
-        <Association Name="FK__DapAnCauH__MaCau__4E88ABD4">
-          <End Type="QuizDBModel.CauHoiLiet" Role="CauHoiLiet" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="QuizDBModel.DapAnCauHoiLiet" Role="DapAnCauHoiLiet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CauHoiLiet">
-              <PropertyRef Name="MaCauHoi" />
-            </Principal>
-            <Dependent Role="DapAnCauHoiLiet">
-              <PropertyRef Name="MaCauHoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ThongTinChung">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -302,14 +269,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DapAnCauHoiLiets">
-            <EntityTypeMapping TypeName="QuizDBModel.DapAnCauHoiLiet">
-              <MappingFragment StoreEntitySet="DapAnCauHoiLiet">
-                <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
-                <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-                <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
+          <EntitySetMapping Name="ThongTinChungs">
+            <EntityTypeMapping TypeName="QuizDBModel.ThongTinChung">
+              <MappingFragment StoreEntitySet="ThongTinChung">
+                <ScalarProperty Name="LienHe" ColumnName="LienHe" />
+                <ScalarProperty Name="GioiThieu" ColumnName="GioiThieu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -319,15 +284,18 @@
                 <ScalarProperty Name="Hinh" ColumnName="Hinh" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ThongTinChungs">
-            <EntityTypeMapping TypeName="QuizDBModel.ThongTinChung">
-              <MappingFragment StoreEntitySet="ThongTinChung">
-                <ScalarProperty Name="LienHe" ColumnName="LienHe" />
-                <ScalarProperty Name="GioiThieu" ColumnName="GioiThieu" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="DapAnCauHoiLiets">
+            <EntityTypeMapping TypeName="QuizDBModel.DapAnCauHoiLiet">
+              <MappingFragment StoreEntitySet="DapAnCauHoiLiet">
+                <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
+                <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
+                <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

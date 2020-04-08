@@ -14,17 +14,9 @@ namespace DaoTaoLaiXe.Models
     
     public partial class CauHoiLiet
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CauHoiLiet()
-        {
-            this.DapAnCauHoiLiets = new HashSet<DapAnCauHoiLiet>();
-        }
-    
+        public int ID { get; set; }
         public int MaCauHoi { get; set; }
         public string NoiDung { get; set; }
         public string Hinh { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DapAnCauHoiLiet> DapAnCauHoiLiets { get; set; }
     }
 }

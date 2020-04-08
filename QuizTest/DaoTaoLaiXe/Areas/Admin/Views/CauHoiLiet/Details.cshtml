@@ -1,5 +1,6 @@
 ﻿@model CauHoiLiet
 @{
+    List<DapAnCauHoiLiet> dapAnCauHoiLiets = ViewBag.DapAnCauHoiLiets;
     ViewBag.Title = "Xem Chi Tiết Câu Hỏi Liệt Số " + Model.MaCauHoi;
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -47,13 +48,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3">Sử dụng</label>
-                            <div class="col-md-6">
-                                @Html.CheckBoxFor(model => model.SuDung,new { @readonly="" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <div class="col-md-12">
                                 <table class="table table-bordered">
                                     <thead>
@@ -64,7 +58,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var dapAn in Model.DapAnCauHoiLiets.OrderBy(x => x.SoThuTu))
+                                        @foreach (var dapAn in dapAnCauHoiLiets)
                                         {
                                             <tr>
                                                 <td class="text-center col-sm-1"><span>@dapAn.SoThuTu</span></td>
@@ -83,7 +77,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-3 col-md-6">
-                                @Html.ActionLink("Sửa", "Edit", new { Id = Model.MaCauHoi }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("Sửa", "Edit", new { Id = Model.ID }, new { @class = "btn btn-default" })
                                 @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-default" })
                             </div>
                         </div>

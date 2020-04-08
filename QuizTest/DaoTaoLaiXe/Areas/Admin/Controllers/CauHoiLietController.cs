@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DaoTaoLaiXe.Models;
@@ -14,7 +15,14 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         // GET: Admin/CauHoiLiet
         public ActionResult Index()
         {
-            return View(db.CauHoiLiets.OrderBy(x => x.MaCauHoi).ToList());
+            List<CauHoiLiet> cauHoiLiets = db.CauHoiLiets.OrderBy(x => x.MaCauHoi).ToList();
+            Dictionary<int, List<DapAnCauHoiLiet>> dapAnCauHoiLietDictionarys = new Dictionary<int, List<DapAnCauHoiLiet>>();
+            foreach (var cauHoiLiet in cauHoiLiets)
+            {
+                dapAnCauHoiLietDictionarys.Add(cauHoiLiet.MaCauHoi, db.DapAnCauHoiLiets.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList());
+            }
+            ViewBag.DapAnCauHoiLietDictionarys = dapAnCauHoiLietDictionarys;
+            return View(cauHoiLiets);
         }
 
         // GET: Admin/CauHoiLiet/Details/5
@@ -25,6 +33,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
             {
                 return Redirect("/pages/404");
             }
+            ViewBag.DapAnCauHoiLiets = db.DapAnCauHoiLiets.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList();
             return View(cauHoiLiet);
         }
 
@@ -36,11 +45,11 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
 
         // POST: Admin/CauHoiLiet/Create
         [HttpPost]
-        public ActionResult Create(CauHoiLiet cauHoiLiet, DapAnCauHoiLiet dapan1, DapAnCauHoiLiet dapan2, DapAnCauHoiLiet dapan3, DapAnCauHoiLiet dapan4, HttpPostedFileBase file)
+        public async Task<ActionResult> Create(CauHoiLiet cauHoiLiet, DapAnCauHoiLiet dapan1, DapAnCauHoiLiet dapan2, DapAnCauHoiLiet dapan3, DapAnCauHoiLiet dapan4, HttpPostedFileBase file)
         {
             try
             {
-                cauHoiLiet.DapAnCauHoiLiets = new List<DapAnCauHoiLiet>();
+                List<DapAnCauHoiLiet> DapAnCauHoiLiets = new List<DapAnCauHoiLiet>();
                 if(db.CauHoiLiets.Count() == 60)
                 {
                     ModelState.AddModelError("", "Câu Hỏi Liệt Không Thể Trên 60 Câu!");
@@ -53,21 +62,21 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                 {
                     if (!string.IsNullOrEmpty(dapan1.NoiDung))
                     {
-                        cauHoiLiet.DapAnCauHoiLiets.Add(dapan1);
+                        DapAnCauHoiLiets.Add(dapan1);
                     }
                     if (!string.IsNullOrEmpty(dapan2.NoiDung))
                     {
-                        cauHoiLiet.DapAnCauHoiLiets.Add(dapan2);
+                        DapAnCauHoiLiets.Add(dapan2);
                     }
                     if (!string.IsNullOrEmpty(dapan3.NoiDung))
                     {
-                        cauHoiLiet.DapAnCauHoiLiets.Add(dapan3);
+                        DapAnCauHoiLiets.Add(dapan3);
                     }
                     if (!string.IsNullOrEmpty(dapan4.NoiDung))
                     {
-                        cauHoiLiet.DapAnCauHoiLiets.Add(dapan4);
+                        DapAnCauHoiLiets.Add(dapan4);
                     }
-                    if (cauHoiLiet.DapAnCauHoiLiets.Count > 0 && cauHoiLiet.DapAnCauHoiLiets.Any(x => x.DapAnDung == true) == false)
+                    if (DapAnCauHoiLiets.Count > 0 && DapAnCauHoiLiets.Any(x => x.DapAnDung == true) == false)
                     {
                         ModelState.AddModelError("", "Bạn cần chỉ định ít nhất 1 đáp án là đáp án đúng!");
                     }
@@ -81,7 +90,16 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                         file.SaveAs(Server.MapPath("~/Content/images/" + fileName));
                     }
                     db.CauHoiLiets.Add(cauHoiLiet);
-                    db.SaveChanges();
+                    int result = await db.SaveChangesAsync();
+                    if(result > 0)
+                    {
+                        foreach (var dapAnCauHoiLiet in DapAnCauHoiLiets)
+                        {
+                            dapAnCauHoiLiet.MaCauHoi = cauHoiLiet.MaCauHoi;
+                            db.DapAnCauHoiLiets.Add(dapAnCauHoiLiet);
+                            await db.SaveChangesAsync();
+                        }
+                    }
                     return RedirectToAction("Index");
                 }
                 return View(cauHoiLiet);
@@ -96,12 +114,13 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         // GET: Admin/CauHoiLiet/Edit/5
         public ActionResult Edit(int id)
         {
-            CauHoiLiet cauHoi = db.CauHoiLiets.Find(id);
-            if (cauHoi == null)
+            CauHoiLiet cauHoiLiet = db.CauHoiLiets.Find(id);
+            if (cauHoiLiet == null)
             {
                 return Redirect("/pages/404");
             }
-            return View(cauHoi);
+            ViewBag.DapAnCauHoiLiets = db.DapAnCauHoiLiets.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList();
+            return View(cauHoiLiet);
         }
 
         // POST: Admin/CauHoiLiet/Edit/5
@@ -145,15 +164,13 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                     }
                     db.Entry(cauHoiLiet).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("Edit", new { Id = cauHoiLiet.MaCauHoi, message = "Sửa thành công" });
+                    return RedirectToAction("Edit", new { Id = cauHoiLiet.ID, message = "Sửa thành công" });
                 }
-                cauHoiLiet.DapAnCauHoiLiets = db.CauHoiLiets.Find(cauHoiLiet.MaCauHoi).DapAnCauHoiLiets.ToList();
                 return View(cauHoiLiet);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                cauHoiLiet.DapAnCauHoiLiets = db.CauHoiLiets.Find(cauHoiLiet.MaCauHoi).DapAnCauHoiLiets.ToList();
                 return View(cauHoiLiet);
             }
         }
@@ -176,18 +193,12 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddAnswer([Bind(Exclude = "SoThuTu")]DapAnCauHoiLiet dapAn)
         {
-            CauHoiLiet cauHoiLiet = db.CauHoiLiets.Find(dapAn.MaCauHoi);
-            if(cauHoiLiet.DapAnCauHoiLiets != null && cauHoiLiet.DapAnCauHoiLiets.Count >= 4)
-            {
-                ModelState.AddModelError("", "Câu hỏi này đã có đủ 4 đáp án. Không thể thêm đáp án khác được!");
-            }
-            else 
-                dapAn.SoThuTu = (byte)(cauHoiLiet.DapAnCauHoiLiets.Count + 1);
+            CauHoiLiet cauHoiLiet = db.CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);           
             if(ModelState.IsValid)
             {
                 db.DapAnCauHoiLiets.Add(dapAn);
                 db.SaveChanges();
-                return RedirectToAction("Edit", new { id = dapAn.MaCauHoi });
+                return RedirectToAction("Edit", new { Id = cauHoiLiet.ID });
             }
             return View("Edit", cauHoiLiet);
         }
@@ -195,20 +206,21 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteAnswer(int Id)
         {
-            DapAn dapAn = db.DapAns.Find(Id);
+            DapAnCauHoiLiet dapAn = db.DapAnCauHoiLiets.Find(Id);
+            CauHoiLiet cauHoiLiet = db.CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);
             try
             {
                 if (dapAn != null)
                 {
-                    db.DapAns.Remove(dapAn);
+                    db.DapAnCauHoiLiets.Remove(dapAn);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Edit", new { id = dapAn.MaCauHoi });
+                return RedirectToAction("Edit",new { Id = cauHoiLiet.ID });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View("Edit", dapAn.CauHoi);
+                return View("Edit", cauHoiLiet);
             }
         }
     }

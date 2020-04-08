@@ -19,7 +19,6 @@ namespace DaoTaoLaiXe.Models
         public byte SoThuTu { get; set; }
         public string NoiDung { get; set; }
         public bool DapAnDung { get; set; }
-    
-        public virtual CauHoiLiet CauHoiLiet { get; set; }
+
     }
 }

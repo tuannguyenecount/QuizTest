@@ -37,9 +37,16 @@ namespace DaoTaoLaiXe.Controllers
             List<CauHoiLiet> cauHoiLiets = db.CauHoiLiets.OrderBy(x => x.MaCauHoi).ToList();
             cauHoiLiets.ForEach(x =>
             {
-                cauHoiDapAnDung.Add(x.MaCauHoi, x.DapAnCauHoiLiets.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
+                List<DapAnCauHoiLiet> dapAnCauHoiLiets = db.DapAnCauHoiLiets.Where(y => y.MaCauHoi == x.MaCauHoi).ToList();
+                cauHoiDapAnDung.Add(x.MaCauHoi, dapAnCauHoiLiets.Where(y => y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
             });
             ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
+            Dictionary<int, List<DapAnCauHoiLiet>> dapAnCauHoiLietDictionarys = new Dictionary<int, List<DapAnCauHoiLiet>>();
+            foreach(var cauHoiLiet in cauHoiLiets)
+            {
+                dapAnCauHoiLietDictionarys.Add(cauHoiLiet.MaCauHoi, db.DapAnCauHoiLiets.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList());
+            }
+            ViewBag.DapAnCauHoiLietDictionarys = dapAnCauHoiLietDictionarys;
             return View(cauHoiLiets);
         }
 

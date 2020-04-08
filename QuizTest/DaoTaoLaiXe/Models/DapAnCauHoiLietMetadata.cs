@@ -9,6 +9,7 @@ namespace DaoTaoLaiXe.Models
     [MetadataType(typeof(DapAnCauHoiLietMetadata))]
     public partial class DapAnCauHoiLiet
     {
+         
     }
     sealed class DapAnCauHoiLietMetadata
     {

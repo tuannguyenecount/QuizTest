@@ -11,10 +11,9 @@
         <EntityTypeShape EntityType="QuizDBModel.ChuyenMucCauHoi" Width="1.5" PointX="0.75" PointY="7.375" />
         <AssociationConnector Association="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" />
         <AssociationConnector Association="QuizDBModel.FK_DapAn_CauHoi" />
-        <EntityTypeShape EntityType="QuizDBModel.DapAnCauHoiLiet" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="QuizDBModel.CauHoiLiet" Width="1.5" PointX="0.75" PointY="1.875" />
-        <AssociationConnector Association="QuizDBModel.FK__DapAnCauH__MaCau__4E88ABD4" />
         <EntityTypeShape EntityType="QuizDBModel.ThongTinChung" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="QuizDBModel.CauHoiLiet" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QuizDBModel.DapAnCauHoiLiet" Width="1.5" PointX="5.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
