@@ -19,9 +19,13 @@
 
 }
 
+@section meta{
+    <meta name="description" content="" />
+}
+
 <div class="row">
     <div class="col-md-8 col-md-offset-2 the-article-body">
-        @foreach (var cauhoi in Model.Where(x => danhSachCauHoiTraLoiDung.Any(y=>y.MaCauHoi == x.MaCauHoi) == false))
+        @foreach (var cauhoi in Model.Where(x => danhSachCauHoiTraLoiDung.Any(y => y.MaCauHoi == x.MaCauHoi) == false))
         {
             int soThuTu = Model.IndexOf(cauhoi) + 1;
             <table class="picture question" align="center">
@@ -32,7 +36,7 @@
                             @if (!string.IsNullOrEmpty(cauhoi.Hinh))
                             {
                                 <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">
-                                    <img src="http://luyenthi.hoclaixekhongkho.com/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
+                                    <img src="~/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
                                 </div>
                             }
                             <ul class="listAnswer">
@@ -47,7 +51,7 @@
             </table>
         }
     </div>
-    <div style="clear:both;" >
+    <div style="clear:both;">
         <table class="table">
             <tr>
                 <td class="text-center" colspan="3">

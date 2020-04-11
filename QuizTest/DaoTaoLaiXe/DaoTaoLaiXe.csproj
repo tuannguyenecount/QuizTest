@@ -1724,6 +1724,9 @@
     <Content Include="Views\Home\FierceQuestion.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\PracticeFierceQuestion.cshtml" />
+    <Content Include="Views\Home\ViewResultPracticeFierceQuestion.cshtml" />
+    <Content Include="Views\Home\ViewWrongAnswerFierceQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

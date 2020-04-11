@@ -8,6 +8,10 @@
     ViewBag.Title = "TRẮC NGHIỆM ĐÀO TẠO LÁI XE ";
 }
 
+@section meta{
+    <meta name="description" content="" />
+}
+
 @section styles{
     <link href="~/Content/sweetalert.css" rel="stylesheet" />
     <link href="~/Content/quizz_008.css" rel="stylesheet" type="text/css" />
@@ -37,11 +41,11 @@
                 if (timeUp == true) {
                     swal("Lỗi", "Bạn đã quá giờ thi!", "error");
                 }
-                else 
+                else
                     $("#frmViewResult").submit();
             }
         }
-       
+
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
             var tickTimer = setInterval(function() {
@@ -77,7 +81,7 @@
                         }
                     });
 
-                    
+
                 }
 
                 if (--timer < 0) {
@@ -158,7 +162,7 @@
         <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE </h1>
         <form action="@Url.Action("ViewResult")" method="post" id="frmViewResult">
             <input type="hidden" name="CauHois" value="@ViewBag.CauHois" />
-            @{ 
+            @{
                 int sothutu = 0;
             }
             @foreach (var cauhoi in Model)
@@ -176,22 +180,22 @@
                                     </div>
                                 }
                                 @*@if (cauhoi.DapAns.Count(x => x.DapAnDung) <= 1)
-                                {
-                                    <ul class="listAnswer">
-                                        @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
-                                        {
-                                            <li> <input type="radio" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
-                                        }
-                                    </ul>
-                                }
-                                else
-                                {*@
-                                    <ul class="listAnswer">
-                                        @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
-                                        {
-                                            <li> <input type="checkbox" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
-                                        }
-                                    </ul>
+                                    {
+                                        <ul class="listAnswer">
+                                            @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                                            {
+                                                <li> <input type="radio" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {*@
+                                <ul class="listAnswer">
+                                    @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
+                                    {
+                                        <li> <input type="checkbox" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
+                                    }
+                                </ul>
                                 @*}*@
                             </td>
                         </tr>
