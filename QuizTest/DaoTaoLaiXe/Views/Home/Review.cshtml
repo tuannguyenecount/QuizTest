@@ -2,12 +2,12 @@
 @model List<CauHoi>
 @{
     Dictionary<int, List<int>> cauHoiDapAnDung = ViewBag.cauHoiDapAnDung;
-    ViewBag.Title = "450 Câu Hỏi Trắc Nghiệm Sát Hạch Lái Xe Kèm Đáp Án";
+    ViewBag.Title = "600 Câu Hỏi Trắc Nghiệm Sát Hạch Lái Xe Kèm Đáp Án";
 }
 
 @section styles{
     <link href="~/Content/quizz_008.css?v=2" rel="stylesheet" type="text/css" />
-    <meta name="description" content="450 câu hỏi ôn tập sat hạch lái xe bằng hình thức trắc nghiệm có kèm đáp án được cập nhật thường xuyên và chính xác theo đúng quy chuẩn của Bộ Giao Thông Vận Tải. " />
+    <meta name="description" content="600 câu hỏi ôn tập sat hạch lái xe bằng hình thức trắc nghiệm có kèm đáp án được cập nhật thường xuyên và chính xác theo đúng quy chuẩn của Bộ Giao Thông Vận Tải. " />
 }
 
 @section meta{
@@ -16,7 +16,7 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2 the-article-body">
-        <h1 class="text-center well text-primary">450 CÂU HỎI ÔN TẬP KÈM ĐÁP ÁN</h1>
+        <h1 class="text-center well text-primary">600 CÂU HỎI ÔN TẬP KÈM ĐÁP ÁN</h1>
         @foreach (var cauhoi in Model)
         {
             <table class="picture question" align="center">

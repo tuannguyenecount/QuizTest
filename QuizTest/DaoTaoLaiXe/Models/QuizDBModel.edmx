@@ -16,15 +16,6 @@
           <Property Name="MaCauHoiMoi" Type="int" Nullable="false" />
           <Property Name="SuDung" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="CauHoiLiet">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaCauHoi" Type="int" Nullable="false" />
-          <Property Name="NoiDung" Type="nvarchar(max)" />
-          <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
-        </EntityType>
         <EntityType Name="ChuyenMucCauHoi">
           <Key>
             <PropertyRef Name="MaChuyenMuc" />
@@ -33,16 +24,6 @@
           <Property Name="TenChuyenMuc" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="DapAn">
-          <Key>
-            <PropertyRef Name="MaDapAn" />
-          </Key>
-          <Property Name="MaDapAn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaCauHoi" Type="int" Nullable="false" />
-          <Property Name="SoThuTu" Type="tinyint" Nullable="false" />
-          <Property Name="NoiDung" Type="nvarchar(max)" />
-          <Property Name="DapAnDung" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DapAnCauHoiLiet">
           <Key>
             <PropertyRef Name="MaDapAn" />
           </Key>
@@ -98,10 +79,8 @@ warning 6035: The relationship 'FK_DapAnCauHoiLiet_CauHoiLiet' has columns that 
         <Association Name="FK_DapAnCauHoiLiet_CauHoiLiet" />-->
         <EntityContainer Name="QuizDBModelStoreContainer">
           <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CauHoiLiet" EntityType="Self.CauHoiLiet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChuyenMucCauHoi" EntityType="Self.ChuyenMucCauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DapAn" EntityType="Self.DapAn" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DapAnCauHoiLiet" EntityType="Self.DapAnCauHoiLiet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuanTriVien" EntityType="Self.QuanTriVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThongTinChung" EntityType="Self.ThongTinChung" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="Self.FK__DapAn__MaCauHoi__3F466844">
@@ -131,8 +110,6 @@ warning 6035: The relationship 'FK_DapAnCauHoiLiet_CauHoiLiet' has columns that 
             <End Role="DapAn" EntitySet="DapAns" />
           </AssociationSet>
           <EntitySet Name="ThongTinChungs" EntityType="QuizDBModel.ThongTinChung" />
-          <EntitySet Name="CauHoiLiets" EntityType="QuizDBModel.CauHoiLiet" />
-          <EntitySet Name="DapAnCauHoiLiets" EntityType="QuizDBModel.DapAnCauHoiLiet" />
           </EntityContainer>
         <EntityType Name="QuanTriVien">
           <Key>
@@ -205,25 +182,6 @@ warning 6035: The relationship 'FK_DapAnCauHoiLiet_CauHoiLiet' has columns that 
           <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="CauHoiLiet">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Hinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DapAnCauHoiLiet">
-          <Key>
-            <PropertyRef Name="MaDapAn" />
-          </Key>
-          <Property Name="MaDapAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
-          <Property Name="SoThuTu" Type="Byte" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DapAnDung" Type="Boolean" Nullable="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -275,27 +233,6 @@ warning 6035: The relationship 'FK_DapAnCauHoiLiet_CauHoiLiet' has columns that 
                 <ScalarProperty Name="LienHe" ColumnName="LienHe" />
                 <ScalarProperty Name="GioiThieu" ColumnName="GioiThieu" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CauHoiLiets">
-            <EntityTypeMapping TypeName="QuizDBModel.CauHoiLiet">
-              <MappingFragment StoreEntitySet="CauHoiLiet">
-                <ScalarProperty Name="Hinh" ColumnName="Hinh" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DapAnCauHoiLiets">
-            <EntityTypeMapping TypeName="QuizDBModel.DapAnCauHoiLiet">
-              <MappingFragment StoreEntitySet="DapAnCauHoiLiet">
-                <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
-                <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-                <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,4 +1,4 @@
-﻿@model CauHoiLiet
+﻿@model CauHoi
 @{
     ViewBag.Title = "Thêm Câu Hỏi Liệt";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -61,7 +61,7 @@
                                     </thead>
                                     <tbody>
                                         @{
-                                            DapAnCauHoiLiet dapAn1 = new DapAnCauHoiLiet() { SoThuTu = 1 };
+                                            DapAn dapAn1 = new DapAn() { SoThuTu = 1 };
                                         }
                                         @Html.HiddenFor(m => dapAn1.SoThuTu)
                                         <tr>
@@ -74,7 +74,7 @@
                                             </td>
                                         </tr>
                                         @{
-                                            DapAnCauHoiLiet dapAn2 = new DapAnCauHoiLiet() { SoThuTu = 2 };
+                                            DapAn dapAn2 = new DapAn() { SoThuTu = 2 };
                                         }
                                         @Html.HiddenFor(m => dapAn2.SoThuTu)
                                         <tr>
@@ -87,7 +87,7 @@
                                             </td>
                                         </tr>
                                         @{
-                                            DapAnCauHoiLiet dapAn3 = new DapAnCauHoiLiet() { SoThuTu = 3 };
+                                            DapAn dapAn3 = new DapAn() { SoThuTu = 3 };
                                         }
                                         @Html.HiddenFor(m => dapAn3.SoThuTu)
                                         <tr>
@@ -100,7 +100,7 @@
                                             </td>
                                         </tr>
                                         @{
-                                            DapAnCauHoiLiet dapAn4 = new DapAnCauHoiLiet() { SoThuTu = 4 };
+                                            DapAn dapAn4 = new DapAn() { SoThuTu = 4 };
                                         }
                                         @Html.HiddenFor(m => dapAn4.SoThuTu)
                                         <tr>
