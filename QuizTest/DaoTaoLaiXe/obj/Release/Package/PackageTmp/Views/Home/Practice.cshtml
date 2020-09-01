@@ -162,6 +162,7 @@
         <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE </h1>
         <form action="@Url.Action("ViewResult")" method="post" id="frmViewResult">
             <input type="hidden" name="CauHois" value="@ViewBag.CauHois" />
+            <input type="hidden" name="Category" value="@ViewBag.Category" />
             @{
                 int sothutu = 0;
             }
@@ -179,24 +180,12 @@
                                         <img src="http://luyenthi.hoclaixekhongkho.com/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
                                     </div>
                                 }
-                                @*@if (cauhoi.DapAns.Count(x => x.DapAnDung) <= 1)
-                                    {
-                                        <ul class="listAnswer">
-                                            @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
-                                            {
-                                                <li> <input type="radio" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
-                                            }
-                                        </ul>
-                                    }
-                                    else
-                                    {*@
                                 <ul class="listAnswer">
                                     @foreach (var dapan in cauhoi.DapAns.OrderBy(x => x.SoThuTu))
                                     {
                                         <li> <input type="checkbox" name="selectAnswer_@(dapan.MaCauHoi)" class="selectAnswer" value="@dapan.MaDapAn" /> <span class="contentAnswer">@dapan.NoiDung</span></li>
                                     }
                                 </ul>
-                                @*}*@
                             </td>
                         </tr>
 

@@ -49,26 +49,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CauHoiLiets">
-      <EntityTypeMapping TypeName="QuizDBModel.CauHoiLiet">
-        <MappingFragment StoreEntitySet="CauHoiLiet">
-          <ScalarProperty Name="Hinh" ColumnName="Hinh" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DapAnCauHoiLiets">
-      <EntityTypeMapping TypeName="QuizDBModel.DapAnCauHoiLiet">
-        <MappingFragment StoreEntitySet="DapAnCauHoiLiet">
-          <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
-          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-          <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

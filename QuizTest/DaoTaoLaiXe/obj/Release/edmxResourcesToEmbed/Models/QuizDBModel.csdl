@@ -14,8 +14,6 @@
       <End Role="DapAn" EntitySet="DapAns" />
     </AssociationSet>
     <EntitySet Name="ThongTinChungs" EntityType="QuizDBModel.ThongTinChung" />
-    <EntitySet Name="CauHoiLiets" EntityType="QuizDBModel.CauHoiLiet" />
-    <EntitySet Name="DapAnCauHoiLiets" EntityType="QuizDBModel.DapAnCauHoiLiet" />
   </EntityContainer>
   <EntityType Name="QuanTriVien">
     <Key>
@@ -87,24 +85,5 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="CauHoiLiet">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Hinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DapAnCauHoiLiet">
-    <Key>
-      <PropertyRef Name="MaDapAn" />
-    </Key>
-    <Property Name="MaDapAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
-    <Property Name="SoThuTu" Type="Byte" Nullable="false" />
-    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DapAnDung" Type="Boolean" Nullable="false" />
   </EntityType>
 </Schema>
