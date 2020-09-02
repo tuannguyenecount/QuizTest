@@ -30,7 +30,5 @@ namespace DaoTaoLaiXe.Models
         public virtual DbSet<CauHoi> CauHois { get; set; }
         public virtual DbSet<ChuyenMucCauHoi> ChuyenMucCauHois { get; set; }
         public virtual DbSet<ThongTinChung> ThongTinChungs { get; set; }
-        public virtual DbSet<CauHoiLiet> CauHoiLiets { get; set; }
-        public virtual DbSet<DapAnCauHoiLiet> DapAnCauHoiLiets { get; set; }
     }
 }

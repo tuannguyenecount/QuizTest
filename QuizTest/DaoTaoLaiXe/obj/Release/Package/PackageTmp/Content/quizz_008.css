@@ -77,10 +77,11 @@ table.picture .selectAnswer {
 }
 
 table.picture .caption h3 {
-    font-size: 1.4em !important;
+    font-size: 1.6em !important;
     margin-top: 0px;
     float: none !important;
-    font-weight: normal
+    font-weight: bold;
+	color:#1165f1;
 }
 
 table.picture ul {

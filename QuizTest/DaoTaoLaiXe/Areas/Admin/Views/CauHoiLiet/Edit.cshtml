@@ -1,8 +1,8 @@
-﻿@model CauHoiLiet
+﻿@model CauHoi
 @{
     ViewBag.Title = "Sửa Câu Hỏi Liệt";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    List<DapAnCauHoiLiet> dapAnCauHoiLiets = ViewBag.DapAnCauHoiLiets;
+    List<DapAn> dapAnCauHoiLiets = ViewBag.DapAnCauHoiLiets;
 }
 
 <section class="content-header">
@@ -76,7 +76,7 @@
                                         <tbody>
                                             @if (dapAnCauHoiLiets.Count > 0)
                                             {
-                                                DapAnCauHoiLiet dapAn1 = dapAnCauHoiLiets.ToList().First();
+                                                DapAn dapAn1 = dapAnCauHoiLiets.ToList().First();
                                                 @Html.HiddenFor(m => dapAn1.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn1.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn1.SoThuTu)
@@ -97,7 +97,7 @@
                                             }
                                             @if (dapAnCauHoiLiets.Count > 1)
                                             {
-                                                DapAnCauHoiLiet dapAn2 =  dapAnCauHoiLiets.ToList().ElementAt(1);
+                                                DapAn dapAn2 =  dapAnCauHoiLiets.ToList().ElementAt(1);
                                                 @Html.HiddenFor(m => dapAn2.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn2.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn2.SoThuTu)
@@ -118,7 +118,7 @@
                                             }
                                             @if (dapAnCauHoiLiets.Count > 2)
                                             {
-                                                DapAnCauHoiLiet dapAn3 = dapAnCauHoiLiets.ToList().ElementAt(2);
+                                                DapAn dapAn3 = dapAnCauHoiLiets.ToList().ElementAt(2);
                                                 @Html.HiddenFor(m => dapAn3.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn3.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn3.SoThuTu)
@@ -139,7 +139,7 @@
                                             }
                                             @if (dapAnCauHoiLiets.Count > 3)
                                             {
-                                                DapAnCauHoiLiet dapAn4 = dapAnCauHoiLiets.ToList().ElementAt(3);
+                                                DapAn dapAn4 = dapAnCauHoiLiets.ToList().ElementAt(3);
                                                 @Html.HiddenFor(m => dapAn4.MaDapAn)
                                                 @Html.HiddenFor(m => dapAn4.MaCauHoi)
                                                 @Html.HiddenFor(m => dapAn4.SoThuTu)
@@ -193,7 +193,7 @@
                 <div class="box-body">
                     @using (Html.BeginForm("AddAnswer", "CauHoiLiet",FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
-                        DapAnCauHoiLiet dapAn = new DapAnCauHoiLiet() {
+                        DapAn dapAn = new DapAn() {
                             MaCauHoi = Model.MaCauHoi
                         };
                         @Html.HiddenFor(m => dapAn.MaCauHoi)

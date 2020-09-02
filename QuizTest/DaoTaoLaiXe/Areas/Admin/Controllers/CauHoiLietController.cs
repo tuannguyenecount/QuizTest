@@ -12,14 +12,22 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
     {
         QuizDBEntities db = new QuizDBEntities();
 
+        private List<CauHoi> CauHoiLiets
+        {
+            get
+            {
+                return db.CauHois.Where(x => x.MaChuyenMuc == 8).ToList();
+            }
+        }
+
         // GET: Admin/CauHoiLiet
         public ActionResult Index()
         {
-            List<CauHoiLiet> cauHoiLiets = db.CauHoiLiets.OrderBy(x => x.MaCauHoi).ToList();
-            Dictionary<int, List<DapAnCauHoiLiet>> dapAnCauHoiLietDictionarys = new Dictionary<int, List<DapAnCauHoiLiet>>();
+            List<CauHoi> cauHoiLiets = CauHoiLiets;
+            Dictionary<int, List<DapAn>> dapAnCauHoiLietDictionarys = new Dictionary<int, List<DapAn>>();
             foreach (var cauHoiLiet in cauHoiLiets)
             {
-                dapAnCauHoiLietDictionarys.Add(cauHoiLiet.MaCauHoi, db.DapAnCauHoiLiets.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList());
+                dapAnCauHoiLietDictionarys.Add(cauHoiLiet.MaCauHoi, db.DapAns.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList());
             }
             ViewBag.DapAnCauHoiLietDictionarys = dapAnCauHoiLietDictionarys;
             return View(cauHoiLiets);
@@ -28,33 +36,35 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         // GET: Admin/CauHoiLiet/Details/5
         public ActionResult Details(int id)
         {
-            CauHoiLiet cauHoiLiet = db.CauHoiLiets.Find(id);
+            CauHoi cauHoiLiet = CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == id);
             if(cauHoiLiet == null)
             {
                 return Redirect("/pages/404");
             }
-            ViewBag.DapAnCauHoiLiets = db.DapAnCauHoiLiets.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList();
+            ViewBag.DapAnCauHoiLiets = db.DapAns.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList();
             return View(cauHoiLiet);
         }
 
         // GET: Admin/CauHoiLiet/Create
         public ActionResult Create()
         {
-            return View(new CauHoiLiet());
+            return View(new CauHoi());
         }
 
         // POST: Admin/CauHoiLiet/Create
         [HttpPost]
-        public async Task<ActionResult> Create(CauHoiLiet cauHoiLiet, DapAnCauHoiLiet dapan1, DapAnCauHoiLiet dapan2, DapAnCauHoiLiet dapan3, DapAnCauHoiLiet dapan4, HttpPostedFileBase file)
+        public async Task<ActionResult> Create(CauHoi cauHoiLiet, DapAn dapan1, DapAn dapan2, DapAn dapan3, DapAn dapan4, HttpPostedFileBase file)
         {
             try
             {
-                List<DapAnCauHoiLiet> DapAnCauHoiLiets = new List<DapAnCauHoiLiet>();
-                if(db.CauHoiLiets.Count() == 60)
+                cauHoiLiet.MaCauHoiMoi = cauHoiLiet.MaCauHoi;
+                cauHoiLiet.MaChuyenMuc = 8;
+                List<DapAn> DapAnCauHoiLiets = new List<DapAn>();
+                if(CauHoiLiets.Count() > 60)
                 {
                     ModelState.AddModelError("", "Câu Hỏi Liệt Không Thể Trên 60 Câu!");
                 }
-                if (db.CauHoiLiets.Any(x => x.MaCauHoi == cauHoiLiet.MaCauHoi))
+                if (CauHoiLiets.Any(x => x.MaCauHoi == cauHoiLiet.MaCauHoi))
                 {
                     ModelState.AddModelError("MaCauHoi", "Mã câu hỏi này đã tồn tại. Bạn hãy kiểm tra lại.");
                 }
@@ -89,14 +99,14 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                         cauHoiLiet.Hinh = fileName;
                         file.SaveAs(Server.MapPath("~/Content/images/" + fileName));
                     }
-                    db.CauHoiLiets.Add(cauHoiLiet);
+                    db.CauHois.Add(cauHoiLiet);
                     int result = await db.SaveChangesAsync();
                     if(result > 0)
                     {
                         foreach (var dapAnCauHoiLiet in DapAnCauHoiLiets)
                         {
                             dapAnCauHoiLiet.MaCauHoi = cauHoiLiet.MaCauHoi;
-                            db.DapAnCauHoiLiets.Add(dapAnCauHoiLiet);
+                            db.DapAns.Add(dapAnCauHoiLiet);
                             await db.SaveChangesAsync();
                         }
                     }
@@ -114,22 +124,23 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         // GET: Admin/CauHoiLiet/Edit/5
         public ActionResult Edit(int id)
         {
-            CauHoiLiet cauHoiLiet = db.CauHoiLiets.Find(id);
+            CauHoi cauHoiLiet = CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == id);
             if (cauHoiLiet == null)
             {
                 return Redirect("/pages/404");
             }
-            ViewBag.DapAnCauHoiLiets = db.DapAnCauHoiLiets.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList();
+            ViewBag.DapAnCauHoiLiets = db.DapAns.Where(x => x.MaCauHoi == cauHoiLiet.MaCauHoi).OrderBy(x => x.SoThuTu).ToList();
             return View(cauHoiLiet);
         }
 
         // POST: Admin/CauHoiLiet/Edit/5
         [HttpPost]
-        public ActionResult Edit(CauHoiLiet cauHoiLiet, DapAnCauHoiLiet dapan1, DapAnCauHoiLiet dapan2, DapAnCauHoiLiet dapan3, DapAnCauHoiLiet dapan4, HttpPostedFileBase file)
+        public ActionResult Edit(CauHoi cauHoiLiet, DapAn dapan1, DapAn dapan2, DapAn dapan3, DapAn dapan4, HttpPostedFileBase file)
         {
             try
-            {               
-                List<DapAnCauHoiLiet> dapAns = new List<DapAnCauHoiLiet>();
+            {
+                cauHoiLiet.MaChuyenMuc = 8;
+                List<DapAn> dapAns = new List<DapAn>();
                 if (dapan1.MaDapAn != 0)
                 {
                     dapAns.Add(dapan1);
@@ -152,7 +163,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    foreach (DapAnCauHoiLiet dapAnItem in dapAns)
+                    foreach (DapAn dapAnItem in dapAns)
                     {
                         db.Entry(dapAnItem).State = System.Data.Entity.EntityState.Modified;
                     }
@@ -164,7 +175,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
                     }
                     db.Entry(cauHoiLiet).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("Edit", new { Id = cauHoiLiet.ID, message = "Sửa thành công" });
+                    return RedirectToAction("Edit", new { Id = cauHoiLiet.MaCauHoi, message = "Sửa thành công" });
                 }
                 return View(cauHoiLiet);
             }
@@ -179,11 +190,11 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            CauHoiLiet cauHoiLiet = db.CauHoiLiets.Find(id);
+            CauHoi cauHoiLiet = CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == id);
 
             if (cauHoiLiet != null)
             {
-                db.CauHoiLiets.Remove(cauHoiLiet);
+                db.CauHois.Remove(cauHoiLiet);
                 db.SaveChanges();
             }
 
@@ -191,14 +202,14 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddAnswer([Bind(Exclude = "SoThuTu")]DapAnCauHoiLiet dapAn)
+        public ActionResult AddAnswer([Bind(Exclude = "SoThuTu")]DapAn dapAn)
         {
-            CauHoiLiet cauHoiLiet = db.CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);           
+            CauHoi cauHoiLiet = CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);           
             if(ModelState.IsValid)
             {
-                db.DapAnCauHoiLiets.Add(dapAn);
+                db.DapAns.Add(dapAn);
                 db.SaveChanges();
-                return RedirectToAction("Edit", new { Id = cauHoiLiet.ID });
+                return RedirectToAction("Edit", new { Id = cauHoiLiet.MaCauHoi });
             }
             return View("Edit", cauHoiLiet);
         }
@@ -206,16 +217,16 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteAnswer(int Id)
         {
-            DapAnCauHoiLiet dapAn = db.DapAnCauHoiLiets.Find(Id);
-            CauHoiLiet cauHoiLiet = db.CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);
+            DapAn dapAn = db.DapAns.Find(Id);
+            CauHoi cauHoiLiet = CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);
             try
             {
                 if (dapAn != null)
                 {
-                    db.DapAnCauHoiLiets.Remove(dapAn);
+                    db.DapAns.Remove(dapAn);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Edit",new { Id = cauHoiLiet.ID });
+                return RedirectToAction("Edit",new { Id = cauHoiLiet.MaCauHoi });
             }
             catch (Exception ex)
             {

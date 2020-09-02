@@ -1,11 +1,11 @@
 ﻿@using DaoTaoLaiXe.Models;
-@model List<CauHoiLiet>
+@model List<CauHoi>
 @{
     Dictionary<int, List<int>> cauHoiDapAnDung = ViewBag.cauHoiDapAnDung;
-    List<CauHoiLiet> danhSachCauHoiTraLoiDung = ViewBag.danhSachCauHoiTraLoiDung;
+    List<CauHoi> danhSachCauHoiTraLoiDung = ViewBag.danhSachCauHoiTraLoiDung;
     List<int> selectAnswer = ViewBag.SelectAnswer;
     int countAnswer = ViewBag.CountAnswer;
-    Dictionary<int, List<DapAnCauHoiLiet>> DapAnsCauHoiLiet = ViewBag.DapAnsCauHoiLiet;
+    Dictionary<int, List<DapAn>> DapAnsCauHoiLiet = ViewBag.DapAnsCauHoiLiet;
     ViewBag.Title = "THI THỬ 60 CÂU HỎI ĐIỂM LIỆT";
 }
 

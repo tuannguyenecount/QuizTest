@@ -1,14 +1,14 @@
 ﻿@using DaoTaoLaiXe.Models;
-@model List<CauHoiLiet>
+@model List<CauHoi>
 
 @{
     ViewBag.Title = "Xem lại đáp án sai câu hỏi liệt";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Dictionary<int, List<int>> cauHoiDapAnDung = ViewBag.cauHoiDapAnDung;
-    List<CauHoiLiet> danhSachCauHoiTraLoiDung = ViewBag.danhSachCauHoiTraLoiDung;
+    List<CauHoi> danhSachCauHoiTraLoiDung = ViewBag.danhSachCauHoiTraLoiDung;
     List<int> selectAnswer = ViewBag.SelectAnswer;
     int countAnswer = ViewBag.CountAnswer;
-    Dictionary<int, List<DapAnCauHoiLiet>> DapAnsCauHoiLiet = ViewBag.DapAnsCauHoiLiet;
+    Dictionary<int, List<DapAn>> DapAnsCauHoiLiet = ViewBag.DapAnsCauHoiLiet;
 
 }
 

@@ -1,8 +1,8 @@
-﻿@model List<CauHoiLiet>
+﻿@model List<CauHoi>
 @{
     ViewBag.Title =  "Danh Sách Câu Hỏi Liệt";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    Dictionary<int, List<DapAnCauHoiLiet>> dapAnCauHoiLietDictionarys = ViewBag.DapAnCauHoiLietDictionarys;
+    Dictionary<int, List<DapAn>> dapAnCauHoiLietDictionarys = ViewBag.DapAnCauHoiLietDictionarys;
 }
 
 @section styles{
@@ -59,10 +59,10 @@
                                             }
                                         </td>
                                         <td class="text-center">
-                                            <a href="@Url.Action("Details",new { id = item.ID })" class="btn btn-primary"><i class="fa fa-info"></i> Xem</a>
-                                            <a href="@Url.Action("Edit",new { id = item.ID })" class="btn btn-primary"><i class="fa fa-edit"></i> Sửa</a>
-                                            <form class="hidden" action="@Url.Action("Delete",new { id = item.ID })" id="frmDelete@(item.ID)" method="post"></form>
-                                            <a class="btn btn-default" onclick="return confirm('Xác nhận xóa câu hỏi liệt này?');" href="javascript:document.getElementById('frmDelete@(item.ID)').submit();">Xoá</a>
+                                            <a href="@Url.Action("Details",new { id = item.MaCauHoi })" class="btn btn-primary"><i class="fa fa-info"></i> Xem</a>
+                                            <a href="@Url.Action("Edit",new { id = item.MaCauHoi })" class="btn btn-primary"><i class="fa fa-edit"></i> Sửa</a>
+                                            <form class="hidden" action="@Url.Action("Delete",new { id = item.MaCauHoi })" id="frmDelete@(item.MaCauHoi)" method="post"></form>
+                                            <a class="btn btn-default" onclick="return confirm('Xác nhận xóa câu hỏi liệt này?');" href="javascript:document.getElementById('frmDelete@(item.MaCauHoi)').submit();">Xoá</a>
                                         </td>
                                     </tr>
                                 }
