@@ -27,5 +27,9 @@ namespace DaoTaoLaiXe.Models
 
         [Display(Name = "Hình")]
         public string Hinh { get; set; }
+
+        [Display(Name = "Câu hỏi liệt")]
+        public bool CauHoiLiet { get; set; }
+
     }
 }

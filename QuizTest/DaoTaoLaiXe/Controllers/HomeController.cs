@@ -14,7 +14,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             get
             {
-                return db.CauHois.Where(x => x.MaChuyenMuc == 8).ToList();
+                return db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == true).ToList();
             }
         }
 
@@ -87,7 +87,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 166).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 166).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -100,7 +100,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 167 && x.MaCauHoiMoi <= 192).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 167 && x.MaCauHoiMoi <= 192).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -113,7 +113,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 193 && x.MaCauHoiMoi <= 213).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 193 && x.MaCauHoiMoi <= 213).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -126,7 +126,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 214 && x.MaCauHoiMoi <= 269).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 214 && x.MaCauHoiMoi <= 269).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -139,7 +139,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 270 && x.MaCauHoiMoi <= 304).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 270 && x.MaCauHoiMoi <= 304).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -152,7 +152,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 305 && x.MaCauHoiMoi <= 486).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 305 && x.MaCauHoiMoi <= 486).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -165,7 +165,7 @@ namespace DaoTaoLaiXe.Controllers
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaCauHoiMoi >= 487 && x.MaCauHoiMoi <= 600).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 487 && x.MaCauHoiMoi <= 600).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -174,11 +174,11 @@ namespace DaoTaoLaiXe.Controllers
             }
         }
 
-        void LayCauHoiChuong8(List<CauHoi> cauhois, int take)
+        void LayCauHoiLiet(List<CauHoi> cauhois, int take)
         {
             List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.MaChuyenMuc == 8).ToList();
+            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == true).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
@@ -192,13 +192,12 @@ namespace DaoTaoLaiXe.Controllers
             List<CauHoi> cauhois = new List<CauHoi>();
 
             LayCauHoiChuong1(cauhois, 9);
-
             LayCauHoiChuong3(cauhois, 1);
             LayCauHoiChuong4(cauhois, 1);
             LayCauHoiChuong5(cauhois, 1);
             LayCauHoiChuong6(cauhois, 9);
             LayCauHoiChuong7(cauhois, 4);
-            LayCauHoiChuong8(cauhois, 5);
+            LayCauHoiLiet(cauhois, 5);
 
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
@@ -216,7 +215,7 @@ namespace DaoTaoLaiXe.Controllers
             LayCauHoiChuong5(cauhois, 1);
             LayCauHoiChuong6(cauhois, 10);
             LayCauHoiChuong7(cauhois, 6);
-            LayCauHoiChuong8(cauhois, 4);
+            LayCauHoiLiet(cauhois, 4);
 
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
@@ -238,7 +237,7 @@ namespace DaoTaoLaiXe.Controllers
             Random random = new Random();
             int take = random.Next(1, 11);
             LayCauHoiChuong7(cauhois, take);
-            LayCauHoiChuong8(cauhois, 11 - take);
+            LayCauHoiLiet(cauhois, 11 - take);
 
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
@@ -254,13 +253,11 @@ namespace DaoTaoLaiXe.Controllers
             LayCauHoiChuong3(cauhois, 1);
             LayCauHoiChuong4(cauhois, 2);
             LayCauHoiChuong5(cauhois, 1);
-
             LayCauHoiChuong6(cauhois, 16);
-
             Random random = new Random();
             int take = random.Next(1, 14);
             LayCauHoiChuong7(cauhois, take);
-            LayCauHoiChuong8(cauhois, 14 - take);
+            LayCauHoiLiet(cauhois, 14 - take);
 
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
@@ -516,10 +513,9 @@ namespace DaoTaoLaiXe.Controllers
         public async Task<ActionResult> ViewWrongAnswerFierceQuestion()
         {
             FormCollection frm = Session["frm"] as FormCollection;
-            List<CauHoi> cauHois = CauHoiLiets.ToList();
             List<int> selectAnswer = new List<int>();
             Dictionary<int, List<int>> cauHoiDapAnDung = new Dictionary<int, List<int>>();
-            cauHois.ForEach(x =>
+            CauHoiLiets.ForEach(x =>
             {
                 selectAnswer.AddRange(frm["selectAnswer_" + x.MaCauHoi].Split(',').Select(y => int.Parse(y.Trim())).ToList());
                 cauHoiDapAnDung.Add(x.MaCauHoi, db.DapAns.Where(y => y.MaCauHoi == x.MaCauHoi && y.DapAnDung == true).Select(y => y.MaDapAn).ToList());
@@ -533,7 +529,7 @@ namespace DaoTaoLaiXe.Controllers
                 {
                     if (danhSachCauHoiTraLoiDung.Any(x => x.MaCauHoi == dapAn.MaCauHoi) == false)
                     {
-                        CauHoi cauHoiLiet = cauHois.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);
+                        CauHoi cauHoiLiet = CauHoiLiets.FirstOrDefault(x => x.MaCauHoi == dapAn.MaCauHoi);
                         danhSachCauHoiTraLoiDung.Add(cauHoiLiet);
                     }
                 }
@@ -543,11 +539,11 @@ namespace DaoTaoLaiXe.Controllers
             ViewBag.cauHoiDapAnDung = cauHoiDapAnDung;
             ViewBag.CountAnswer = db.DapAns.ToList().Where(x => selectAnswer.Contains(x.MaDapAn)).Select(x => x.MaCauHoi).Distinct().Count();
             ViewBag.DapAnsCauHoiLiet = new Dictionary<int, List<DapAn>>();
-            foreach (CauHoi item in cauHois)
+            foreach (CauHoi item in CauHoiLiets)
             {
                 (ViewBag.DapAnsCauHoiLiet as Dictionary<int, List<DapAn>>).Add(item.MaCauHoi, db.DapAns.Where(x => x.MaCauHoi == item.MaCauHoi).OrderBy(x => x.SoThuTu).ToList());
             }
-            return View(cauHois);
+            return View(CauHoiLiets);
         }
 
 

@@ -26,9 +26,10 @@ namespace DaoTaoLaiXe.Models
         public string Hinh { get; set; }
         public int MaCauHoiMoi { get; set; }
         public bool SuDung { get; set; }
+        public bool CauHoiLiet { get; set; }
     
-        public virtual ChuyenMucCauHoi ChuyenMucCauHoi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DapAn> DapAns { get; set; }
+        public virtual ChuyenMucCauHoi ChuyenMucCauHoi { get; set; }
     }
 }

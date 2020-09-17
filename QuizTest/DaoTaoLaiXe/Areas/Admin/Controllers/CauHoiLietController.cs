@@ -16,7 +16,7 @@ namespace DaoTaoLaiXe.Areas.Admin.Controllers
         {
             get
             {
-                return db.CauHois.Where(x => x.MaChuyenMuc == 8).ToList();
+                return db.CauHois.Where(x => x.CauHoiLiet == true).ToList();
             }
         }
 
