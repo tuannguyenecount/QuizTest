@@ -72,6 +72,13 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label col-md-3">Câu hỏi liệt</label>
+                        <div class="col-md-6 checkbox">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.CheckBoxFor(model => model.CauHoiLiet)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         @if (Model.DapAns != null && Model.DapAns.Count < 4)
                         {
                             <p class="col-md-12">
@@ -79,8 +86,6 @@
                             </p>
                         }
                         <div class="col-md-12">
-
-
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
