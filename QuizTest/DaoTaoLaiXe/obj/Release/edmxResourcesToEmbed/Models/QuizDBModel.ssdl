@@ -10,6 +10,7 @@
     <Property Name="Hinh" Type="nvarchar" MaxLength="200" />
     <Property Name="MaCauHoiMoi" Type="int" Nullable="false" />
     <Property Name="SuDung" Type="bit" Nullable="false" />
+    <Property Name="CauHoiLiet" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ChuyenMucCauHoi">
     <Key>
@@ -69,9 +70,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_DapAnCauHoiLiet_CauHoiLiet' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_DapAnCauHoiLiet_CauHoiLiet" />-->
   <EntityContainer Name="QuizDBModelStoreContainer">
     <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChuyenMucCauHoi" EntityType="Self.ChuyenMucCauHoi" Schema="dbo" store:Type="Tables" />

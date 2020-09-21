@@ -3,17 +3,17 @@
   <EntityContainer Name="QuizDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="QuanTriViens" EntityType="QuizDBModel.QuanTriVien" />
     <EntitySet Name="DapAns" EntityType="QuizDBModel.DapAn" />
-    <EntitySet Name="CauHois" EntityType="QuizDBModel.CauHoi" />
     <EntitySet Name="ChuyenMucCauHois" EntityType="QuizDBModel.ChuyenMucCauHoi" />
+    <EntitySet Name="ThongTinChungs" EntityType="QuizDBModel.ThongTinChung" />
+    <EntitySet Name="CauHois" EntityType="QuizDBModel.CauHoi" />
+    <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="QuizDBModel.FK__DapAn__MaCauHoi__3F466844">
+      <End Role="CauHoi" EntitySet="CauHois" />
+      <End Role="DapAn" EntitySet="DapAns" />
+    </AssociationSet>
     <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi">
       <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHois" />
       <End Role="CauHoi" EntitySet="CauHois" />
     </AssociationSet>
-    <AssociationSet Name="FK_DapAn_CauHoi" Association="QuizDBModel.FK_DapAn_CauHoi">
-      <End Role="CauHoi" EntitySet="CauHois" />
-      <End Role="DapAn" EntitySet="DapAns" />
-    </AssociationSet>
-    <EntitySet Name="ThongTinChungs" EntityType="QuizDBModel.ThongTinChung" />
   </EntityContainer>
   <EntityType Name="QuanTriVien">
     <Key>
@@ -31,7 +31,23 @@
     <Property Name="SoThuTu" Type="Byte" Nullable="false" />
     <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DapAnDung" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="CauHoi" Relationship="QuizDBModel.FK_DapAn_CauHoi" FromRole="DapAn" ToRole="CauHoi" />
+    <NavigationProperty Name="CauHoi" Relationship="QuizDBModel.FK__DapAn__MaCauHoi__3F466844" FromRole="DapAn" ToRole="CauHoi" />
+  </EntityType>
+  <EntityType Name="ChuyenMucCauHoi">
+    <Key>
+      <PropertyRef Name="MaChuyenMuc" />
+    </Key>
+    <Property Name="MaChuyenMuc" Type="Double" Nullable="false" />
+    <Property Name="TenChuyenMuc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CauHois" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="ChuyenMucCauHoi" ToRole="CauHoi" />
+  </EntityType>
+  <EntityType Name="ThongTinChung">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CauHoi">
     <Key>
@@ -42,18 +58,25 @@
     <Property Name="MaChuyenMuc" Type="Double" />
     <Property Name="Hinh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="MaCauHoiMoi" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChuyenMucCauHoi" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="CauHoi" ToRole="ChuyenMucCauHoi" />
-    <NavigationProperty Name="DapAns" Relationship="QuizDBModel.FK_DapAn_CauHoi" FromRole="CauHoi" ToRole="DapAn" />
     <Property Name="SuDung" Type="Boolean" Nullable="false" />
+    <Property Name="CauHoiLiet" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DapAns" Relationship="QuizDBModel.FK__DapAn__MaCauHoi__3F466844" FromRole="CauHoi" ToRole="DapAn" />
+    <NavigationProperty Name="ChuyenMucCauHoi" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="CauHoi" ToRole="ChuyenMucCauHoi" />
   </EntityType>
-  <EntityType Name="ChuyenMucCauHoi">
-    <Key>
-      <PropertyRef Name="MaChuyenMuc" />
-    </Key>
-    <Property Name="MaChuyenMuc" Type="Double" Nullable="false" />
-    <Property Name="TenChuyenMuc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CauHois" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="ChuyenMucCauHoi" ToRole="CauHoi" />
-  </EntityType>
+  <Association Name="FK__DapAn__MaCauHoi__3F466844">
+    <End Type="QuizDBModel.CauHoi" Role="CauHoi" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="QuizDBModel.DapAn" Role="DapAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CauHoi">
+        <PropertyRef Name="MaCauHoi" />
+      </Principal>
+      <Dependent Role="DapAn">
+        <PropertyRef Name="MaCauHoi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CauHoi_ChuyenMucCauHoi">
     <End Type="QuizDBModel.ChuyenMucCauHoi" Role="ChuyenMucCauHoi" Multiplicity="0..1" />
     <End Type="QuizDBModel.CauHoi" Role="CauHoi" Multiplicity="*" />
@@ -66,24 +89,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DapAn_CauHoi">
-    <End Type="QuizDBModel.CauHoi" Role="CauHoi" Multiplicity="1" />
-    <End Type="QuizDBModel.DapAn" Role="DapAn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CauHoi">
-        <PropertyRef Name="MaCauHoi" />
-      </Principal>
-      <Dependent Role="DapAn">
-        <PropertyRef Name="MaCauHoi" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="ThongTinChung">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
 </Schema>

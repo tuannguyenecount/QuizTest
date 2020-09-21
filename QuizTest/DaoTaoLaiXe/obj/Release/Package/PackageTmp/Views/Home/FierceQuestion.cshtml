@@ -17,13 +17,16 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2 the-article-body">
         <h1 class="text-center well text-primary">60 CÂU HỎI ĐIỂM LIỆT LÝ THUYẾT BẰNG LÁI XE</h1>
+        @{ 
+            int stt = 1;
+        }
         @foreach (var cauhoi in Model)
         {
             <table class="picture question" align="center">
                 <tbody>
                     <tr>
                         <td class="pCaption caption">
-                            <h3><b>Câu @cauhoi.MaCauHoi:</b> @cauhoi.NoiDung</h3>
+                            <h3><b>Câu @(stt++):</b> @cauhoi.NoiDung</h3>
                             @if (!string.IsNullOrEmpty(cauhoi.Hinh))
                             {
                                 <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">

@@ -65,7 +65,13 @@
                         </div>
 
                         <div class="form-group">
-                            @*<label class="col-md-2 control-label">Danh sách đáp án</label>*@
+                            <label class="control-label col-md-3">Câu hỏi liệt</label>
+                            <div class="col-md-6 checkbox">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.CheckBoxFor(model => model.CauHoiLiet)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-12">
                                 <table class="table table-bordered">
                                     <thead>

@@ -20,18 +20,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CauHois">
-      <EntityTypeMapping TypeName="QuizDBModel.CauHoi">
-        <MappingFragment StoreEntitySet="CauHoi">
-          <ScalarProperty Name="SuDung" ColumnName="SuDung" />
-          <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
-          <ScalarProperty Name="Hinh" ColumnName="Hinh" />
-          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ChuyenMucCauHois">
       <EntityTypeMapping TypeName="QuizDBModel.ChuyenMucCauHoi">
         <MappingFragment StoreEntitySet="ChuyenMucCauHoi">
@@ -46,6 +34,19 @@
           <ScalarProperty Name="LienHe" ColumnName="LienHe" />
           <ScalarProperty Name="GioiThieu" ColumnName="GioiThieu" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CauHois">
+      <EntityTypeMapping TypeName="QuizDBModel.CauHoi">
+        <MappingFragment StoreEntitySet="CauHoi">
+          <ScalarProperty Name="CauHoiLiet" ColumnName="CauHoiLiet" />
+          <ScalarProperty Name="SuDung" ColumnName="SuDung" />
+          <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
+          <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+          <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

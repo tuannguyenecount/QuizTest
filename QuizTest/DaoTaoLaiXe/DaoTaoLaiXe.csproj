@@ -1465,11 +1465,10 @@
     <Content Include="Areas\Admin\Views\CauHoi\Details.cshtml" />
     <Content Include="Areas\Admin\Views\CauHoi\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\CauHoiLiet\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\CauHoiLiet\Details.cshtml" />
     <Content Include="Areas\Admin\Views\CauHoiLiet\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CauHoiLiet\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongTinChung\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CauHoiLiet\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
