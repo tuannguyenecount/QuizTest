@@ -152,7 +152,6 @@ E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\System.Web.WebPages.Razor.xml
 E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\Newtonsoft.Json.xml
 E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\Antlr3.Runtime.pdb
 E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.csprojAssemblyReference.cache
 E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.csproj.CoreCompileInputs.cache
 E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.csproj.CopyComplete
 E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.dll
@@ -237,3 +236,4 @@ D:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.csproj.CopyComplete
 D:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.dll
 D:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.pdb
 H:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.csproj.CoreCompileInputs.cache
+E:\TFS\QuizTest\QuizTest\DaoTaoLaiXe\obj\Release\DaoTaoLaiXe.csproj.AssemblyReference.cache

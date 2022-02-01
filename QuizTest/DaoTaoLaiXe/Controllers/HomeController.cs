@@ -198,7 +198,7 @@ namespace DaoTaoLaiXe.Controllers
             LayCauHoiChuong6(cauhois, 9);
             LayCauHoiChuong7(cauhois, 4);
             LayCauHoiLiet(cauhois, 5);
-
+            ShuffleArray(ref cauhois);
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
             return cauhois;
@@ -216,7 +216,7 @@ namespace DaoTaoLaiXe.Controllers
             LayCauHoiChuong6(cauhois, 10);
             LayCauHoiChuong7(cauhois, 6);
             LayCauHoiLiet(cauhois, 4);
-
+            ShuffleArray(ref cauhois);
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
             return cauhois;
@@ -238,7 +238,7 @@ namespace DaoTaoLaiXe.Controllers
             int take = random.Next(1, 11);
             LayCauHoiChuong7(cauhois, take);
             LayCauHoiLiet(cauhois, 11 - take);
-
+            ShuffleArray(ref cauhois);
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
             return cauhois;
@@ -258,7 +258,7 @@ namespace DaoTaoLaiXe.Controllers
             int take = random.Next(1, 14);
             LayCauHoiChuong7(cauhois, take);
             LayCauHoiLiet(cauhois, 14 - take);
-
+            ShuffleArray(ref cauhois);
             cauhois = cauhois.Where(x => x.DapAns != null && x.DapAns.Count > 0 && x.DapAns.Any(y => y.DapAnDung == true)).ToList();
 
             return cauhois;

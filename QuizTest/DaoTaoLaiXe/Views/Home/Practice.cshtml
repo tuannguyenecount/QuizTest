@@ -34,73 +34,73 @@
     <script src="~/Scripts/sweetalert.min.js"></script>
     <script>
         var countAnswer = 0;
-            var minutePractice = @(minutePractice);
-            var timeUp = false;
-            function SetCountAnswer() {
+        var minutePractice = @(minutePractice);
+        var timeUp = false;
+        function SetCountAnswer() {
             countAnswer = 0;
             $.each($(".listAnswer"), function (key, ctrl) {
-            if ($(ctrl).find("input:checked").length > 0) {
-                countAnswer++;
-            }
-        });
+                if ($(ctrl).find("input:checked").length > 0) {
+                    countAnswer++;
+                }
+            });
             $("#countAnswer").html(countAnswer);
-    }
-    function viewResult() {
-        if (countAnswer < @(Model.Count)) {
-            swal("Lỗi", "Bạn chưa hoàn thành trả lời tất cả câu hỏi!", "error");
-            return false;
         }
+        function viewResult() {
+            if (countAnswer < @(Model.Count)) {
+                swal("Lỗi", "Bạn chưa hoàn thành trả lời tất cả câu hỏi!", "error");
+                return false;
+            }
             else {
-            if (timeUp == true) {
-                swal("Lỗi", "Bạn đã quá giờ thi!", "error");
+                if (timeUp == true) {
+                    swal("Lỗi", "Bạn đã quá giờ thi!", "error");
+                }
+                else
+                    $("#frmViewResult").submit();
             }
-            else
-                $("#frmViewResult").submit();
         }
-    }
 
-    function startTimer(duration, display) {
-        var timer = duration, minutes, seconds;
-        var tickTimer = setInterval(function() {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            var tickTimer = setInterval(function() {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
 
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            display.textContent = minutes + ":" + seconds;
+                display.textContent = minutes + ":" + seconds;
 
-            if (minutes <= 0 && seconds <= 0) {
-                timeUp = true;
-                clearInterval(tickTimer);
+                if (minutes <= 0 && seconds <= 0) {
+                    timeUp = true;
+                    clearInterval(tickTimer);
 
-                swal({
-                title: 'Lỗi',
-                        text: "Bạn đã quá thời gian quy định",
-                        type: "error",
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                        confirmButtonColor: "#e64942",
-                        confirmButtonText: "Thi Lại",
-                        cancelButtonText: 'Về Trang Chủ',
-                        closeOnConfirm: false,
-                        showLoaderOnConfirm: false
-                    }, function (result) {
-                    if (result == true) {
-                        window.location.href = "@Url.Action("Practice")";
-                    }
-                    else {
-                        window.location.href = "/";
-                    }
-                });
+                    swal({
+                    title: 'Lỗi',
+                            text: "Bạn đã quá thời gian quy định",
+                            type: "error",
+                            showCancelButton: true,
+                            showConfirmButton: true,
+                            confirmButtonColor: "#e64942",
+                            confirmButtonText: "Thi Lại",
+                            cancelButtonText: 'Về Trang Chủ',
+                            closeOnConfirm: false,
+                            showLoaderOnConfirm: false
+                        }, function (result) {
+                        if (result == true) {
+                            window.location.href = "@Url.Action("Practice")";
+                        }
+                        else {
+                            window.location.href = "/";
+                        }
+                    });
 
 
-            }
+                }
 
-            if (--timer < 0) {
-                timer = duration;
-            }
-        }, 1000);
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
         }
         $(function () {
             var minutes = 60 * minutePractice,
@@ -108,7 +108,7 @@
             startTimer(minutes, display);
 
             window.onbeforeunload = function(e) {
-              return 'Dialog text here.';
+                return 'Dialog text here.';
             };
 
             $(document).on("click", ".listAnswer li input", function (e) {
@@ -190,7 +190,7 @@
                                 @if (!string.IsNullOrEmpty(cauhoi.Hinh))
                                 {
                                     <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">
-                                        <img src="https://luyenthi.hoclaixekhongkho.com/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
+                                        <img src="/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
                                     </div>
                                 }
                                 <ul class="listAnswer">
