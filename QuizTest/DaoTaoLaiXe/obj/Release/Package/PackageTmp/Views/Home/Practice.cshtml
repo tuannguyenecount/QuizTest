@@ -6,6 +6,19 @@
     List<int> selectAnswer = ViewBag.SelectAnswer;
     int countAnswer = ViewBag.CountAnswer;
     ViewBag.Title = "TRẮC NGHIỆM ĐÀO TẠO LÁI XE ";
+    string category = Url.RequestContext.RouteData.Values["category"].ToString();
+    int minutePractice = 20;
+    switch (category)
+    {
+        case "B1":
+            minutePractice = 20; break;
+        case "B2":
+            minutePractice = 22; break;
+        case "C":
+            minutePractice = 24; break;
+        case "DEFC":
+            minutePractice = 26; break;
+    }
 }
 
 @section meta{
@@ -21,7 +34,7 @@
     <script src="~/Scripts/sweetalert.min.js"></script>
     <script>
         var countAnswer = 0;
-        var minutePractice = 20;
+        var minutePractice = @(minutePractice);
         var timeUp = false;
         function SetCountAnswer() {
             countAnswer = 0;
@@ -62,17 +75,17 @@
                     clearInterval(tickTimer);
 
                     swal({
-                        title: 'Lỗi',
-                        text: "Bạn đã quá thời gian quy định",
-                        type: "error",
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                        confirmButtonColor: "#e64942",
-                        confirmButtonText: "Thi Lại",
-                        cancelButtonText: 'Về Trang Chủ',
-                        closeOnConfirm: false,
-                        showLoaderOnConfirm: false
-                    }, function (result) {
+                    title: 'Lỗi',
+                            text: "Bạn đã quá thời gian quy định",
+                            type: "error",
+                            showCancelButton: true,
+                            showConfirmButton: true,
+                            confirmButtonColor: "#e64942",
+                            confirmButtonText: "Thi Lại",
+                            cancelButtonText: 'Về Trang Chủ',
+                            closeOnConfirm: false,
+                            showLoaderOnConfirm: false
+                        }, function (result) {
                         if (result == true) {
                             window.location.href = "@Url.Action("Practice")";
                         }
@@ -95,7 +108,7 @@
             startTimer(minutes, display);
 
             window.onbeforeunload = function(e) {
-              return 'Dialog text here.';
+                return 'Dialog text here.';
             };
 
             $(document).on("click", ".listAnswer li input", function (e) {
@@ -156,7 +169,7 @@
                         width: 100%;
                         opacity: 0.8;
                         text-align: center;
-                        ">20:00</div>
+                        ">@minutePractice:00</div>
 <div class="row">
     <div class="col-md-8 col-md-offset-2 the-article-body">
         <h1 class="text-center well text-primary">TRẮC NGHIỆM ĐÀO TẠO LÁI XE </h1>
@@ -177,7 +190,7 @@
                                 @if (!string.IsNullOrEmpty(cauhoi.Hinh))
                                 {
                                     <div class="zad-inimage-wrapper text-center" style="overflow: hidden;">
-                                        <img src="http://luyenthi.hoclaixekhongkho.com/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
+                                        <img src="/Content/images/@cauhoi.Hinh" alt="Hình câu hỏi @cauhoi.MaCauHoi">
                                     </div>
                                 }
                                 <ul class="listAnswer">
