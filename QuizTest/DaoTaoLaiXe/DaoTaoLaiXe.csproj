@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DaoTaoLaiXe</RootNamespace>
     <AssemblyName>DaoTaoLaiXe</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -63,12 +65,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -112,6 +111,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -146,15 +146,15 @@
     <Compile Include="Models\CauHoi.cs">
       <DependentUpon>QuizDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DapAnMetadata.cs" />
-    <Compile Include="Models\CauHoiMetadata.cs" />
-    <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChuyenMucCauHoi.cs">
       <DependentUpon>QuizDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DapAn.cs">
       <DependentUpon>QuizDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DapAnMetadata.cs" />
+    <Compile Include="Models\CauHoiMetadata.cs" />
+    <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\QuanTriVien.cs">
       <DependentUpon>QuizDBModel.tt</DependentUpon>
@@ -1283,8 +1283,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\QuizDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QuizDBModel.Context.cs</LastGenOutput>
       <DependentUpon>QuizDBModel.edmx</DependentUpon>
+      <LastGenOutput>QuizDBModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\QuizDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1440,13 +1440,6 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\QuizDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QuizDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QuizDBModel.edmx.diagram">
-      <DependentUpon>QuizDBModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SidebarPartial.cshtml" />
@@ -1469,6 +1462,13 @@
     <Content Include="Areas\Admin\Views\CauHoiLiet\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongTinChung\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CauHoiLiet\Details.cshtml" />
+    <EntityDeploy Include="Models\QuizDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QuizDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QuizDBModel.edmx.diagram">
+      <DependentUpon>QuizDBModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

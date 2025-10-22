@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QuizDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="hoclaix6_QuizDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CauHoi">
           <Key>
             <PropertyRef Name="MaCauHoi" />
@@ -75,7 +75,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QuizDBModelStoreContainer">
+        <EntityContainer Name="hoclaix6_QuizDBModelStoreContainer">
           <EntitySet Name="CauHoi" EntityType="Self.CauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChuyenMucCauHoi" EntityType="Self.ChuyenMucCauHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DapAn" EntityType="Self.DapAn" Schema="dbo" store:Type="Tables" />
@@ -90,59 +90,11 @@
             <End Role="CauHoi" EntitySet="CauHoi" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="QuizDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="QuizDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="QuanTriViens" EntityType="QuizDBModel.QuanTriVien" />
-          <EntitySet Name="DapAns" EntityType="QuizDBModel.DapAn" />
-          <EntitySet Name="ChuyenMucCauHois" EntityType="QuizDBModel.ChuyenMucCauHoi" />
-          <EntitySet Name="ThongTinChungs" EntityType="QuizDBModel.ThongTinChung" />
-          <EntitySet Name="CauHois" EntityType="QuizDBModel.CauHoi" />
-          <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="QuizDBModel.FK__DapAn__MaCauHoi__3F466844">
-            <End Role="CauHoi" EntitySet="CauHois" />
-            <End Role="DapAn" EntitySet="DapAns" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi">
-            <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHois" />
-            <End Role="CauHoi" EntitySet="CauHois" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="QuanTriVien">
-          <Key>
-            <PropertyRef Name="TaiKhoan" />
-          </Key>
-          <Property Name="TaiKhoan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="DapAn">
-          <Key>
-            <PropertyRef Name="MaDapAn" />
-          </Key>
-          <Property Name="MaDapAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
-          <Property Name="SoThuTu" Type="Byte" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DapAnDung" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="CauHoi" Relationship="QuizDBModel.FK__DapAn__MaCauHoi__3F466844" FromRole="DapAn" ToRole="CauHoi" />
-        </EntityType>
-        <EntityType Name="ChuyenMucCauHoi">
-          <Key>
-            <PropertyRef Name="MaChuyenMuc" />
-          </Key>
-          <Property Name="MaChuyenMuc" Type="Double" Nullable="false" />
-          <Property Name="TenChuyenMuc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CauHois" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="ChuyenMucCauHoi" ToRole="CauHoi" />
-        </EntityType>
-        <EntityType Name="ThongTinChung">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
+      <Schema Namespace="hoclaix6_QuizDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="CauHoi">
           <Key>
             <PropertyRef Name="MaCauHoi" />
@@ -154,14 +106,48 @@
           <Property Name="MaCauHoiMoi" Type="Int32" Nullable="false" />
           <Property Name="SuDung" Type="Boolean" Nullable="false" />
           <Property Name="CauHoiLiet" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DapAns" Relationship="QuizDBModel.FK__DapAn__MaCauHoi__3F466844" FromRole="CauHoi" ToRole="DapAn" />
-          <NavigationProperty Name="ChuyenMucCauHoi" Relationship="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" FromRole="CauHoi" ToRole="ChuyenMucCauHoi" />
+          <NavigationProperty Name="DapAns" Relationship="Self.FK__DapAn__MaCauHoi__3F466844" FromRole="CauHoi" ToRole="DapAn" />
+          <NavigationProperty Name="ChuyenMucCauHoi" Relationship="Self.FK_CauHoi_ChuyenMucCauHoi" FromRole="CauHoi" ToRole="ChuyenMucCauHoi" />
+        </EntityType>
+        <EntityType Name="ChuyenMucCauHoi">
+          <Key>
+            <PropertyRef Name="MaChuyenMuc" />
+          </Key>
+          <Property Name="MaChuyenMuc" Type="Double" Nullable="false" />
+          <Property Name="TenChuyenMuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CauHois" Relationship="Self.FK_CauHoi_ChuyenMucCauHoi" FromRole="ChuyenMucCauHoi" ToRole="CauHoi" />
+        </EntityType>
+        <EntityType Name="DapAn">
+          <Key>
+            <PropertyRef Name="MaDapAn" />
+          </Key>
+          <Property Name="MaDapAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaCauHoi" Type="Int32" Nullable="false" />
+          <Property Name="SoThuTu" Type="Byte" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DapAnDung" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CauHoi" Relationship="Self.FK__DapAn__MaCauHoi__3F466844" FromRole="DapAn" ToRole="CauHoi" />
+        </EntityType>
+        <EntityType Name="QuanTriVien">
+          <Key>
+            <PropertyRef Name="TaiKhoan" />
+          </Key>
+          <Property Name="TaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ThongTinChung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GioiThieu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LienHe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__DapAn__MaCauHoi__3F466844">
-          <End Type="QuizDBModel.CauHoi" Role="CauHoi" Multiplicity="1">
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="QuizDBModel.DapAn" Role="DapAn" Multiplicity="*" />
+          <End Role="DapAn" Type="Self.DapAn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CauHoi">
               <PropertyRef Name="MaCauHoi" />
@@ -172,8 +158,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CauHoi_ChuyenMucCauHoi">
-          <End Type="QuizDBModel.ChuyenMucCauHoi" Role="ChuyenMucCauHoi" Multiplicity="0..1" />
-          <End Type="QuizDBModel.CauHoi" Role="CauHoi" Multiplicity="*" />
+          <End Role="ChuyenMucCauHoi" Type="Self.ChuyenMucCauHoi" Multiplicity="0..1" />
+          <End Role="CauHoi" Type="Self.CauHoi" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ChuyenMucCauHoi">
               <PropertyRef Name="MaChuyenMuc" />
@@ -183,62 +169,77 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="QuizDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CauHois" EntityType="Self.CauHoi" />
+          <EntitySet Name="ChuyenMucCauHois" EntityType="Self.ChuyenMucCauHoi" />
+          <EntitySet Name="DapAns" EntityType="Self.DapAn" />
+          <EntitySet Name="QuanTriViens" EntityType="Self.QuanTriVien" />
+          <EntitySet Name="ThongTinChungs" EntityType="Self.ThongTinChung" />
+          <AssociationSet Name="FK__DapAn__MaCauHoi__3F466844" Association="Self.FK__DapAn__MaCauHoi__3F466844">
+            <End Role="CauHoi" EntitySet="CauHois" />
+            <End Role="DapAn" EntitySet="DapAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CauHoi_ChuyenMucCauHoi" Association="Self.FK_CauHoi_ChuyenMucCauHoi">
+            <End Role="ChuyenMucCauHoi" EntitySet="ChuyenMucCauHois" />
+            <End Role="CauHoi" EntitySet="CauHois" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QuizDBModelStoreContainer" CdmEntityContainer="QuizDBEntities">
-          <EntitySetMapping Name="QuanTriViens">
-            <EntityTypeMapping TypeName="QuizDBModel.QuanTriVien">
-              <MappingFragment StoreEntitySet="QuanTriVien">
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DapAns">
-            <EntityTypeMapping TypeName="QuizDBModel.DapAn">
-              <MappingFragment StoreEntitySet="DapAn">
-                <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
+        <EntityContainerMapping StorageEntityContainer="hoclaix6_QuizDBModelStoreContainer" CdmEntityContainer="QuizDBEntities">
+          <EntitySetMapping Name="CauHois">
+            <EntityTypeMapping TypeName="hoclaix6_QuizDBModel.CauHoi">
+              <MappingFragment StoreEntitySet="CauHoi">
                 <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-                <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
+                <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+                <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
+                <ScalarProperty Name="SuDung" ColumnName="SuDung" />
+                <ScalarProperty Name="CauHoiLiet" ColumnName="CauHoiLiet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ChuyenMucCauHois">
-            <EntityTypeMapping TypeName="QuizDBModel.ChuyenMucCauHoi">
+            <EntityTypeMapping TypeName="hoclaix6_QuizDBModel.ChuyenMucCauHoi">
               <MappingFragment StoreEntitySet="ChuyenMucCauHoi">
-                <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
                 <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
+                <ScalarProperty Name="TenChuyenMuc" ColumnName="TenChuyenMuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DapAns">
+            <EntityTypeMapping TypeName="hoclaix6_QuizDBModel.DapAn">
+              <MappingFragment StoreEntitySet="DapAn">
+                <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
+                <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
+                <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="DapAnDung" ColumnName="DapAnDung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuanTriViens">
+            <EntityTypeMapping TypeName="hoclaix6_QuizDBModel.QuanTriVien">
+              <MappingFragment StoreEntitySet="QuanTriVien">
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ThongTinChungs">
-            <EntityTypeMapping TypeName="QuizDBModel.ThongTinChung">
+            <EntityTypeMapping TypeName="hoclaix6_QuizDBModel.ThongTinChung">
               <MappingFragment StoreEntitySet="ThongTinChung">
-                <ScalarProperty Name="LienHe" ColumnName="LienHe" />
-                <ScalarProperty Name="GioiThieu" ColumnName="GioiThieu" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GioiThieu" ColumnName="GioiThieu" />
+                <ScalarProperty Name="LienHe" ColumnName="LienHe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CauHois">
-            <EntityTypeMapping TypeName="QuizDBModel.CauHoi">
-              <MappingFragment StoreEntitySet="CauHoi">
-                <ScalarProperty Name="CauHoiLiet" ColumnName="CauHoiLiet" />
-                <ScalarProperty Name="SuDung" ColumnName="SuDung" />
-                <ScalarProperty Name="MaCauHoiMoi" ColumnName="MaCauHoiMoi" />
-                <ScalarProperty Name="Hinh" ColumnName="Hinh" />
-                <ScalarProperty Name="MaChuyenMuc" ColumnName="MaChuyenMuc" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="MaCauHoi" ColumnName="MaCauHoi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

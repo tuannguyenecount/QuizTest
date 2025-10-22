@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="75d2999a01fa43349a0e53158119a347" Name="Diagram1">
-        <EntityTypeShape EntityType="QuizDBModel.QuanTriVien" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="QuizDBModel.DapAn" Width="1.5" PointX="5.25" PointY="5.125" />
-        <EntityTypeShape EntityType="QuizDBModel.ChuyenMucCauHoi" Width="1.5" PointX="0.75" PointY="7.375" />
-        <EntityTypeShape EntityType="QuizDBModel.ThongTinChung" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="QuizDBModel.CauHoi" Width="1.5" PointX="3" PointY="6.75" />
-        <AssociationConnector Association="QuizDBModel.FK__DapAn__MaCauHoi__3F466844" />
-        <AssociationConnector Association="QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" />
-        </Diagram>
+      <Diagram DiagramId="9a86e425f173484680c5d1550abf8e2e" Name="Diagram1">
+        <EntityTypeShape EntityType="hoclaix6_QuizDBModel.CauHoi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoclaix6_QuizDBModel.ChuyenMucCauHoi" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoclaix6_QuizDBModel.DapAn" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoclaix6_QuizDBModel.QuanTriVien" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoclaix6_QuizDBModel.ThongTinChung" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="hoclaix6_QuizDBModel.FK__DapAn__MaCauHoi__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="hoclaix6_QuizDBModel.FK_CauHoi_ChuyenMucCauHoi" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

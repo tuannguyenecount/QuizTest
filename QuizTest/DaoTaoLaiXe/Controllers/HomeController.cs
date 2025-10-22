@@ -85,9 +85,8 @@ namespace DaoTaoLaiXe.Controllers
 
         void LayCauHoiChuong1(List<CauHoi> cauhois, int take)
         {
-            List<CauHoi> lstToAdd = new List<CauHoi>();
             Random random = new Random();
-            lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 166).ToList();
+            List<CauHoi> lstToAdd = db.CauHois.Where(x => x.SuDung == true && x.CauHoiLiet == false && x.MaCauHoiMoi >= 1 && x.MaCauHoiMoi <= 166).ToList();
             if (lstToAdd.Count >= take)
             {
                 ShuffleArray(ref lstToAdd);
